@@ -1,26 +1,34 @@
 from django.db import models
 from django.utils import timezone
-from django.contrib.auth.models import (BaseUserManager, AbstractBaseUser)
+from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 
 class UserManager(BaseUserManager):
-    use_in_migrations = True
 
-    def create_user(self,**kwargs):
-        if not "email" in kwargs:
+    def create_user(self, email, birth, gender, password=None):
+        if not email:
             raise ValueError('Please enter your email')
         
         user = self.model(
-            email = UserManager.normalize_email(kwargs.get("email")),
+            email = UserManager.normalize_email(email),
+            birth = birth,
+            gender = gender,
+
         )
-        user.set_password(self.normalize_email(kwargs.get("paassword")))
-        user.save(using=self.db)
+        user.set_password(password)
+        user.save(using=self._db)
         return user
 
-    def create_superuser(self, **kwargs):
-        new_superuser = self.create_user(**kwargs)
-        new_superuser.is_admin = True
-        new_superuser.save(using=self._db)
-        return new_superuser
+    def create_superuser(self, email, birth, gender, password):
+        user = self.create_user(
+            email=self.normalize_email(email),
+            birth = birth,
+            gender = gender,
+            password = password,
+        )
+        user.is_admin = True
+        user.save(using=self._db)
+        return user
+
 '''
 GENDER_CHOICES = (
     (0, 'Female')
@@ -29,7 +37,9 @@ GENDER_CHOICES = (
 )
 '''
 
+
 class User(AbstractBaseUser):
+
     email = models.EmailField(
         verbose_name='email',
         max_length=255,
@@ -42,7 +52,9 @@ class User(AbstractBaseUser):
     date_joined = models.DateTimeField(default=timezone.now)
 
     objects = UserManager()
+
     USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['birth', 'gender']
 
     def __str__(self):
         return self.email

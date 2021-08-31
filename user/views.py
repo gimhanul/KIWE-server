@@ -1,7 +1,6 @@
 
 from django.shortcuts import redirect, render
-from django.contrib.auth.forms import UserCreationForm
-from . import forms
+from .forms import UserCreationForm
 
 
 def first(request):
