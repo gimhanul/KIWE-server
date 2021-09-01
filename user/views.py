@@ -17,7 +17,7 @@ def join(request):
     context = {
         'form': form
     }
-    return render(request, 'temp.html', context)
+    return render(request, 'join.html', context)
 
 def login(request):
     return render(request, 'login.html')
