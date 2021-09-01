@@ -3,8 +3,8 @@ from django.shortcuts import redirect, render
 from .forms import UserCreationForm
 
 
-def first(request):
-    return render(request, 'first.html')
+def index(request):
+    return render(request, 'index.html')
 
 def join(request):
     if request.method == 'POST':

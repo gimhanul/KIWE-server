@@ -40,7 +40,7 @@ GENDER_CHOICES = (
 
 class User(AbstractBaseUser):
 
-    email = models.EmailField(
+    email = models.CharField(
         verbose_name='email',
         max_length=255,
         unique=True,
