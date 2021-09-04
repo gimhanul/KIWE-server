@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kiwe</title>
+        <style>
+          h5{
+            margin:0;
+          }
+        </style>
+    </head>
+    <body>
+      <center>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <h1>로그인</h1>
+          <section>
+            <form name="login" action="{% url 'login' %}" method="post">
+              {% csrf_token %}
+              이메일
+              <div>
+                <input style="WIDTH:160pt; HEIGHT:13pt" class = "email" type="email" placeholder= "이메일을 입력해주세요"></input>
+              </div>
+              비밀번호
+              <div>
+                <input style="WIDTH:160pt; HEIGHT:13pt" class = "password" type="password" placeholder= "비밀번호를 입력해주세요"></input>
+              </div>
+              <br>
+
+              <input type="submit" name="" value="로그인"> 
+            </form>
+          </section>
+        </center>
+</html>

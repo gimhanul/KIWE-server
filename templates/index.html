@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% load static %}
+        <title>kiwe</title>
+        <link rel="stylesheet" href="{% static "button.css" %}">
+        <style>
+            center{
+                width:200px;
+                margin: 0 auto;
+            }
+        </style>
+    </head>
+    <body>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <center>
+        <img src="https://blogfiles.pstatic.net/MjAyMTA4MTFfODUg/MDAxNjI4Njc5NzIxMzMw.c4QrPdrqH8qhwLtAOuwi9cRyyC6NJBa8y_-3jdWKI1wg.-6W_lXwbYmX-ysW_k4ceHzK2-LPVdB_WWOZblVxIE0Mg.JPEG.ksj051203/logo.jpg" style="WIDTH:120pt; HEIGHT:85pt"></center>
+            <br>
+            <br>
+        <div class = "center" id="btn">
+            <center><a href="{% url 'login' %}"><button style="font-size:1.5em;">로그인</button></a></center>
+            <br>
+            <center><a href="{% url 'join' %}"><button style="font-size:1.5em;">회원가입</button></a></center>
+            <br>
+            <center><button style="font-size:1.5em;">게스트</button></center>
+        </center>
+        </div>
+        <br>
+        <br>
+        <br>
+        <center>게스트로 로그인 시
+            사용자 연결 기능이 제한됩니다</center>
+</html>

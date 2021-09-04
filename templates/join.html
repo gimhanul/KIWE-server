@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kiwe</title>
+        
+        <style>
+          h5{
+            margin:0;
+          }
+        </style>
+    </head>
+    <body>
+      <center>
+          <br>
+          <br>
+          <br>
+          <br>
+          <h1>회원가입</h1>
+        <section>
+            <form name="join" action="{% url 'join' %}" method="post">
+            {% csrf_token %}
+            이메일<br>
+              <input type="email" name="email">
+              </input>
+
+            <br>
+            비밀번호<br> 
+            <input type="password" name="password1"><br>
+            비밀번호 확인<br> 
+            <input type="password" name="password2">
+            <br><br>
+            생년월일<br> 
+            <input type="date" name="birth">
+            <br><br>
+            성별<br>  
+            <label for="man">남자</label>
+            <input type="radio" name="gender" value="0" id="man">
+            <label for="woman">여자</label>
+            <input type="radio" name="gender" value="1" id="woman">
+            <label for="no">밝히고 싶지 않음</label>
+            <input type="radio" name="gender" value="2" id="nowonder"> <br><br>
+            <br>
+            사용자 정보 제공 동의
+            <input type="checkbox" name="agree" value="y" checked><br><br>
+            <input type="submit" name="submit" value="회원가입"> 
+        </form>
+    </section>
+  <center>
+</body>
+</html>
+    
