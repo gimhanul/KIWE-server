@@ -29,14 +29,6 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-'''
-GENDER_CHOICES = (
-    (0, 'Female')
-    (1, 'Male')
-    (2, 'Not to disclose')
-)
-'''
-
 
 class User(AbstractBaseUser):
 
@@ -69,18 +61,6 @@ class User(AbstractBaseUser):
     def is_staff(self):
         return self.is_admin
 
-'''
-class User(models.Model):
-    id = models.CharField(max_length=10, primary_key=True) 
-    password = models.CharField(max_length=10)
-    agree = models.IntegerField()
-    gender = models.CharField(max_length=1) #m=man, w=woman
-    birth = models.DateField()
-    phonenumber = models.CharField(max_length=10)
-
-    def __str__(self):
-        return self.id
-'''
 '''
 class Keyword(models.Model):
     keyword = models.CharField(max_length=100)

@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import ReadOnlyPasswordHashField
+from django.contrib.auth.forms import ReadOnlyPasswordHashField, AuthenticationForm
 from .models import User
 
 class UserCreationForm(forms.ModelForm):
@@ -34,15 +34,7 @@ class UserChangeForm(forms.ModelForm):
     def clean_password(self):
         return self.initial["password"]
  
-
 '''
-def signup(self, request, User):
-    if(self.password==self.passwordcheck):
-        User.id=self.cleaned_data['id']
-        User.password=self.cleaned_data['password']
-        User.birth=self.cleaned_data['birth']
-        User.gender=self.cleaned_data['gender']
-        User.phonenumber=self.cleaned_data['phonenumber']
-        User.agree=self.cleaned_data['agree']
-        User.save()
+class LoginForm(AuthenticationForm):
+    email = forms.CharField()
 '''
