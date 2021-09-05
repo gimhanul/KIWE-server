@@ -38,11 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.sites',
     'user.apps.UserConfig',
 
-    'allauth',
-    'allauth.account',
+
+    #'django.contrib.sites',
+    #'allauth',
+    #'allauth.account',
 ]
 
 AUTH_USER_MODEL = 'user.User'
@@ -144,10 +145,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 AUTHENTICATION_BACKENDS = (
-    'django.contrib.auth.backends.ModelBackend',
-    'allauth.account.auth_backends.AuthenticationBackend',
+    'django.contrib.auth.backends.AllowAllUserModelBackend'
+    'User.backends.CaseInsensitiveModelBackend'
+    #'django.contrib.auth.backends.ModelBackend',
+    #'allauth.account.auth_backends.AuthenticationBackend',
 )
 
+'''
 SITE_ID = 1
 
 ACCOUNT_EMAIL_REQUIRED = True
@@ -156,3 +160,4 @@ ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
 ACCOUNT_SESSION_REMEMBER = True
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_UNIQUE_EMAIL = True
+'''
