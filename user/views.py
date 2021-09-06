@@ -1,7 +1,7 @@
-
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login, logout
+from .models import User
 from django.shortcuts import redirect, render
-from .forms import UserCreationForm
+from .forms import UserCreationForm, AuthenticationForm
 
 
 def index(request):
@@ -22,13 +22,36 @@ def join(request):
     return render(request, 'join.html', context)
 
 
-def login(request):
+def userlogin(request):
+    context = {}
+    user = request.user
     if request.method == 'POST':
+        form = AuthenticationForm(request.POST)
         email = request.POST.get('email')
         password = request.POST.get('password')
+        user = authenticate(email=email, password=password)
+        if user:
+            login(request, user)
+            return redirect('main')
+    else:
+        form = AuthenticationForm()
+    context = {
+        'form': form
+    }
+    return render(request, 'login.html', context)
+
+'''
+def login(request):
+    if request.method == 'POST':
+        email = request.POST['email']
+        password = request.POST['password']
+        user = authenticate(email=email, password=password)
+        login(request, user)
+        return redirect('main')
         
     else:
         return render(request,'login.html')
+'''
 
 
 def main(request):

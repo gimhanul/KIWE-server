@@ -145,10 +145,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 AUTHENTICATION_BACKENDS = (
-    'django.contrib.auth.backends.AllowAllUserModelBackend'
-    'User.backends.CaseInsensitiveModelBackend'
-    #'django.contrib.auth.backends.ModelBackend',
-    #'allauth.account.auth_backends.AuthenticationBackend',
+    'django.contrib.auth.backends.ModelBackend',
 )
 
 '''

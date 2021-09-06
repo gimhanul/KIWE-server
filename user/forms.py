@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import ReadOnlyPasswordHashField, AuthenticationForm
+from django.contrib.auth import authenticate, login, logout
 from .models import User
 
 class UserCreationForm(forms.ModelForm):
@@ -33,3 +34,19 @@ class UserChangeForm(forms.ModelForm):
 
     def clean_password(self):
         return self.initial["password"]
+
+
+class AuthenticationForm(forms.ModelForm):
+    password  = forms.CharField()
+
+    class Meta:
+        model  =  User
+        fields =  ('email', 'password')
+
+    def clean(self):
+        if self.is_valid():
+
+            email = self.cleaned_data.get('email')
+            password = self.cleaned_data.get('password')
+            if not authenticate(email=email, password=password):
+                raise forms.ValidationError('Invalid Login')
