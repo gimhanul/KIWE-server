@@ -40,19 +40,6 @@ def userlogin(request):
     }
     return render(request, 'login.html', context)
 
-'''
-def login(request):
-    if request.method == 'POST':
-        email = request.POST['email']
-        password = request.POST['password']
-        user = authenticate(email=email, password=password)
-        login(request, user)
-        return redirect('main')
-        
-    else:
-        return render(request,'login.html')
-'''
-
 
 def main(request):
     return render(request, 'main.html')
