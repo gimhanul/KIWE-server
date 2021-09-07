@@ -20,7 +20,14 @@
           <h1>설정</h1>
           <br>
           <div>
-            <p><h3>계정 설정</h3>회원 정보 수정<br>로그아웃<br>회원 탈퇴</p>
+            <form name="setting" action="{% url 'setting' %}" method="post">
+            {% csrf_token %}
+            <p>
+              <h3>계정 설정</h3>
+              회원 정보 수정<br>
+              <button class=logout name="logout">로그아웃</button><br>
+              회원 탈퇴
+            </p>
         </div>
           내활동
           <br>
@@ -36,6 +43,6 @@
           <br>
           오픈소스
           </div>
-
+        </form>
         </center>
 </html>

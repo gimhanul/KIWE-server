@@ -22,5 +22,6 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('join/', views.join, name='join'),
     path('login/', views.userlogin, name='login'),
-    path('main', views.main, name='main'),
+    path('main/', views.main, name='main'),
+    path('setting/', views.setting, name='setting'),
 ]

@@ -43,3 +43,10 @@ def userlogin(request):
 
 def main(request):
     return render(request, 'main.html')
+
+
+def setting(request):
+    if request.method == 'POST':
+        logout(request)
+        return redirect('/')
+    return render(request, 'setting.html')
