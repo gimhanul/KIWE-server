@@ -39,15 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'user.apps.UserConfig',
-
-
-    #'django.contrib.sites',
-    #'allauth',
-    #'allauth.account',
+    'kiword.apps.KiwordConfig',
 ]
 
 AUTH_USER_MODEL = 'user.User'
-#AUTHENTICATION_BACKENDS = ['User.backends.EmailBackend']
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
