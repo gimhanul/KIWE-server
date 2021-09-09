@@ -1,7 +1,8 @@
 from django import forms
 
 class OnceDataForm(forms.form):
-    where = forms.IntegerField()
-    when = forms.IntegerField()
-    who = forms.IntegerField()
+    where = forms.CharField()
+    howmany = forms.CharField()
+    what = forms.CharField()
+    relationship = forms.CharField()
     
