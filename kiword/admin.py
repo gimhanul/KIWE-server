@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Keyword, Question, Choice
+from .models import Keyword, KeywordRelated, Question, Choice
 
 class ChoiceInline(admin.TabularInline):
     model = Choice
@@ -13,7 +13,18 @@ class QuestionAdmin(admin.ModelAdmin):
     ]
     search_fields = ['question']
 
+class KeywordrelatedInline(admin.TabularInline):
+    model = KeywordRelated
 
-admin.site.register(Keyword)
+class KeywordAdmin(admin.ModelAdmin):
+    list_display = ('keyword',)
+    inlines = [KeywordrelatedInline]
+
+    fieldsets = [
+        (None, {'fields': ['keyword']}),
+    ]
+    search_fields = ['keyword']
+
+
+admin.site.register(Keyword, KeywordAdmin)
 admin.site.register(Question, QuestionAdmin)
-#admin.site.register(Choice)

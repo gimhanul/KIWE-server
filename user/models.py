@@ -63,10 +63,3 @@ class User(AbstractBaseUser):
     @property
     def is_staff(self):
         return self.is_admin
-
-'''
-class Keyword(models.Model):
-    keyword = models.CharField(max_length=100)
-    tag = models.CharField(max_length=10)
-
-'''
