@@ -9,6 +9,8 @@
         </style>
     </head>
     <body>
+      <form name="main" action="{% url 'main' %}" method="post">
+      {% csrf_token %}
       <center>
           <br>
           <br>
@@ -21,25 +23,13 @@
           <div>
             <img src="https://blogfiles.pstatic.net/MjAyMTA4MTFfODUg/MDAxNjI4Njc5NzIxMzMw.c4QrPdrqH8qhwLtAOuwi9cRyyC6NJBa8y_-3jdWKI1wg.-6W_lXwbYmX-ysW_k4ceHzK2-LPVdB_WWOZblVxIE0Mg.JPEG.ksj051203/logo.jpg" style="WIDTH:100pt; HEIGHT:75pt">
           <h2>{{ request.user.name }} 님<br>
-          무엇을 하고 계신가요?</h2>
+          START</h2>
           <br>
           <div>
-              <center>
-                  <a href="file:///C:/Users/SW2120/DOCUME~1/%EC%B9%B4%EC%B9%B4%EC%98%A4~1/q1.html"><button type="button" style="font-size:24px;">전화</button></a>
-              </center>
-            <p>
-              </p><center>
-                  <a href="file:///C:/Users/SW2120/DOCUME~1/%EC%B9%B4%EC%B9%B4%EC%98%A4~1/q0.html"><button type="button" style="font-size:24px;">오프라인</button></a>
-              </center>
-            <p></p>
-            <p>
-              </p><center>
-                  <a href="file:///C:/Users/SW2120/DOCUME~1/%EC%B9%B4%EC%B9%B4%EC%98%A4~1/q1.html"><button type="button" style="font-size:24px;">채팅</button></a>
-              </center>
-            <p></p>
+            <input type="submit" name="" value="gogo"> 
           </div>
           <div style="position: absolute; right: 30px; bottom: 30px;">
         </div>
         <center>
-
+        </form>
 </center></div></center></body></html>

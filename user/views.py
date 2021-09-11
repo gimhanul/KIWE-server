@@ -42,6 +42,8 @@ def userlogin(request):
 
 
 def main(request):
+    if request.method == 'POST':
+        return redirect('../q/1')
     return render(request, 'main.html')
 
 

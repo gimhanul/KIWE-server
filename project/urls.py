@@ -1,11 +1,11 @@
 """project URL Configuration
 
-The `urlpatterns` list routes URLs to views. For more information please see:
+The `urlpatterns` list routes URLs to  For more information please see:
     https://docs.djangoproject.com/en/3.2/topics/http/urls/
 Examples:
 Function views
     1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
+    2. Add a URL to urlpatterns:  path('', home, name='home')
 Class-based views
     1. Add an import:  from other_app.views import Home
     2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
@@ -15,13 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from user import views
+from user import views as user
+from kiword import views as kiword
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index, name='index'),
-    path('join/', views.join, name='join'),
-    path('login/', views.userlogin, name='login'),
-    path('main/', views.main, name='main'),
-    path('setting/', views.setting, name='setting'),
+    path('', user.index, name='index'),
+    path('join/', user.join, name='join'),
+    path('login/', user.userlogin, name='login'),
+    path('main/', user.main, name='main'),
+    path('setting/', user.setting, name='setting'),
+    path('q/<int:question_id>/', kiword.q, name='q'),
 ]
