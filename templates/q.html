@@ -2,11 +2,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>kiwe</title>
-    <link rel="stylesheet" href="button.css">
+    <link rel="stylesheet" href="{% static "button.css" %}">
 </head>
 <body>
     <div>
@@ -20,6 +21,16 @@
                 <strong><h2>{{ question.question }}</h2></strong>
             </center>
         <br><br>
+
+        {% for choice in choices %}
+        <center>
+        <div>
+            <button>{{ choice.choice }}</button>
+        </div>
+        </center><br>
+        {% endfor %}
+        <!--
+
         <div>
             <p>
                 <center>
@@ -50,5 +61,7 @@
             >카페</button></a>
             </center>
         </div>
+            
+        -->
 </body>
 </html>
