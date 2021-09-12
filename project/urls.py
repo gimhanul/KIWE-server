@@ -26,4 +26,5 @@ urlpatterns = [
     path('main/', user.main, name='main'),
     path('setting/', user.setting, name='setting'),
     path('q/<int:question_id>/', kiword.q, name='q'),
+    path('keyword/', kiword.kiword, name='keyword'),
 ]

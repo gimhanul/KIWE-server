@@ -21,14 +21,16 @@
                 <strong><h2>{{ question.question }}</h2></strong>
             </center>
         <br><br>
-
+        <form name="choice" method="post">
+        {% csrf_token %}
         {% for choice in choices %}
         <center>
         <div>
-            <button>{{ choice.choice }}</button>
+            <button value="{{ choice.id }}" name="oncedata">{{ choice.choice }}</button>
         </div>
         </center><br>
         {% endfor %}
+        </form>
         <!--
 
         <div>
