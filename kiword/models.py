@@ -30,3 +30,5 @@ class KeywordRelated(models.Model):
 
     def __str__(self):
         return self.choice
+
+#class userchoice(models.Model):
