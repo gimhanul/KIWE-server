@@ -26,24 +26,16 @@
         {% for choice in choices %}
         <center>
         <div>
-            <button value="{{ choice.id }}" name="oncedata" onclick="javascript:test( {{choice.id}} )">{{ choice.choice }}</button>
+            <button value="{{ choice.id }}" name="oncedata" onclick="javascript:test( {{question.id}}, {{choice.id}} )">{{ choice.choice }}</button>
         </div>
         </center><br>
         {% endfor %}
         </form>
 </body>
-<!--
-now = localStorage.getItem("key");
-now.push(i);
-localStorage.setItem("key",JSON.stringiry(now)); 
--->
+
 <script>
-    localStorage.setItem("now", []);
-    function test(i){
-        now = localStorage.getItem("now");
-        now.push(i);
-        localStorage.setItem("now", JSON.stringify(now));
-    } 
+    function test(id, data){
+        localStorage.setItem(id, data);
+    }
 </script>
 </html>
-
