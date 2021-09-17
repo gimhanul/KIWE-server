@@ -24,6 +24,11 @@ def q(request, question_id):
 def kiword(request):
     if request.method == 'POST':
         data = json.loads(request.body)
-        print(data)
+        one = data['one']
+        two = data['two']
+        three = data['three']
+        print(one)
+        print(two)
+        print(three)
     #algorithm
     return render(request, 'keyword.html')
