@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <!-- saved from url=(0075)file:///C:/Users/SW2120/DOCUME~1/%EC%B9%B4%EC%B9%B4%EC%98%A4~1/KIWE_M~1.HTM -->
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>kiwe</title>
-        <style>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    {% load static %}
+    <title>kiwe</title>
+    <link rel="stylesheet" href="{% static "style.css" %}">
+    <style>
           h5{
             margin:0;
           }
-        </style>
-    </head>
+    </style>
+  </head>
     <body>
       <form name="main" action="{% url 'main' %}" method="post">
       {% csrf_token %}

@@ -25,8 +25,8 @@ class Keyword(models.Model):
 
 class KeywordRelated(models.Model):
     keyword = models.ForeignKey(Keyword, on_delete=models.CASCADE)
-    question = models.IntegerField()
-    choice = models.IntegerField()
+    question = models.CharField(max_length=2)
+    choice = models.CharField(max_length=2)
 
     def __str__(self):
         return self.choice
