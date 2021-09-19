@@ -28,7 +28,6 @@ def kiword(request):
         two = data['two']
         three = data['three']
         birth = request.user.birth
-        print(request.keywordrelated.question)
         
     #algorithm
     return render(request, 'keyword.html')

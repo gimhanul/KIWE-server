@@ -3,7 +3,7 @@
     <head>
         {% load static %}
         <title>kiwe</title>
-        <link rel="stylesheet" href="{% static "style.css" %}">
+        <link rel="stylesheet" href="{% static "blank.css" %}">
         <style>
           h5{
             margin:0;
@@ -27,15 +27,15 @@
               {% csrf_token %}
               이메일
               <div>
-                <input style="WIDTH:160pt; HEIGHT:13pt"  name="email" class = "email" type="email" placeholder= "이메일을 입력해주세요"></input>
+                <input class="blank" name="email" type="email" placeholder= "이메일을 입력해주세요"></input>
               </div>
               비밀번호
               <div>
-                <input style="WIDTH:160pt; HEIGHT:13pt" name="password" class = "password" type="password" placeholder= "비밀번호를 입력해주세요"></input>
+                <input class="blank" name="password" type="password" placeholder= "비밀번호를 입력해주세요"></input>
               </div>
               <br>
 
-              <input type="submit" name="" value="로그인"> 
+              <input type="submit" name="" class="Rectangle-5" value="로그인"> 
             </form>
           </section>
         </center>

@@ -3,7 +3,7 @@
     <head>
         {% load static %}
         <title>kiwe</title>
-        <link rel="stylesheet" href="{% static "style.css" %}">
+        <link rel="stylesheet" href="{% static "blank.css" %}">
         <style>
           h5{
             margin:0;
@@ -21,15 +21,15 @@
             <form name="join" action="{% url 'join' %}" method="post">
             {% csrf_token %}
             이메일<br>
-              <input type="email" name="email">
+              <input class="blank" type="email" name="email">
             <br>
             비밀번호<br> 
-            <input type="password" name="password1"><br>
+            <input class="blank" type="password" name="password1"><br>
             비밀번호 확인<br> 
-            <input type="password" name="password2">
+            <input class="blank" type="password" name="password2">
             <br>
             이름<br>
-            <input type=text name="name">
+            <input class="blank" type=text name="name">
             <br><br>
             생년월일<br> 
             <input type="date" name="birth">
@@ -44,7 +44,7 @@
             <br>
             사용자 정보 제공 동의
             <input type="checkbox" name="agree" value="y" checked><br><br>
-            <input type="submit" name="submit" value="회원가입"> 
+            <input type="submit" name="submit" class="Rectangle-5" value="회원가입"> 
         </form>
     </section>
   <center>
