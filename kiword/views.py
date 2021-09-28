@@ -1,5 +1,5 @@
 from django.shortcuts import redirect, render
-from .models import Choice, Question
+from .models import Choice, Question, Keyword
 import json
 
 def q(request, question_id):
@@ -22,6 +22,8 @@ def q(request, question_id):
 
 
 def kiword(request):
+    #keywords = Keyword.objects.get()
+    #Choice.objects.filter(question_id=question_id)
     if request.method == 'POST':
         data = json.loads(request.body)
         one = data['one']
