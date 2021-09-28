@@ -1,5 +1,6 @@
 from django.shortcuts import redirect, render
-from .models import Choice, Question, Keyword
+from .models import Choice, Question, KeywordRelated
+from datetime import date 
 import json
 
 def q(request, question_id):
@@ -22,14 +23,19 @@ def q(request, question_id):
 
 
 def kiword(request):
-    #keywords = Keyword.objects.get()
-    #Choice.objects.filter(question_id=question_id)
     if request.method == 'POST':
         data = json.loads(request.body)
         one = data['one']
         two = data['two']
         three = data['three']
+        today = date.today()
         birth = request.user.birth
-        
+        birth = (today.year - birth.year + 1)//10
+        keywords = KeywordRelated.objects.filter(question='10', choice=birth).values('keyword')
+        recomm = []
+
+        for i in keywords:
+            recomm.append(i['keyword'])
+        print(recomm)
     #algorithm
     return render(request, 'keyword.html')
