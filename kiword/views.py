@@ -36,6 +36,7 @@ def kiword(request):
 
         for i in keywords:
             recomm.append(i['keyword'])
-        print(recomm)
-    #algorithm
+            
+
+
     return render(request, 'keyword.html')
