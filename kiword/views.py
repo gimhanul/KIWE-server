@@ -45,18 +45,19 @@ def kiword(request):
 
         for i in keywords:
             score = 0
-            if KeywordRelated.objects.filter(question='2', choice=two).exists():
+            if (KeywordRelated.objects.filter(keyword_id=i['keyword'], question='2', choice=two)).exists():
                 score += 1
-            if KeywordRelated.objects.filter(question='3', choice=three).exists():
+            if (KeywordRelated.objects.filter(keyword_id=i['keyword'], question='3', choice=three)).exists():
                 score += 1
-            if KeywordRelated.objects.filter(question='10', choice=birth).exists():
-                score += 1
-            temp = Rank(i['keyword'], score)
-            print(temp)
+            temp = Rank(score, i['keyword'])
             recomm.append(temp)
 
+        recomm = sorted(recomm, key=lambda rank : rank.score, reverse=False)
+        context = {
+            'recomm': recomm
+        }
         print(recomm)
             
 
 
-    return render(request, 'keyword.html')
+    return render(request, 'keyword.html', context)
