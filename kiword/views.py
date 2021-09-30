@@ -19,7 +19,15 @@ def q(request, question_id):
 
     return render(request, 'q.html', context)
     
+
     
+class Rank():
+    def __init__(self, keyword_id, score):
+        self.keyword_id = keyword_id
+        self.score = score
+
+    def __repr__(self):
+        return repr((self.keyword_id, self.score))
 
 
 def kiword(request):
@@ -32,10 +40,22 @@ def kiword(request):
         birth = request.user.birth
         birth = (today.year - birth.year + 1)//10
         keywords = KeywordRelated.objects.filter(question='10', choice=birth).values('keyword')
+        
         recomm = []
 
         for i in keywords:
-            recomm.append(i['keyword'])
+            score = 0
+            if KeywordRelated.objects.filter(question='2', choice=two).exists():
+                score += 1
+            if KeywordRelated.objects.filter(question='3', choice=three).exists():
+                score += 1
+            if KeywordRelated.objects.filter(question='10', choice=birth).exists():
+                score += 1
+            temp = Rank(i['keyword'], score)
+            print(temp)
+            recomm.append(temp)
+
+        print(recomm)
             
 
 
