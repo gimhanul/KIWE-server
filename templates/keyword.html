@@ -3,13 +3,13 @@
 <head>
     {% load static %}
     <title>kiwe</title>
-    <link rel="stylesheet" href="{% static "style.css" %}">
+    <link rel="stylesheet" href="{% static "button.css" %}">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 </head>
-<body>
+<body onload="javascript:recommend()">
     <form name="keyword" action="{% url 'keyword' %}" method="post">
     {% csrf_token %}
     <div>
@@ -25,7 +25,7 @@
     </div>
     <br><br>
     <center>
-        <button type="button" onclick="javascript:recommend()"><img src=https://postfiles.pstatic.net/MjAyMTA4MTFfMjA5/MDAxNjI4Njc5NzIxMzI4.GPP1mvtfYgKTPeeMlEV4p2bSKE3sTzYN_giSAfhEIM8g.U1M8A2XBDYDj_hTnA6K_2jHsYdxgffKAfxGNE68SOy8g.PNG.ksj051203/KakaoTalk_20210811_192221213.png?type=w966></button>
+        <button type="button" onclick=""><img src=https://postfiles.pstatic.net/MjAyMTA4MTFfMjA5/MDAxNjI4Njc5NzIxMzI4.GPP1mvtfYgKTPeeMlEV4p2bSKE3sTzYN_giSAfhEIM8g.U1M8A2XBDYDj_hTnA6K_2jHsYdxgffKAfxGNE68SOy8g.PNG.ksj051203/KakaoTalk_20210811_192221213.png?type=w966></button>
         </a>        
     </center>
     </form>
