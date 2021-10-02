@@ -1,6 +1,7 @@
 from django.shortcuts import redirect, render
-from .models import Choice, Question, KeywordRelated
+from .models import Choice, Question, KeywordRelated, Keyword
 from datetime import date 
+from django.http import JsonResponse
 import json
 
 def q(request, question_id):
@@ -22,18 +23,17 @@ def q(request, question_id):
 
     
 class Rank():
-    def __init__(self, keyword_id, score):
-        self.keyword_id = keyword_id
+    def __init__(self, score, keyword_str):
         self.score = score
+        self.keyword_str = keyword_str
 
     def __repr__(self):
-        return repr((self.score, self.keyword_id))
+        return repr((self.score, self.keyword_str))
 
 
 def kiword(request):
     if request.method == 'POST':
         data = json.loads(request.body)
-        print(data)
         one = data['one']
         two = data['two']
         three = data['three']
@@ -49,13 +49,15 @@ def kiword(request):
                 score += 1
             if (KeywordRelated.objects.filter(keyword_id=i['keyword'], question='3', choice=three)).exists():
                 score += 1
-            temp = Rank(score, i['keyword'])
-            print(temp)
+            temp = Rank(score, Keyword.objects.filter(id=i['keyword']).values('keyword')[0]['keyword'])
             recomm.append(temp)
-
-        recomm = sorted(recomm, key=lambda rank : rank.score, reverse=False)
+        recomm = sorted(recomm, key=lambda rank : rank.score, reverse=True)
         print(recomm)
+        first = recomm[0].keyword_str
+        return render(request, 'keyword.html', {'first': first})
+        #return JsonResponse(recomm, safe=False)
             
 
-
-    return render(request, 'keyword.html')
+    
+    
+    
