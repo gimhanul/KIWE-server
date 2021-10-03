@@ -52,12 +52,11 @@ def kiword(request):
             temp = Rank(score, Keyword.objects.filter(id=i['keyword']).values('keyword')[0]['keyword'])
             recomm.append(temp)
         recomm = sorted(recomm, key=lambda rank : rank.score, reverse=True)
+        recomm = [i.keyword_str for i in recomm]
         print(recomm)
-        first = recomm[0].keyword_str
-        return render(request, 'keyword.html', {'first': first})
-        #return JsonResponse(recomm, safe=False)
+        return JsonResponse({'recomm':recomm}, safe=False)
             
 
-    
+    return render(request, 'keyword.html')
     
     

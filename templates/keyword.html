@@ -20,12 +20,12 @@
     </div>
     <div>
         <center>
-            <strong><h2><p>{{ request.user.name }} 님<br> " {{ first }} "<br>이야기는 어때요?</h2></strong>
+            <strong><h2><p>{{ request.user.name }} 님<br>""<br>이야기는 어때요?</h2></strong>
         </center>
     </div>
     <br><br>
     <center>
-        <button type="button" onclick=""><img src=https://postfiles.pstatic.net/MjAyMTA4MTFfMjA5/MDAxNjI4Njc5NzIxMzI4.GPP1mvtfYgKTPeeMlEV4p2bSKE3sTzYN_giSAfhEIM8g.U1M8A2XBDYDj_hTnA6K_2jHsYdxgffKAfxGNE68SOy8g.PNG.ksj051203/KakaoTalk_20210811_192221213.png?type=w966></button>
+        <button type="button" onclick="javascript:keyword()"><img src=https://postfiles.pstatic.net/MjAyMTA4MTFfMjA5/MDAxNjI4Njc5NzIxMzI4.GPP1mvtfYgKTPeeMlEV4p2bSKE3sTzYN_giSAfhEIM8g.U1M8A2XBDYDj_hTnA6K_2jHsYdxgffKAfxGNE68SOy8g.PNG.ksj051203/KakaoTalk_20210811_192221213.png?type=w966></button>
         </a>        
     </center>
     </form>
@@ -47,7 +47,10 @@
                 'X-CSRFTOKEN' : '{{ csrf_token }}'
             },
             dataType : "json",
-            data : JSON.stringify(data)
+            data : JSON.stringify(data),
+            success : function(kk) {
+                console.log(kk['recomm'])
+            }
         });
     }
 </script>
