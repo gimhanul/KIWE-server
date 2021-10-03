@@ -53,7 +53,6 @@ def kiword(request):
             recomm.append(temp)
         recomm = sorted(recomm, key=lambda rank : rank.score, reverse=True)
         recomm = [i.keyword_str for i in recomm]
-        print(recomm)
         return JsonResponse({'recomm':recomm}, safe=False)
             
 

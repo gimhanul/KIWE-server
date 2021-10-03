@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     {% load static %}
     <title>kiwe</title>
@@ -20,12 +20,14 @@
     </div>
     <div>
         <center>
-            <strong><h2><p>{{ request.user.name }} 님<br>""<br>이야기는 어때요?</h2></strong>
+            <p><strong><h2>{{ request.user.name }} 님</h2>
+            <h2 id="recom"></h2>
+            <h2>이야기는 어때요?</h2></strong></p>
         </center>
     </div>
     <br><br>
     <center>
-        <button type="button" onclick="javascript:keyword()"><img src=https://postfiles.pstatic.net/MjAyMTA4MTFfMjA5/MDAxNjI4Njc5NzIxMzI4.GPP1mvtfYgKTPeeMlEV4p2bSKE3sTzYN_giSAfhEIM8g.U1M8A2XBDYDj_hTnA6K_2jHsYdxgffKAfxGNE68SOy8g.PNG.ksj051203/KakaoTalk_20210811_192221213.png?type=w966></button>
+        <button type="button" onclick="javascript:re()"><img src=https://postfiles.pstatic.net/MjAyMTA4MTFfMjA5/MDAxNjI4Njc5NzIxMzI4.GPP1mvtfYgKTPeeMlEV4p2bSKE3sTzYN_giSAfhEIM8g.U1M8A2XBDYDj_hTnA6K_2jHsYdxgffKAfxGNE68SOy8g.PNG.ksj051203/KakaoTalk_20210811_192221213.png?type=w966></button>
         </a>        
     </center>
     </form>
@@ -33,6 +35,13 @@
 </html>
 
 <script>
+    var i = 0;
+    function re() {
+        if(i<keywords.length){
+            witch.innerHTML = keywords[i++]
+        }
+    }
+
     function recommend() {
         var data = {
             one : localStorage.getItem("1"),
@@ -48,8 +57,12 @@
             },
             dataType : "json",
             data : JSON.stringify(data),
-            success : function(kk) {
-                console.log(kk['recomm'])
+            success : function (kk) {
+                if(1) {
+                    keywords = kk['recomm']
+                    witch = document.getElementById("recom")
+                }
+                witch.innerHTML = keywords[i++]
             }
         });
     }
