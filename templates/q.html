@@ -32,7 +32,7 @@
                 <strong><h2>{{ question.question }}</h2></strong>
             </center>
         <br><br>
-        <form name="choice" method="post">
+        <form name="choice" method="POST">
         {% csrf_token %}
         {% for choice in choices %}
         <center>
@@ -47,6 +47,6 @@
 <script>
     function test(id, data){
         localStorage.setItem(id, data);
-    }
+        }
 </script>
 </html>

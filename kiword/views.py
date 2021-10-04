@@ -13,8 +13,12 @@ def q(request, question_id):
     }
 
     if request.method == 'POST':
-        question_id=question_id+1
-        if question_id==4:
+        print(request.POST.get('oncedata'))
+        if request.POST.get('oncedata') == '1' or request.POST.get('oncedata') == '3':
+            question_id = question_id+2
+        else:
+            question_id=question_id+1
+        if question_id>=4:
             return redirect('/keyword')
         return redirect('/q/%s' %question_id)
 
@@ -37,6 +41,8 @@ def kiword(request):
         one = data['one']
         two = data['two']
         three = data['three']
+        if one != 2:
+            two=-1
         today = date.today()
         birth = request.user.birth
         birth = (today.year - birth.year + 1)//10
