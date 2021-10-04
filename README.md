@@ -1,3 +1,2 @@
 # kiwe-server
-KIWE is club in Busan Software Meister Highschool 🥝🥝    
-WE are making a webapp, using Django and Python. ⛏⛏
+KIWE app recommend a keyword when you are with friends!
