@@ -38,28 +38,34 @@ class Rank():
 def kiword(request):
     if request.method == 'POST':
         data = json.loads(request.body)
-        one = data['one']
-        two = data['two']
-        three = data['three']
-        if one != 2:
-            two=-1
-        today = date.today()
-        birth = request.user.birth
-        birth = (today.year - birth.year + 1)//10
-        keywords = KeywordRelated.objects.filter(question='10', choice=birth).values('keyword')
-        recomm = []
+        if(data['one']):
+            print('oo')
+            one = data['one']
+            two = data['two']
+            three = data['three']
+            if one != 2:
+                two=-1
+            today = date.today()
+            birth = request.user.birth
+            birth = (today.year - birth.year + 1)//10
+            keywords = KeywordRelated.objects.filter(question='10', choice=birth).values('keyword')
+            recomm = []
 
-        for i in keywords:
-            score = 0
-            if (KeywordRelated.objects.filter(keyword_id=i['keyword'], question='2', choice=two)).exists():
-                score += 1
-            if (KeywordRelated.objects.filter(keyword_id=i['keyword'], question='3', choice=three)).exists():
-                score += 1
-            temp = Rank(score, Keyword.objects.filter(id=i['keyword']).values('keyword')[0]['keyword'])
-            recomm.append(temp)
-        recomm = sorted(recomm, key=lambda rank : rank.score, reverse=True)
-        recomm = [i.keyword_str for i in recomm]
-        return JsonResponse({'recomm':recomm}, safe=False)
+            for i in keywords:
+                score = 0
+                if (KeywordRelated.objects.filter(keyword_id=i['keyword'], question='2', choice=two)).exists():
+                    score += 1
+                if (KeywordRelated.objects.filter(keyword_id=i['keyword'], question='3', choice=three)).exists():
+                    score += 1
+                temp = Rank(score, Keyword.objects.filter(id=i['keyword']).values('keyword')[0]['keyword'])
+                recomm.append(temp)
+            recomm = sorted(recomm, key=lambda rank : rank.score, reverse=True)
+            recomm = [i.keyword_str for i in recomm]
+            return JsonResponse({'recomm':recomm}, safe=False)
+        elif (data['wihle']):
+            print('xx')
+            #print(data['while'])
+
             
 
     return render(request, 'keyword.html')

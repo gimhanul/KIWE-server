@@ -38,7 +38,27 @@
     var i = 0;
     function re() {
         if(i<keywords.length){
-            witch.innerHTML = keywords[i++]
+            var end = new Date();
+            
+            var time = {
+                keyword : keywords[i-1],
+                while : (end.getTime() - start.getTime())/1000,
+            }
+            console.log(time);
+            
+            $.ajax({
+                url: "{% url 'keyword' %}",
+                type : "POST",
+                headers : {
+                    'S-CSRFTOKEN' : '{{ csrf_token }}'
+                },
+                dataType : "json",
+                data : JSON.stringify(time),
+            })
+            start = new Date();
+            
+
+            witch.innerHTML = keywords[i++];
         }
     }
 
@@ -59,10 +79,11 @@
             data : JSON.stringify(data),
             success : function (kk) {
                 if(1) {
-                    keywords = kk['recomm']
-                    witch = document.getElementById("recom")
+                    keywords = kk['recomm'];
+                    witch = document.getElementById("recom");
+                    start = new Date();
                 }
-                witch.innerHTML = keywords[i++]
+                witch.innerHTML = keywords[i++];
             }
         });
     }
