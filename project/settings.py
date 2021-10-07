@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-w8)lbkzvc6#6f#1*v6ro+%6n82$f#s&mm9s1d14=a-9p_*yoqp
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -80,15 +80,12 @@ WSGI_APPLICATION = 'project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'kiwe', # Database 이름
-        'USER': 'hanul', # 데이터베이스에서 사용할 계정
-        'PASSWORD': 'hanul', # 계정의 비밀번호
-        'HOST': 'localhost', # 데이테베이스 주소
-        'PORT': '3306', # 데이터베이스 포트, mysql 디폴트값은 3306
-        'OPTIONS': {
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
-        }
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'Jinaeran!!!',
+        'HOST' :'database-1.c6buxo1xynav.ap-northeast-2.rds.amazonaws.com',
+        'PORT' : '5432',
     }
 }
 
