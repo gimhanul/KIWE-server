@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    {% load static %}
+    <title>kiwe</title>
+    <link rel="stylesheet" href="{% static 'css/bar.css' %}">
+  </head>
+    <body>
+      <form name="main" action="{% url 'kiwe' %}" method="post">
+      {% csrf_token %}
+      <center>
+        <br><br><br>
+        <img src="{% static 'images/kiwe.png' %}"><br><br>
+        <button style="font-size:2em; background-color: white; outline:0; border: 0;">시작하기</button>
+      </center>
+      </form>
+
+      <div class="bottom_menu">
+        <div>
+            <a href="{% url 'kiwe' %}"><img src="{% static 'images/b-filled-kiwe.png' %}"></a>
+        </div>
+        <div>
+            <a href="{% url 'friends' %}"><img src="{% static 'images/b-friend.png' %}"></a>
+        </div>
+        <div>
+            <a href="{% url 'memory' %}"><img src="{% static 'images/b-memory.png' %}"></a>
+        </div>
+        <div>
+          <a href="{% url 'setting' %}"><img src="{% static 'images/b-setting.png' %}"></a>
+        </div>
+    </div>
+    </body>
+</html>

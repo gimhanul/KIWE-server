@@ -32,7 +32,7 @@ def userlogin(request):
         user = authenticate(email=email, password=password)
         if user:
             login(request, user)
-            return redirect('main')
+            return redirect('kiwe')
     else:
         form = AuthenticationForm()
     context = {
@@ -41,11 +41,15 @@ def userlogin(request):
     return render(request, 'login.html', context)
 
 
-def main(request):
+def kiwe(request):
     if request.method == 'POST':
         return redirect('../q/1')
-    return render(request, 'main.html')
+    return render(request, 'kiwe.html')
 
+def friends(request):
+    #if request.method == 'POST':
+
+    return render(request, 'friends.html')
 
 def setting(request):
     if request.method == 'POST':

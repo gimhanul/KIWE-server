@@ -1,4 +1,5 @@
 from django.db import models
+from user.models import User
 from django.db.models.deletion import CASCADE
 
 class Question(models.Model):
@@ -31,4 +32,6 @@ class KeywordRelated(models.Model):
     def __str__(self):
         return self.choice
 
-#class userchoice(models.Model):
+class Userchoice(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    

@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html>
     <head>
+        {% load static %}
         <title>kiwe</title>
         <style>
           h5{
             margin:0;
           }
         </style>
+        <link rel="stylesheet" href="{% static 'css/bar.css' %}">
     </head>
     <body>
       <center>
@@ -19,19 +21,24 @@
           <br>
           <h4>2021.03.09 with 세진 님</h4>
           <div>
-            <img src ="https://blogfiles.pstatic.net/MjAyMTA4MTFfMjAg/MDAxNjI4Njc5NzIxMzQx.hj4FPgCvVHYpXH2lMCI_EVR0d6JQaTQfMbjqYWOo4zkg.QR1yAYL3laXAeNksKln8rCuTSP16JZJU3qRMqAnsbkkg.PNG.ksj051203/keyword.png" border=2; style="WIDTH:250pt; HEIGHT:160pt">
+            <img src ="" style="WIDTH:250pt; HEIGHT:160pt">
           </div>
           <br>
           <br>
-          <h4>2021.04.15 with 한울 님</h4>
-          <div>
-            <img src ="https://blogfiles.pstatic.net/MjAyMTA4MTFfMjAg/MDAxNjI4Njc5NzIxMzQx.hj4FPgCvVHYpXH2lMCI_EVR0d6JQaTQfMbjqYWOo4zkg.QR1yAYL3laXAeNksKln8rCuTSP16JZJU3qRMqAnsbkkg.PNG.ksj051203/keyword.png" border=2; style="WIDTH:250pt; HEIGHT:160pt">
-          </div>
-          <br>
-          <br>
-          <h4>2021.05.28 with 나은 님</h4>
-          <div>
-            <img src ="https://blogfiles.pstatic.net/MjAyMTA4MTFfMjAg/MDAxNjI4Njc5NzIxMzQx.hj4FPgCvVHYpXH2lMCI_EVR0d6JQaTQfMbjqYWOo4zkg.QR1yAYL3laXAeNksKln8rCuTSP16JZJU3qRMqAnsbkkg.PNG.ksj051203/keyword.png" border=2; style="WIDTH:250pt; HEIGHT:160pt">
-          </div>
         </center>
+
+        <div class="bottom_menu">
+          <div>
+              <a href="{% url 'kiwe' %}"><img src="{% static 'images/b-kiwe.png' %}"></a>
+          </div>
+          <div>
+              <a href="{% url 'friends' %}"><img src="{% static 'images/b-friend.png' %}"></a>
+          </div>
+          <div>
+              <a href="{% url 'memory' %}"><img src="{% static 'images/b-filled-memory.png' %}"></a>
+          </div>
+          <div>
+            <a href="{% url 'setting' %}"><img src="{% static 'images/b-setting.png' %}"></a>
+          </div>
+      </div>
 </html>

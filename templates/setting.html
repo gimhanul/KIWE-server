@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html>
     <head>
+      {% load static %}
         <title>kiwe</title>
         <style>
           h5{
             margin:0;
           }
         </style>
+      <link rel="stylesheet" href="{% static 'css/bar.css' %}"
     </head>
     <body>
       <center>
@@ -45,4 +47,19 @@
           </div>
         </form>
         </center>
+
+        <div class="bottom_menu">
+          <div>
+              <a href="{% url 'kiwe' %}"><img src="{% static 'images/b-kiwe.png' %}"></a>
+          </div>
+          <div>
+              <a href="{% url 'friends' %}"><img src="{% static 'images/b-friend.png' %}"></a>
+          </div>
+          <div>
+              <a href="{% url 'memory' %}"><img src="{% static 'images/b-memory.png' %}"></a>
+          </div>
+          <div>
+            <a href="{% url 'setting' %}"><img src="{% static 'images/b-filled-setting.png' %}"></a>
+          </div>
+      </div>
 </html>

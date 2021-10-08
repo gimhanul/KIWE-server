@@ -13,7 +13,6 @@ def q(request, question_id):
     }
 
     if request.method == 'POST':
-        print(request.POST.get('oncedata'))
         if request.POST.get('oncedata') == '1' or request.POST.get('oncedata') == '3':
             question_id = question_id+2
         else:
@@ -39,7 +38,6 @@ def kiword(request):
     if request.method == 'POST':
         data = json.loads(request.body)
         if(data['one']):
-            print('oo')
             one = data['one']
             two = data['two']
             three = data['three']
@@ -62,12 +60,12 @@ def kiword(request):
             recomm = sorted(recomm, key=lambda rank : rank.score, reverse=True)
             recomm = [i.keyword_str for i in recomm]
             return JsonResponse({'recomm':recomm}, safe=False)
-        elif (data['wihle']):
-            print('xx')
+        #elif (data['wihle']):
             #print(data['while'])
 
-            
-
     return render(request, 'keyword.html')
+
+def memory(request):
+    return render(request, 'memory.html')
     
     

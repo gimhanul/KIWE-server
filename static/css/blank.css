@@ -1,0 +1,16 @@
+.blank {
+    WIDTH: 220pt;
+    HEIGHT: 27pt;
+    border: 2.5px solid rgb(156, 156, 156);
+    margin: 3px 26px 5px 17px;
+    border-radius: 10px;
+}
+
+.Rectangle-5 {
+    width: 309px;
+    height: 47px;
+    margin: 18px 26px 0 17px;
+    padding: 13px 108px 14px 98px;
+    border-radius: 100px;
+    background-color: #d0ea85;
+  }
