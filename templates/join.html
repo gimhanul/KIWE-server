@@ -11,12 +11,26 @@
         h5{
           margin:0;
         }
+        input[type="date"]::-webkit-calendar-picker-indicator,
+        input[type="date"]::-webkit-inner-spin-button {
+          display: none;
+          appearance: none;
+        }   
+
+        input[type="date"] {
+          WIDTH: 220pt;
+          HEIGHT: 27pt;
+          border: 2.5px solid rgb(156, 156, 156);
+          margin: 3px 26px 5px 17px;
+          border-radius: 10px;
+          display: inline-block;
+          text-align: center;
+          
+        }
       </style>
     </head>
     <body>
       <center>
-          <br>
-          <br>
           <br>
           <br>
           <h1>회원가입</h1>
@@ -44,7 +58,7 @@
             <input type="radio" name="gender" value="1" id="woman"><br><br>
             <br>
             사용자 정보 제공 동의
-            <input type="checkbox" name="agree" value="y" checked><br><br>
+            <input type="checkbox" name="agree" value="y"><br><br>
             <input type="submit" name="submit" class="Rectangle-5" value="회원가입"> 
         </form>
     </section>
