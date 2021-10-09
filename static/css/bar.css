@@ -1,10 +1,22 @@
+
+.title {
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    height: 130px;
+    left: 0px;
+    border-bottom: 1px #FFFFFF;
+    background: #FFFFFF;
+    box-shadow: 0px -3px 16px rgba(0, 0, 0, 0.25);
+}
+
 .bottom_menu {
     
     position: fixed;
     bottom: 0px;
     left: 0px;
     width: 100%;
-    height: 80px;
+    height: 9%;
     z-index: 100;
     border-top: 1px solid white;
     background-color: white;
@@ -17,6 +29,6 @@
     width: 25%;
     height: 100%;
     text-align: center;
-    transform: translate(0%, 28%);
+    transform: translateY(28%);
     /*padding-top: 1%;*/
 }

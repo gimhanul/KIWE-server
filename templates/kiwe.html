@@ -9,11 +9,12 @@
     <body>
       <form name="main" action="{% url 'kiwe' %}" method="post">
       {% csrf_token %}
-      <center>
-        <br><br><br>
-        <img src="{% static 'images/kiwe.png' %}"><br><br>
-        <button style="font-size:2em; background-color: white; outline:0; border: 0;">시작하기</button>
-      </center>
+      <div style="margin-top: 40%;">
+        <center>
+        <img src="{% static 'images/kiwe.png' %}" style="height: 30%; width: 30%;"><br><br>
+        <button style="font-size:2em; font-weight: bold; background-color: white; outline:0; border: 0;">시작하기</button>
+        </center>
+      </div>
       </form>
 
       <div class="bottom_menu">

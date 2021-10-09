@@ -8,58 +8,72 @@
             margin:0;
           }
         </style>
-      <link rel="stylesheet" href="{% static 'css/bar.css' %}"
+      <link rel="stylesheet" href="{% static 'css/bar.css' %}">
+      <link rel="stylesheet" href="{% static 'css/setting.css' %}">
     </head>
     <body>
-      <center>
-          <br>
-          <br>
-          <br>
-          <br>
-          <br>
-          <br>
-          <br>
-          <h1>설정</h1>
-          <br>
-          <div>
-            <form name="setting" action="{% url 'setting' %}" method="post">
-            {% csrf_token %}
-            <p>
-              <h3>계정 설정</h3>
-              회원 정보 수정<br>
-              <button class=logout name="logout">로그아웃</button><br>
-              회원 탈퇴
-            </p>
-        </div>
-          내활동
-          <br>
-          <br>
-          다크모드
-          <br>
-          <br>
-          도움말
-          <br>
-          <br>
-          알림 설정
-          <br>
-          <br>
-          오픈소스
-          </div>
+
+      <div class="title">
+        <h1 style="padding-left: 5%; transform: translateY(90%);">설정</h1>
+      </div>
+      
+      <div>
+        <br><br><br><br><br><br><br><br>
+        <form name="setting" action="{% url 'setting' %}" method="post">
+        {% csrf_token %}
+          <div id='settinglist'>
+            <ul>
+                <li><button class="m-list">계정</button>
+                    <ul class="sub">
+                        <li class='sub-list'><button>회원 정보 수정</button></li>
+                        <li class='sub-list'><button name="logout">로그아웃</button></li>
+                        <li class='sub-list'><button>회원 탈퇴</button></li>
+                    </ul>
+                </li>
+                    
+                <li><button class="m-list">친구</button>
+                    <ul class="sub">
+                        <li class='sub-list'><button>차단한 친구</button></li>
+                        <li class='sub-list'><button>숨긴 친구</button></li>
+                    </ul>
+                </li>
+                    
+                <li><button class="m-list">알림</button>
+                    <ul class="sub">
+                        <li class='sub-list'><button>알림 받기</button></li>
+                        <li class='sub-list'><button>통화 중 알림</button></li>
+                        <li class='sub-list'><button>사용 중 알림</button></li>
+                    </ul>
+                </li>
+                    
+                <li><button class="m-list">도움말</button></li>
+        
+                <li><button class="m-list">개발자</button>
+                    <ul class="sub">
+                        <li class='sub-list'><button>키위팀</button></li>
+                        <li class='sub-list'><button>김한울</button></li>
+                        <li class='sub-list'><button>진애란</button></li>
+                        <li class='sub-list'><button>김세진</button></li>
+                        <li class='sub-list'><button>유나은</button></li>
+                    </ul>
+                </li>
+            </ul>
+            </div>
         </form>
-        </center>
+        </div>
 
         <div class="bottom_menu">
           <div>
-              <a href="{% url 'kiwe' %}"><img src="{% static 'images/b-kiwe.png' %}"></a>
+              <a href="{% url 'kiwe' %}"><img src="{% static 'images/b-kiwe.png' %}"></button>
           </div>
           <div>
-              <a href="{% url 'friends' %}"><img src="{% static 'images/b-friend.png' %}"></a>
+              <a href="{% url 'friends' %}"><img src="{% static 'images/b-friend.png' %}"></button>
           </div>
           <div>
-              <a href="{% url 'memory' %}"><img src="{% static 'images/b-memory.png' %}"></a>
+              <a href="{% url 'memory' %}"><img src="{% static 'images/b-memory.png' %}"></button>
           </div>
           <div>
-            <a href="{% url 'setting' %}"><img src="{% static 'images/b-filled-setting.png' %}"></a>
+            <a href="{% url 'setting' %}"><img src="{% static 'images/b-filled-setting.png' %}"></button>
           </div>
-      </div>
+        </div>
 </html>

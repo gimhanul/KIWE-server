@@ -1,0 +1,29 @@
+li {
+    list-style: none;
+}
+
+button {
+    background-color: white;
+    outline:0;
+    border: 0;
+}
+
+.m-list {
+    font-size: 1.5em;
+    font-weight: lighter;
+    font-style: Medium;
+    font-size: 30px;
+    line-height: 35px;
+    line-height: 100%;
+    box-align: Left;
+    vertical-align: Top;
+}
+
+.m-list .sub {
+    position: absolute;
+    /*
+    width: 150px;
+    left: 149px;
+    */
+    top: -1px;
+}
