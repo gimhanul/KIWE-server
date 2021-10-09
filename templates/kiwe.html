@@ -6,15 +6,14 @@
     <title>kiwe</title>
     <link rel="stylesheet" href="{% static 'css/bar.css' %}">
   </head>
-    <body>
-      <form name="main" action="{% url 'kiwe' %}" method="post">
-      {% csrf_token %}
-      <div style="margin-top: 40%;">
-        <center>
-        <img src="{% static 'images/kiwe.png' %}" style="height: 30%; width: 30%;"><br><br>
-        <button style="font-size:2em; font-weight: bold; background-color: white; outline:0; border: 0;">시작하기</button>
-        </center>
-      </div>
+  <body>
+    <form name="main" action="{% url 'kiwe' %}" method="post">
+    {% csrf_token %}
+      <br><br><br>
+      <center>
+      <img src="{% static 'images/kiwe.png' %}"><br><br>
+      <button style="font-size:2em; font-weight: bold; color: black; background-color: white; outline:0; border: 0;">시작하기</button>
+      </center>
       </form>
 
       <div class="bottom_menu">
