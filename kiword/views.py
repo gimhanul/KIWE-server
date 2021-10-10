@@ -1,5 +1,5 @@
 from django.shortcuts import redirect, render
-from .models import Choice, Question, KeywordRelated, Keyword
+from .models import Choice, Question, KeywordRelated, Keyword, Usermemory, Each
 from datetime import date 
 from django.http import JsonResponse
 import json
@@ -37,7 +37,7 @@ class Rank():
 def kiword(request):
     if request.method == 'POST':
         data = json.loads(request.body)
-        if(data['one']):
+        if data['dt']=='k':
             one = data['one']
             two = data['two']
             three = data['three']
@@ -57,11 +57,21 @@ def kiword(request):
                     score += 1
                 temp = Rank(score, Keyword.objects.filter(id=i['keyword']).values('keyword')[0]['keyword'])
                 recomm.append(temp)
+
             recomm = sorted(recomm, key=lambda rank : rank.score, reverse=True)
             recomm = [i.keyword_str for i in recomm]
+
+            usermemory = Usermemory.objects.create(user = request.user)
+            usermemory.save()
+
             return JsonResponse({'recomm':recomm}, safe=False)
-        #elif (data['wihle']):
-            #print(data['while'])
+
+            
+        elif data['dt'] == 'time':
+            print(data['keyword'])
+            usermemory_id = Usermemory.objects.filter(user=request.user).latest('id')
+            each = Each.objects.create(memory_id=usermemory_id, keyword = data['keyword'], time = float(data['while']))
+            each.save()
 
     return render(request, 'keyword.html')
 

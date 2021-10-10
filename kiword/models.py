@@ -1,5 +1,6 @@
 from django.db import models
 from user.models import User
+from django.utils import timezone
 from django.db.models.deletion import CASCADE
 
 class Question(models.Model):
@@ -32,6 +33,17 @@ class KeywordRelated(models.Model):
     def __str__(self):
         return self.choice
 
-class Userchoice(models.Model):
+class Usermemory(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    kiwe_time = models.DateTimeField(default=timezone.now)
+
+    def __str__ (self):
+        return self.user
     
+class Each(models.Model):
+    memory_id = models.ForeignKey(Usermemory, on_delete=models.CASCADE)
+    keyword = models.CharField(max_length=100)
+    time = models.FloatField()
+
+    def __str__ (self):
+        return self.keyword

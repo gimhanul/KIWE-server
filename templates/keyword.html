@@ -27,48 +27,52 @@
     </div>
     <br><br>
     <center>
-        <button type="button" style="background-color: white; outline:0; border: 0;" onclick="javascript:re()"><img src="{% static 'images/new.jpg' %}"></button>
-        </a>        
+        <button type="button" style="background-color: white; outline:0; border: 0;" onclick="javascript:re()"><img src="{% static 'images/new.jpg' %}"></button>  
     </center>
+
+    <a href="{% url 'kiwe' %}"><button type="button" style="position: fixed; background-color: white; outline: 0; border:0; color: gray; bottom: 30px; left: 45%;" onclick="javascript:re()">그만하기</button></a>
     </form>
 </body>
 </html>
 
 <script>
     var i = 0;
+
     function re() {
-        if(i<keywords.length){
+        if(i<=keywords.length){
             var end = new Date();
-            
             var time = {
+                dt : 'time',
                 keyword : keywords[i-1],
                 while : (end.getTime() - start.getTime())/1000,
             }
-            console.log(time);
-            
-            /*
+
             $.ajax({
-                url: "{% url 'keyword' %}",
+                url : "{% url 'keyword' %}",
                 type : "POST",
                 headers : {
-                    'S-CSRFTOKEN' : '{{ csrf_token }}'
+                    'X-CSRFTOKEN' : '{{ csrf_token }}'
                 },
                 dataType : "json",
                 data : JSON.stringify(time),
-            })*/
-            start = new Date();
-            
+                async : false,
+            });
 
-            witch.innerHTML = keywords[i++];
+            if(i<keywords.length) {
+                start = new Date();
+                witch.innerHTML = keywords[i++];
+
+            }         
+            
         }
     }
 
     function recommend() {
         var data = {
+            dt : 'k',
             one : localStorage.getItem("1"),
             two : localStorage.getItem("2"),
             three : localStorage.getItem("3")
-
         }
         $.ajax({
             url : "{% url 'keyword' %}",
@@ -78,6 +82,7 @@
             },
             dataType : "json",
             data : JSON.stringify(data),
+            async : false,
             success : function (kk) {
                 if(1) {
                     keywords = kk['recomm'];
