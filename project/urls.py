@@ -17,6 +17,8 @@ from django.contrib import admin
 from django.urls import path
 from user import views as user
 from kiword import views as kiword
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,8 +27,11 @@ urlpatterns = [
     path('login/', user.userlogin, name='login'),
     path('kiwe/', user.kiwe, name='kiwe'),
     path('friends/', user.friends, name='friends'),
-    path('memory/', kiword.memory, name='memory'),
+    path('memories/', kiword.memories, name='memories'),
     path('setting/', user.setting, name='setting'),
     path('q/<int:question_id>/', kiword.q, name='q'),
     path('keyword/', kiword.kiword, name='keyword'),
-]
+    path('memory/<int:usermemory_id>/', kiword.memory, name='memory')
+] 
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,9 +1,11 @@
 from django.shortcuts import redirect, render
-from django.db.models import Max
+import wordcloud
 from .models import Choice, Question, KeywordRelated, Keyword, Usermemory, Each
 from datetime import date 
 from django.http import JsonResponse
 import json
+from wordcloud import WordCloud
+import matplotlib.pyplot as plt
 
 def q(request, question_id):
     question = Question.objects.get(id=question_id)
@@ -56,8 +58,8 @@ def kiword(request):
                     score += 1
                 if (KeywordRelated.objects.filter(keyword_id=i['keyword'], question='3', choice=three)).exists():
                     score += 1
-                temp = Rank(score, Keyword.objects.filter(id=i['keyword']).values('keyword')[0]['keyword'])
-                recomm.append(temp)
+                words = Rank(score, Keyword.objects.filter(id=i['keyword']).values('keyword')[0]['keyword'])
+                recomm.append(words)
 
             recomm = sorted(recomm, key=lambda rank : rank.score, reverse=True)
             recomm = [i.keyword_str for i in recomm]
@@ -77,17 +79,44 @@ def kiword(request):
                 usermemory.longestt = data['longestt']
                 usermemory.longestk = data['longestk']
                 usermemory.save()
+                
 
 
     return render(request, 'keyword.html')
 
-def memory(request):
+def memories(request):
     usermemory = Usermemory.objects.filter(user=request.user)
     usermemory = reversed(usermemory)
 
     context = {
         'usermemory': usermemory,
     }
-    return render(request, 'memory.html', context)
+    return render(request, 'memories.html', context)
     
+
+def memory(request, usermemory_id):
+    words = []
+    each = Each.objects.filter(memory_id=usermemory_id)
+    for i in each:
+        temp = (i.keyword, i.time)
+        words.append(temp)
+
+
+    wc = WordCloud(
+        font_path=None,
+        background_color="white",
+        max_words=100,
+        max_font_size=100,
+    )
+
+    wc.generate_from_frequencies(dict(words))
     
+    plt.figure(figsize=(419,453))
+    plt.imshow(wc)
+    plt.tight_layout(pad=0)
+    plt.axis("off")
+    plt.show()
+    #keywordcloud = word_cloud(usermemory_id)
+    return render(request, 'memory.html')
+
+#def word_cloud(usermemory_id):

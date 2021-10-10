@@ -1,81 +1,11 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        {% load static %}
-        <title>kiwe</title>
-        <style>
-          h5{
-            margin:0;
-          }
-          .memory {
-            position: relative;
-            background-color: #EEF6D6;
-            border-radius: 15px;
-            box-shadow: 0px 4px 7px -2px rgba(0, 0, 0, 0.25);
-            width: 355px;
-            height: 182px;
-            padding-left: 25px;
-            margin-bottom: 19px;
-            z-index: -1;
-          }
-          .memory > h3 {
-            position: absolute;
-            font-style: bold;
-            text-align: center;
-            color: #ABC65F;
-            z-index: 1;
-          }
-
-          .memory > h1 {
-            position: absolute;
-            font-weight: bold;
-            font-size: 60px;
-            text-align: center;
-            color: #ABC65F;
-            z-index: 1;
-          }
-        </style>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="{% static 'css/bar.css' %}">
-    </head>
-    <body>
-      <div class="title">
-        <h1 style="padding-left: 5%; transform: translateY(90%);">그날의 추억</h1>
-      </div>
-      <center>
-          <br>
-          <br>          
-          <br>
-          <br>
-          <br>
-          <br>
-          <br>
-          <br>
-          {% for one in usermemory %}
-          <div class="memory">
-              <h1 style="bottom: 37px;">{{ one.longestk }}</h1>
-              <h3 style="bottom: 35px;">{{ one.kiwe_time }}</h3>
-              <h3 style="bottom: 15px;">{{ one.user.name }}</h3>
-          </div>
-          {% endfor %}
-          <br>
-          <br>
-        </center>
-
-        <div class="bottom_menu">
-          <div>
-              <a href="{% url 'kiwe' %}"><img src="{% static 'images/b-kiwe.png' %}"></a>
-          </div>
-          <div>
-              <a href="{% url 'friends' %}"><img src="{% static 'images/b-friend.png' %}"></a>
-          </div>
-          <div>
-              <a href="{% url 'memory' %}"><img src="{% static 'images/b-filled-memory.png' %}"></a>
-          </div>
-          <div>
-            <a href="{% url 'setting' %}"><img src="{% static 'images/b-setting.png' %}"></a>
-          </div>
-      </div>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+</body>
 </html>
