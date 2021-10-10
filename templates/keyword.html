@@ -27,24 +27,35 @@
     </div>
     <br><br>
     <center>
-        <button type="button" style="background-color: white; outline:0; border: 0;" onclick="javascript:re()"><img src="{% static 'images/new.jpg' %}"></button>  
+        <button type="button" style="background-color: white; outline:0; border: 0;" onclick="javascript:re('time')"><img src="{% static 'images/new.jpg' %}"></button>  
     </center>
 
-    <a href="{% url 'kiwe' %}"><button type="button" style="position: fixed; background-color: white; outline: 0; border:0; color: gray; bottom: 30px; left: 45%;" onclick="javascript:re()">그만하기</button></a>
+    <a href="{% url 'kiwe' %}"><button type="button" style="position: fixed; background-color: white; outline: 0; border:0; color: gray; bottom: 30px; left: 45%;" onclick="javascript:re('end')">그만하기</button></a>
     </form>
 </body>
 </html>
 
 <script>
     var i = 0;
+    var longestk = 'temp';
+    var longestt = 0.0;
 
-    function re() {
+    function re(dt) {
         if(i<=keywords.length){
             var end = new Date();
-            var time = {
-                dt : 'time',
+            var time = (end.getTime() - start.getTime())/1000;
+
+            if(longestt < time) {
+                longestt = time;
+                longestk = keywords[i-1];
+            }
+
+            var data = {
+                dt : dt,
                 keyword : keywords[i-1],
-                while : (end.getTime() - start.getTime())/1000,
+                while : time,
+                longestk : longestk,
+                longestt : longestt,
             }
 
             $.ajax({
@@ -54,7 +65,7 @@
                     'X-CSRFTOKEN' : '{{ csrf_token }}'
                 },
                 dataType : "json",
-                data : JSON.stringify(time),
+                data : JSON.stringify(data),
                 async : false,
             });
 

@@ -47,13 +47,11 @@ def kiwe(request):
     return render(request, 'kiwe.html')
 
 def friends(request):
-    #if request.method == 'POST':
 
     return render(request, 'friends.html')
 
 def setting(request):
     if request.method == 'POST':
-        print(request.POST)
         logout(request)
         return redirect('/')
     return render(request, 'setting.html')

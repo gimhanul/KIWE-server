@@ -8,6 +8,7 @@
     border-bottom: 1px #FFFFFF;
     background: #FFFFFF;
     box-shadow: 0px -3px 16px rgba(0, 0, 0, 0.25);
+    z-index: 9999;
 }
 
 .bottom_menu {

@@ -1,4 +1,5 @@
 from django.shortcuts import redirect, render
+from django.db.models import Max
 from .models import Choice, Question, KeywordRelated, Keyword, Usermemory, Each
 from datetime import date 
 from django.http import JsonResponse
@@ -67,15 +68,26 @@ def kiword(request):
             return JsonResponse({'recomm':recomm}, safe=False)
 
             
-        elif data['dt'] == 'time':
-            print(data['keyword'])
-            usermemory_id = Usermemory.objects.filter(user=request.user).latest('id')
-            each = Each.objects.create(memory_id=usermemory_id, keyword = data['keyword'], time = float(data['while']))
+        elif data['dt'] == 'time' or data['dt'] == 'end':
+            usermemory = Usermemory.objects.filter(user=request.user).latest('id')
+            each = Each.objects.create(memory_id=usermemory, keyword = data['keyword'], time = float(data['while']))
             each.save()
+
+            if data['dt'] == 'end':
+                usermemory.longestt = data['longestt']
+                usermemory.longestk = data['longestk']
+                usermemory.save()
+
 
     return render(request, 'keyword.html')
 
 def memory(request):
-    return render(request, 'memory.html')
+    usermemory = Usermemory.objects.filter(user=request.user)
+    usermemory = reversed(usermemory)
+
+    context = {
+        'usermemory': usermemory,
+    }
+    return render(request, 'memory.html', context)
     
     

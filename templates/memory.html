@@ -7,6 +7,33 @@
           h5{
             margin:0;
           }
+          .memory {
+            position: relative;
+            background-color: #EEF6D6;
+            border-radius: 15px;
+            box-shadow: 0px 4px 7px -2px rgba(0, 0, 0, 0.25);
+            width: 355px;
+            height: 182px;
+            padding-left: 25px;
+            margin-bottom: 19px;
+            z-index: -1;
+          }
+          .memory > h3 {
+            position: absolute;
+            font-style: bold;
+            text-align: center;
+            color: #ABC65F;
+            z-index: 1;
+          }
+
+          .memory > h1 {
+            position: absolute;
+            font-weight: bold;
+            font-size: 60px;
+            text-align: center;
+            color: #ABC65F;
+            z-index: 1;
+          }
         </style>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,16 +46,20 @@
       </div>
       <center>
           <br>
+          <br>          
           <br>
           <br>
           <br>
           <br>
-          <h1></h1>
           <br>
-          <h4>2021.03.09 with 세진 님</h4>
-          <div>
-            <img src ="" style="WIDTH:250pt; HEIGHT:160pt">
+          <br>
+          {% for one in usermemory %}
+          <div class="memory">
+              <h1 style="bottom: 37px;">{{ one.longestk }}</h1>
+              <h3 style="bottom: 35px;">{{ one.kiwe_time }}</h3>
+              <h3 style="bottom: 15px;">{{ one.user.name }}</h3>
           </div>
+          {% endfor %}
           <br>
           <br>
         </center>
