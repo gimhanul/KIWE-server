@@ -58,7 +58,8 @@ def kiword(request):
                     score += 1
                 words = Rank(score, Keyword.objects.filter(id=i['keyword']).values('keyword')[0]['keyword'])
                 recomm.append(words)
-
+            
+            random.shuffle(recomm)
             recomm = sorted(recomm, key=lambda rank : rank.score, reverse=True)
             recomm = [i.keyword_str for i in recomm]
 
