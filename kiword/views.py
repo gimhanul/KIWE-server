@@ -1,11 +1,8 @@
 from django.shortcuts import redirect, render
-import wordcloud
 from .models import Choice, Question, KeywordRelated, Keyword, Usermemory, Each
 from datetime import date 
 from django.http import JsonResponse
 import json
-from wordcloud import WordCloud
-import matplotlib.pyplot as plt
 
 def q(request, question_id):
     question = Question.objects.get(id=question_id)
@@ -78,6 +75,8 @@ def kiword(request):
             if data['dt'] == 'end':
                 usermemory.longestt = data['longestt']
                 usermemory.longestk = data['longestk']
+                usermemory.shortestt = data['shortestt']
+                usermemory.shortestk = data['shotestk']
                 usermemory.save()
                 
 
@@ -101,22 +100,10 @@ def memory(request, usermemory_id):
         temp = (i.keyword, i.time)
         words.append(temp)
 
-
-    wc = WordCloud(
-        font_path=None,
-        background_color="white",
-        max_words=100,
-        max_font_size=100,
-    )
-
-    wc.generate_from_frequencies(dict(words))
+    context = {
+        'id': usermemory_id
+    }
     
-    plt.figure(figsize=(419,453))
-    plt.imshow(wc)
-    plt.tight_layout(pad=0)
-    plt.axis("off")
-    plt.show()
-    #keywordcloud = word_cloud(usermemory_id)
-    return render(request, 'memory.html')
+    return render(request, 'memory.html', context)
 
 #def word_cloud(usermemory_id):

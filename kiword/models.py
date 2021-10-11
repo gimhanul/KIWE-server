@@ -33,15 +33,13 @@ class KeywordRelated(models.Model):
     def __str__(self):
         return self.choice
 
-def wordcloud_directory_path(instance, wordcloud):
-    return 'beat/{0}/{1}'.format(instance.user.id, wordcloud)
-
 class Usermemory(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     kiwe_time = models.DateTimeField(default=timezone.now)
     longestt = models.FloatField(null=True)
     longestk = models.CharField(max_length=100, null=True)
-    wordcloud = models.ImageField(null=True, upload_to=wordcloud_directory_path)
+    shortestt = models.FloatField(null=True)
+    shortestk = models.CharField(max_length=100, null=True)
 
     def __str__ (self):
         return self

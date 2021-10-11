@@ -1,11 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/bar.css' %}">
+    <title>kiwe</title>
+    <style>
+        #leftbutton {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            background-color: white; 
+            outline: 0; 
+            border: 0;
+            z-index: -1;
+            width: 25vw;
+            height: 100vh;
+        }
+        #rightbutton{
+            position: absolute;
+            top:0px;
+            right: 0px;
+            background-color: white; 
+            outline:0; 
+            border: 0;
+            z-index: -1;
+            width: 25vw;
+            height: 100vh;
+        }
+
+        .contents {
+            z-index: 3;
+        }
+    </style>
 </head>
 <body>
+    <div class="title">
+    <h1 style="color: gray; padding-left: 5%; transform: translateY(90%);">그날의 추억</h1>
+    <h3 style="color: gray; padding-left: 42%; transform: translateY(-20%);">#{{ id }}</h3>
+    </div>
+    <br><br><br><br><br><br><br><br>
+
+    <div>
+        <button id="leftbutton" onclick="javascript:left()"></button>
+        <button id="rightbutton" onclick="javascript:right()"></button>
+    </div>
+
+    <div class="contents">
+        <strong><h2 id="memorytype" style="display: inline-block; background-color: #EEF6D6;">real</h2></strong>
+    </div>
+
+    <div class="bottom_menu">
+        <div>
+            <a href="{% url 'kiwe' %}"><img src="{% static 'images/b-kiwe.png' %}"></a>
+        </div>
+        <div>
+            <a href="{% url 'friends' %}"><img src="{% static 'images/b-friend.png' %}"></a>
+        </div>
+        <div>
+            <a href="{% url 'memories' %}"><img src="{% static 'images/b-filled-memory.png' %}"></a>
+        </div>
+        <div>
+          <a href="{% url 'setting' %}"><img src="{% static 'images/b-setting.png' %}"></a>
+        </div>
+    </div>
 </body>
 </html>
+
+<script>
+    var i=0;
+    function left() {
+        alert('left')
+    }
+    function right() {
+        alert('right')
+    }
+</script>

@@ -39,6 +39,8 @@
     var i = 0;
     var longestk = 'temp';
     var longestt = 0.0;
+    var shortestk = 'temp';
+    var shortestt = 0.0;
 
     function re(dt) {
         if(i<=keywords.length){
@@ -50,13 +52,30 @@
                 longestk = keywords[i-1];
             }
 
-            var data = {
+            if(shortestt > time) {
+                shortestt = time;
+                shortestk = keywords[i-1];
+            }
+
+            if(dt=='end') {
+                var data = {
                 dt : dt,
                 keyword : keywords[i-1],
                 while : time,
                 longestk : longestk,
                 longestt : longestt,
+                shortestk : shortestk,
+                shortestt : shortestt,
             }
+
+            if(dt=='time') {
+                var data = {
+                dt : dt,
+                keyword : keywords[i-1],
+                while : time,
+            }
+            }
+            
 
             $.ajax({
                 url : "{% url 'keyword' %}",
