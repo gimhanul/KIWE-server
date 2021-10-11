@@ -44,19 +44,16 @@ class KeywordRelated(models.Model):
 class Usermemory(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     kiwe_time = models.DateTimeField(default=timezone.now)
-    longestt = models.FloatField(null=True)
     longestk = models.CharField(max_length=100, null=True)
-    shortestt = models.FloatField(null=True)
-    shortestk = models.CharField(max_length=100, null=True)
 
     def __str__ (self):
         return self
-        
+
 def wordcloud_directory_path():
     return 0
 
 class Each(models.Model):
-    memory_id = models.ForeignKey(Usermemory, on_delete=models.CASCADE)
+    memory = models.ForeignKey(Usermemory, on_delete=models.CASCADE)
     keyword = models.CharField(max_length=100)
     time = models.FloatField()
 
@@ -71,6 +68,9 @@ class Memorytype(models.Model):
         return self.highlighter
 
 class Memoryresult(models.Model):
-    memroy_id = models.ForeignKey(Usermemory, on_delete=models.CASCADE)
-    mt_id = models.ForeignKey(Memorytype, on_delete=models.CASCADE)
+    memory = models.ForeignKey(Usermemory, on_delete=models.CASCADE)
+    mt = models.ForeignKey(Memorytype, on_delete=models.CASCADE)
     result = models.CharField(max_length=20, null=True)
+
+    def __str__ (self):
+        return self

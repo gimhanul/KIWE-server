@@ -12,10 +12,10 @@
             position: absolute;
             top: 0px;
             left: 0px;
-            background-color: white; 
+            background-color: transparent; 
             outline: 0; 
             border: 0;
-            z-index: -1;
+            z-index: 40;
             width: 25vw;
             height: 100vh;
         }
@@ -23,10 +23,10 @@
             position: absolute;
             top:0px;
             right: 0px;
-            background-color: white; 
+            background-color: transparent; 
             outline:0; 
             border: 0;
-            z-index: -1;
+            z-index: 40;
             width: 25vw;
             height: 100vh;
         }
@@ -36,7 +36,7 @@
         }
     </style>
 </head>
-<body>
+<body onload="javascript:load(0)">
     <div class="title">
     <h1 style="color: gray; padding-left: 5%; transform: translateY(90%);">그날의 추억</h1>
     <h3 style="color: gray; padding-left: 42%; transform: translateY(-20%);">#{{ id }}</h3>
@@ -48,8 +48,13 @@
         <button id="rightbutton" onclick="javascript:right()"></button>
     </div>
 
+    
     <div class="contents">
-        <strong><h2 id="memorytype" style="display: inline-block; background-color: #EEF6D6;">real</h2></strong>
+        <strong><h1 id="highlighter" style="position:absolute; display: inline-block; background-color: #EEF6D6; left: 44px; top: 301;"></h1></strong><br><br>
+        <h1 id="texxt" style="position: absolute; left: 44px;"></h1>
+
+        <img src="{% static 'images/kiwe.png' %}" style="position: absolute; left: 52px; top: 512px; width: 100px; height: 100px;">
+        <h1 id="result" style="position: absolute; left: 172px; top: 512px;"></h1>
     </div>
 
     <div class="bottom_menu">
@@ -71,14 +76,30 @@
 
 <script>
     var i=0;
-    keywords = kk['recomm'];
-    witch = document.getElementById("recom");
-    start = new Date();
-    witch.innerHTML = keywords[i++];
-    function left() {
-        alert('left')
+    var memory = {{ memory|safe }};
+    highlighter = document.getElementById("highlighter");
+    texxt = document.getElementById("texxt");
+    result = document.getElementById("result");
+
+    function load() {
+        highlighter.innerHTML = memory[i][0];
+        texxt.innerHTML = memory[i][1];
+        result.innerHTML = memory[i][2];
     }
+
+    function left() {
+        if(i > 0) i--;
+        else i = memory.length - 1;
+        console.log(i);
+
+        load();
+    }
+
     function right() {
-        alert('right')
+        if(i < memory.length-1) i++;
+        else i = 0;
+        console.log(i);
+
+        load();
     }
 </script>

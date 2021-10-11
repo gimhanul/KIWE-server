@@ -40,12 +40,16 @@
     var longestk = 'temp';
     var longestt = 0.0;
     var shortestk = 'temp';
-    var shortestt = 0.0;
+    var shortestt = 10000.0;
+    var alllength = 0;
+    var allthetime = 0.0;
 
     function re(dt) {
         if(i<=keywords.length){
             var end = new Date();
             var time = (end.getTime() - start.getTime())/1000;
+            alllength += keywords[i-1].length;
+            allthetime += time;
 
             if(longestt < time) {
                 longestt = time;
@@ -63,7 +67,7 @@
                 keyword : keywords[i-1],
                 while : time,
             }}
-            
+
             else if(dt=='end') {
                 var data = {
                 dt : dt,
@@ -73,6 +77,10 @@
                 longestt : longestt,
                 shortestk : shortestk,
                 shortestt : shortestt,
+                i : i,
+                alllength : alllength,
+                allthetime : allthetime,
+                random : keywords[Math.floor(Math.random()*i)]
             }}
             
 

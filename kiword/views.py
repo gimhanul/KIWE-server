@@ -1,5 +1,5 @@
 from django.shortcuts import redirect, render
-from .models import Choice, Question, KeywordRelated, Keyword, Usermemory, Each, Memorytype
+from .models import Choice, Question, KeywordRelated, Keyword, Usermemory, Each, Memorytype, Memoryresult
 from datetime import date 
 from django.http import JsonResponse
 import json
@@ -69,16 +69,40 @@ def kiword(request):
 
             
         elif data['dt'] == 'time' or data['dt'] == 'end':
-            usermemory = Usermemory.objects.filter(user=request.user).latest('id')
-            each = Each.objects.create(memory_id=usermemory, keyword = data['keyword'], time = float(data['while']))
+            usermemory = Usermemory.objects.filter(user = request.user).latest('id')
+            each = Each.objects.create(memory_id=usermemory.id, keyword = data['keyword'], time = float(data['while']))
             each.save()
 
             if data['dt'] == 'end':
-                usermemory.longestt = data['longestt']
                 usermemory.longestk = data['longestk']
-                usermemory.shortestt = data['shortestt']
-                usermemory.shortestk = data['shotestk']
                 usermemory.save()
+
+                print('usermemorysave OK')
+
+                memorytype = Memorytype.objects.all()
+
+                for i in memorytype:
+                    temp = Memoryresult.objects.create(memory_id = usermemory.id, mt_id = i.id)
+                    if i.id == 2:
+                        temp.result = data['shortestk']
+                    elif i.id == 3:
+                        temp.result = data['longestk']
+                    elif i.id == 4:
+                        temp.result = data['longestt']
+                    elif i.id == 5:
+                        temp.result = data['shortestt']
+                    elif i.id == 6:
+                        temp.result = data['random']
+                    elif i.id == 7:
+                        temp.result = data['i']
+                    elif i.id == 8:
+                        temp.result = data['alllength']
+                    elif i.id == 9:
+                        temp.result = data['allthetime']
+                    temp.save()
+                    print('tempsave OK')
+                    
+                
                 
 
 
@@ -95,25 +119,20 @@ def memories(request):
     
 
 def memory(request, usermemory_id):
-    words = []
-    each = Each.objects.filter(memory_id=usermemory_id)
-    for i in each:
-        temp = (i.keyword, i.time)
-        words.append(temp)
-
     memorytype = Memorytype.objects.all()
+    
+    memory = []
+    #[memorytype.highlighter, memorytype.text, memorydata.result]
     for i in memorytype:
-        print(i.id)
-        if(i.id == 2):
-            i.result = Usermemory.objects.filter(id=usermemory_id).values('shortestk')[0]['shortestk']
-            print(i.result)
+        result = Memoryresult.objects.filter(memory_id = usermemory_id, mt_id = i.id).values('result')[0]['result']
+        temp = (i.highlighter, i.text, result)
+        memory.append(temp)
 
 
+    memory = json.dumps(memory)
     context = {
-        'id': usermemory_id,
-        'memorytype': memorytype,
+        'id' : usermemory_id,
+        'memory' : memory,
     }
     
     return render(request, 'memory.html', context)
-
-#def word_cloud(usermemory_id):
