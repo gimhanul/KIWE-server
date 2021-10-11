@@ -77,8 +77,6 @@ def kiword(request):
                 usermemory.longestk = data['longestk']
                 usermemory.save()
 
-                print('usermemorysave OK')
-
                 memorytype = Memorytype.objects.all()
 
                 for i in memorytype:
@@ -100,7 +98,6 @@ def kiword(request):
                     elif i.id == 9:
                         temp.result = data['allthetime']
                     temp.save()
-                    print('tempsave OK')
                     
                 
                 
