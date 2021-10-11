@@ -3,6 +3,9 @@ from user.models import User
 from django.utils import timezone
 from django.db.models.deletion import CASCADE
 
+
+
+#question and choice model
 class Question(models.Model):
     question = models.CharField(max_length = 200)
 
@@ -18,6 +21,8 @@ class Choice(models.Model):
         return self.choice
 
 
+
+#keyword model
 class Keyword(models.Model):
     keyword = models.CharField(max_length = 100)
 
@@ -33,6 +38,9 @@ class KeywordRelated(models.Model):
     def __str__(self):
         return self.choice
 
+
+
+#memory model
 class Usermemory(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     kiwe_time = models.DateTimeField(default=timezone.now)
@@ -43,7 +51,10 @@ class Usermemory(models.Model):
 
     def __str__ (self):
         return self
-    
+        
+def wordcloud_directory_path():
+    return 0
+
 class Each(models.Model):
     memory_id = models.ForeignKey(Usermemory, on_delete=models.CASCADE)
     keyword = models.CharField(max_length=100)
@@ -51,3 +62,15 @@ class Each(models.Model):
 
     def __str__ (self):
         return self
+
+class Memorytype(models.Model):
+    highlighter = models.CharField(max_length=100)
+    text = models.CharField(max_length=100)
+
+    def __str__ (self):
+        return self.highlighter
+
+class Memoryresult(models.Model):
+    memroy_id = models.ForeignKey(Usermemory, on_delete=models.CASCADE)
+    mt_id = models.ForeignKey(Memorytype, on_delete=models.CASCADE)
+    result = models.CharField(max_length=20, null=True)

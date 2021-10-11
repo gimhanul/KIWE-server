@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Keyword, KeywordRelated, Question, Choice
+from .models import Keyword, KeywordRelated, Question, Choice, Memorytype
 
 class ChoiceInline(admin.TabularInline):
     model = Choice
@@ -28,3 +28,4 @@ class KeywordAdmin(admin.ModelAdmin):
 
 admin.site.register(Keyword, KeywordAdmin)
 admin.site.register(Question, QuestionAdmin)
+admin.site.register(Memorytype)

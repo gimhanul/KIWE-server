@@ -57,7 +57,14 @@
                 shortestk = keywords[i-1];
             }
 
-            if(dt=='end') {
+            if(dt=='time') {
+                var data = {
+                dt : dt,
+                keyword : keywords[i-1],
+                while : time,
+            }}
+            
+            else if(dt=='end') {
                 var data = {
                 dt : dt,
                 keyword : keywords[i-1],
@@ -66,15 +73,7 @@
                 longestt : longestt,
                 shortestk : shortestk,
                 shortestt : shortestt,
-            }
-
-            if(dt=='time') {
-                var data = {
-                dt : dt,
-                keyword : keywords[i-1],
-                while : time,
-            }
-            }
+            }}
             
 
             $.ajax({

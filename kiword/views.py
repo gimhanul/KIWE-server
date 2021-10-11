@@ -1,8 +1,9 @@
 from django.shortcuts import redirect, render
-from .models import Choice, Question, KeywordRelated, Keyword, Usermemory, Each
+from .models import Choice, Question, KeywordRelated, Keyword, Usermemory, Each, Memorytype
 from datetime import date 
 from django.http import JsonResponse
 import json
+import random
 
 def q(request, question_id):
     question = Question.objects.get(id=question_id)
@@ -100,8 +101,17 @@ def memory(request, usermemory_id):
         temp = (i.keyword, i.time)
         words.append(temp)
 
+    memorytype = Memorytype.objects.all()
+    for i in memorytype:
+        print(i.id)
+        if(i.id == 2):
+            i.result = Usermemory.objects.filter(id=usermemory_id).values('shortestk')[0]['shortestk']
+            print(i.result)
+
+
     context = {
-        'id': usermemory_id
+        'id': usermemory_id,
+        'memorytype': memorytype,
     }
     
     return render(request, 'memory.html', context)
