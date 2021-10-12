@@ -9,6 +9,7 @@ button {
 }
 
 .m-list {
+    color: black;
     font-size: 1.5em;
     font-weight: lighter;
     font-style: Medium;
@@ -21,9 +22,7 @@ button {
 
 .m-list .sub {
     position: absolute;
-    /*
-    width: 150px;
-    left: 149px;
-    */
+    color: black;
     top: -1px;
 }
+

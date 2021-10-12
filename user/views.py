@@ -52,6 +52,10 @@ def friends(request):
 
 def setting(request):
     if request.method == 'POST':
-        logout(request)
-        return redirect('/')
+        setting = request.POST.get('setting')
+        if setting == 'logout':
+            logout(request)
+            return redirect('/')
+        elif setting == 'test':
+            print('good')
     return render(request, 'setting.html')

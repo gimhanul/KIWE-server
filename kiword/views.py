@@ -99,10 +99,6 @@ def kiword(request):
                     elif i.id == 9:
                         temp.result = data['allthetime']
                     temp.save()
-                    
-                
-                
-
 
     return render(request, 'keyword.html')
 
@@ -132,5 +128,5 @@ def memory(request, usermemory_id):
         'id' : usermemory_id,
         'memory' : memory,
     }
-    
+
     return render(request, 'memory.html', context)
