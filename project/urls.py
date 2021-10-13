@@ -31,7 +31,10 @@ urlpatterns = [
     path('setting/', user.setting, name='setting'),
     path('q/<int:question_id>/', kiword.q, name='q'),
     path('keyword/', kiword.kiword, name='keyword'),
-    path('memory/<int:usermemory_id>/', kiword.memory, name='memory')
+    path('memory/<int:usermemory_id>/', kiword.memory, name='memory'),
+    path('send_friend_request/<int:user_id>/', user.send_friend_request, name='send_friend_request'),
+    path('accept_friend_request/<int:requestID>/', user.accept_friend_request, name='accept_friend_request'),
+
 ] 
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

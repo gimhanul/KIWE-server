@@ -1,8 +1,8 @@
 from django.contrib.auth import authenticate, login, logout
-from .models import User
+from .models import User, FriendRequest
 from django.shortcuts import redirect, render
 from .forms import UserCreationForm, AuthenticationForm
-
+from django.contrib.auth.decorators import login_required
 
 def index(request):
     return render(request, 'index.html')
@@ -40,7 +40,7 @@ def userlogin(request):
     }
     return render(request, 'login.html', context)
 
-
+@login_required
 def kiwe(request):
     if request.method == 'POST':
         return redirect('../q/1')
@@ -59,3 +59,25 @@ def setting(request):
         elif setting == 'test':
             print('good')
     return render(request, 'setting.html')
+
+@login_required
+def send_friend_request(request, user_id):
+    from_user = request.user
+    to_user = User.objects.get(email = user_id)
+    friend_request, created = FriendRequest.objects.get_or_create(
+        from_user=from_user, to_user=to_user)
+
+
+@login_required
+def accept_friend_request(request, requestID):
+    fr = FriendRequest.objects.get(id=requestID)
+    if fr.to_user == request.user:
+        fr.to_user.friends.add(fr.from_user)
+        fr.from_user.friends.add(fr.to_user)
+        fr.delete()
+
+@login_required
+def delete_friend_request(request, requestID):
+    fr = FriendRequest.objects.get(id=requestID)
+    if fr.to_user == request.user:
+        fr.delete()

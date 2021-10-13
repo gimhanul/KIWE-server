@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 
+
 class UserManager(BaseUserManager):
 
     def create_user(self, name, email, birth, gender, password=None):
@@ -42,6 +43,7 @@ class User(AbstractBaseUser):
     name = models.CharField(max_length=20)
     birth=models.DateField()
     gender = models.SmallIntegerField()
+    friends = models.ManyToManyField('User', related_name='friend', black=True, null=True)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     date_joined = models.DateTimeField(default=timezone.now)
@@ -63,3 +65,11 @@ class User(AbstractBaseUser):
     @property
     def is_staff(self):
         return self.is_admin
+
+
+#friends
+class FriendRequest(models.Model):
+    from_user = models.ForeignKey(
+        User, related_name='from_user', on_delete=models.CASCADE)
+    to_user = models.ForeignKey(
+        User, related_name='to_user', on_delete=models.CASCADE)
