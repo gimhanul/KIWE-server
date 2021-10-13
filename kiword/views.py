@@ -128,5 +128,6 @@ def memory(request, usermemory_id):
         'id' : usermemory_id,
         'memory' : memory,
     }
-
+    
     return render(request, 'memory.html', context)
+
