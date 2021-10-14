@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models.deletion import CASCADE
 from django.utils import timezone
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 
@@ -43,7 +44,7 @@ class User(AbstractBaseUser):
     name = models.CharField(max_length=20)
     birth=models.DateField()
     gender = models.SmallIntegerField()
-    friends = models.ManyToManyField('User', related_name='friend', black=True, null=True)
+    friends = models.ManyToManyField('User', related_name='friend', blank=True)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     date_joined = models.DateTimeField(default=timezone.now)
@@ -65,6 +66,14 @@ class User(AbstractBaseUser):
     @property
     def is_staff(self):
         return self.is_admin
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=CASCADE)
+    description = models.CharField(max_length=150, default='')
+    image = models.ImageField(upload_to='profileImage/', null=True, blank=True)
+    
+    def __str__ (self):
+        return self.user.name
 
 
 #friends
