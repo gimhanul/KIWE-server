@@ -17,6 +17,25 @@
       <div class="title">
         <h1 style="padding-left: 5%; transform: translateY(90%);">친구</h1>
       </div>
+      <center>
+        <br>
+        <br>          
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        {% for one in friends %}
+        <div class="friend">
+            <img src="{{ ond.image }}">
+            <h3 style="bottom: 35px;">{{ one.name }}</h3>
+        </div>
+        </a>
+        {% endfor %}
+        <br>
+        <br>
+      </center>
       <div class="bottom_menu">
         <div>
           <a href="{% url 'kiwe' %}"><img src="{% static 'images/b-kiwe.png' %}"></a>

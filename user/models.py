@@ -44,7 +44,9 @@ class User(AbstractBaseUser):
     name = models.CharField(max_length=20)
     birth=models.DateField()
     gender = models.SmallIntegerField()
-    friends = models.ManyToManyField('User', related_name='friend', blank=True)
+    description = models.CharField(max_length=150, default='')
+    image = models.ImageField(upload_to='profileImage/', null=True, blank=True)
+    friends = models.ManyToManyField('User', blank=True)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     date_joined = models.DateTimeField(default=timezone.now)
@@ -55,7 +57,7 @@ class User(AbstractBaseUser):
     REQUIRED_FIELDS = ['name', 'birth', 'gender']
 
     def __str__(self):
-        return self.email
+        return self
 
     def has_perm(self,perm,obj=None):
         return True
@@ -66,14 +68,6 @@ class User(AbstractBaseUser):
     @property
     def is_staff(self):
         return self.is_admin
-
-class UserProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=CASCADE)
-    description = models.CharField(max_length=150, default='')
-    image = models.ImageField(upload_to='profileImage/', null=True, blank=True)
-    
-    def __str__ (self):
-        return self.user.name
 
 
 #friends
