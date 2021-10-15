@@ -1,4 +1,4 @@
-"""project URL Configuration
+'''project URL Configuration
 
 The `urlpatterns` list routes URLs to  For more information please see:
     https://docs.djangoproject.com/en/3.2/topics/http/urls/
@@ -12,7 +12,7 @@ Class-based views
 Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
+'''
 from django.contrib import admin
 from django.urls import path
 from user import views as user
@@ -34,7 +34,8 @@ urlpatterns = [
     path('memory/<int:usermemory_id>/', kiword.memory, name='memory'),
     path('send_friend_request/<int:user_id>/', user.send_friend_request, name='send_friend_request'),
     path('accept_friend_request/<int:requestID>/', user.accept_friend_request, name='accept_friend_request'),
-
+    path('profile/', user.profile, name='profile'),
+    path('profileCreate/', user.profileCreate, name="profileCreate")
 ] 
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

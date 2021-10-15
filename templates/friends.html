@@ -28,8 +28,10 @@
         <br>
         {% for one in friends %}
         <div class="friend">
-            <img src="{{ ond.image }}">
-            <h3 style="bottom: 35px;">{{ one.name }}</h3>
+          <!--  
+          <img src="{{ one.profile.image.url }}">
+            <h3 style="bottom: 35px;">{{ one.profile.name }}</h3>-->
+            {{ one }}
         </div>
         </a>
         {% endfor %}

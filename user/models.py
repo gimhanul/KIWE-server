@@ -6,13 +6,12 @@ from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 
 class UserManager(BaseUserManager):
 
-    def create_user(self, name, email, birth, gender, password=None):
+    def create_user(self, email, birth, gender, password=None):
         if not email:
             raise ValueError('Please enter your email')
         
         user = self.model(
             email = UserManager.normalize_email(email),
-            name = name,
             birth = birth,
             gender = gender,
 
@@ -21,10 +20,9 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, name, birth, gender, password):
+    def create_superuser(self, email, birth, gender, password):
         user = self.create_user(
             email=self.normalize_email(email),
-            name = name,
             birth = birth,
             gender = gender,
             password = password,
@@ -41,11 +39,8 @@ class User(AbstractBaseUser):
         max_length=255,
         unique=True,
     )
-    name = models.CharField(max_length=20)
     birth=models.DateField()
     gender = models.SmallIntegerField()
-    description = models.CharField(max_length=150, default='')
-    image = models.ImageField(upload_to='profileImage/', null=True, blank=True)
     friends = models.ManyToManyField('User', blank=True)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
@@ -54,7 +49,7 @@ class User(AbstractBaseUser):
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['name', 'birth', 'gender']
+    REQUIRED_FIELDS = ['birth', 'gender']
 
     def __str__(self):
         return self
@@ -69,6 +64,14 @@ class User(AbstractBaseUser):
     def is_staff(self):
         return self.is_admin
 
+class Profile(models.Model):
+    user = models.OneToOneField('User', on_delete=models.CASCADE)
+    name = models.CharField(max_length=20)
+    description = models.CharField(max_length=150, default='')
+    image = models.ImageField(upload_to='profileImage/', blank=True, null=True)
+    
+    def __str__(self):
+        return self
 
 #friends
 class FriendRequest(models.Model):

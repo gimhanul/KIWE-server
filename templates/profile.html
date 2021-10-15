@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>kiwe</title>
+</head>
+<body>
+    <div class="profile">
+            <img src={% if request.user.profile.image %}"{{ request.user.profile.image.url }}"{% else %}"{% static 'images/user.png' %}"{% endif %}
+            width="90px" style="border-radius: 50%;" alt="">
+            <br>이름
+            <p>{{ request.user.profile.name }}</p>
+            한 줄 소개
+            <p>{{ request.user.profile.description }}</p>
+        </div>
+    </div>
+    <a href="{% url 'profile/edit' %}"><button>프로필 수정</button></a>
+</body>
+</html>

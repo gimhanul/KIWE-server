@@ -1,8 +1,8 @@
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, get_user_model, login, logout
 from django.http.response import HttpResponse
-from .models import User, FriendRequest
-from django.shortcuts import redirect, render
-from .forms import UserCreationForm, AuthenticationForm
+from .models import User, FriendRequest, Profile
+from django.shortcuts import get_object_or_404, redirect, render
+from .forms import UserCreationForm, AuthenticationForm, ProfileForm
 from django.contrib.auth.decorators import login_required
 
 def index(request):
@@ -33,7 +33,10 @@ def userlogin(request):
         user = authenticate(email=email, password=password)
         if user:
             login(request, user)
-            return redirect('kiwe')
+            if not Profile.objects.filter(user=request.user).exists():
+                return redirect('../profileCreate/')
+            else:
+                return redirect('kiwe')
     else:
         form = AuthenticationForm()
     context = {
@@ -48,7 +51,8 @@ def kiwe(request):
     return render(request, 'kiwe.html')
 
 def friends(request):
-    friends = User.objects.get(id=request.user.id).friends.values('name', 'image', 'description')
+    friends = User.objects.get(id=request.user.id).friends.user.profile_set.values('name')
+    print(friends)
     
     context = {
         'friends': friends
@@ -61,8 +65,8 @@ def setting(request):
         if setting == 'logout':
             logout(request)
             return redirect('/')
-        elif setting == 'test':
-            print('good')
+        elif setting == 'profile':
+            print(".")
     return render(request, 'setting.html')
 
 @login_required
@@ -97,3 +101,29 @@ def delete_friend_request(request, requestID):
         return HttpResponse('friend request deleted')
     else:
         return HttpResponse('friend request deleted')
+
+def profile(request):
+    return render(request, 'profile.html')
+
+def profileCreate(request):
+    if request.method == 'POST':
+        form = ProfileForm(request.POST)
+        if form.is_valid():
+            profile = form.save(commit=False)
+            profile.image = request.FILES.get('image')
+            profile.user = request.user
+            profile.save()
+            return redirect('kiwe')
+    else:
+        form = ProfileForm()
+    context = {
+        'form': form
+    }
+    return render(request, 'profileCreate.html', context)
+
+def profileEdit(request):
+    if request.method == 'POST':
+        form = ProfileForm(request.POST)
+        if form.is_valid():
+            lastUser = request.user.profile
+            #lastUser.

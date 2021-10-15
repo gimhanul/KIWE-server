@@ -23,7 +23,7 @@
           <h1>로그인</h1>
           <section>
             <form name="login" action="{% url 'login' %}" method="post">
-              {% csrf_token %}
+            {% csrf_token %}
               이메일
               <div>
                 <input class="blank" name="email" type="email" placeholder= "이메일을 입력해주세요"></input>
