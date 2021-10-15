@@ -35,7 +35,8 @@ urlpatterns = [
     path('send_friend_request/<int:user_id>/', user.send_friend_request, name='send_friend_request'),
     path('accept_friend_request/<int:requestID>/', user.accept_friend_request, name='accept_friend_request'),
     path('profile/', user.profile, name='profile'),
-    path('profileCreate/', user.profileCreate, name="profileCreate")
+    path('profileCreate/', user.profileCreate, name="profileCreate"),
+    path('profileEdit/', user.profileEdit, name="profileEdit"),
 ] 
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

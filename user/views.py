@@ -128,7 +128,16 @@ def profileCreate(request):
 
 def profileEdit(request):
     if request.method == 'POST':
-        form = ProfileForm(request.POST)
+        form = ProfileForm(request.POST, request.FILES, instance = request.user.profile)
         if form.is_valid():
-            lastUser = request.user.profile
-            #lastUser.
+            profile = form.save(commit=False)
+            profile.user = request.user
+            profile.save()
+            return redirect('profile')
+    else:
+        form = ProfileForm(instance=request.user.profile)
+    context = {
+        'form': form
+    }
+
+    return render(request, 'profileEdit.html', context)
