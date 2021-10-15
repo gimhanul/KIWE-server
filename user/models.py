@@ -52,7 +52,7 @@ class User(AbstractBaseUser):
     REQUIRED_FIELDS = ['birth', 'gender']
 
     def __str__(self):
-        return self
+        return self.email
 
     def has_perm(self,perm,obj=None):
         return True
@@ -68,10 +68,10 @@ class Profile(models.Model):
     user = models.OneToOneField('User', on_delete=models.CASCADE)
     name = models.CharField(max_length=20)
     description = models.CharField(max_length=150, default='')
-    image = models.ImageField(upload_to='profileImage/', blank=True, null=True)
+    image = models.ImageField(upload_to='Profile/', blank=True)
     
     def __str__(self):
-        return self
+        return self.name
 
 #friends
 class FriendRequest(models.Model):

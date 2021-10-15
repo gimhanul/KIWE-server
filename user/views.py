@@ -51,8 +51,13 @@ def kiwe(request):
     return render(request, 'kiwe.html')
 
 def friends(request):
-    friends = User.objects.get(id=request.user.id).friends.user.profile_set.values('name')
-    print(friends)
+    temp = User.objects.get(id=request.user.id).friends.values('profile')
+    temp = [i['profile'] for i in temp]
+    friends = []
+    for i in temp:
+        temp1 = Profile.objects.filter(id=i).values('name', 'description', 'image')[0]
+        friends.append(temp1)
+
     
     context = {
         'friends': friends
