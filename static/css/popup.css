@@ -1,4 +1,4 @@
-#popup {
+section {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -11,11 +11,11 @@
     z-index: 9999;
 }
 
-#popup.hide {
+section.hide {
     display: none;
 }
 
-#popup .content {
+section > div {
     padding: 20px;
     background: #fff;
     border-radius: 5px;

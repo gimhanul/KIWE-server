@@ -28,18 +28,18 @@
         <br>
         <br>
         {% for one in friends %}
-        <div class="friend" onclick="javascript:showPopup()" style="display: inline">
+        <div class="friend" onclick="javascript:showPopup('{{ one.id }}')" style="display: inline">
             <img src="../media/{{ one.image }}">
             <h3 style="bottom: 35px;">{{ one.name }}</h3>
         </div>
-        <div id="{{ one.id }}" group="popup" value="{{ one.id }}" class="hide">
+        <section id="{{ one.id }}" class="hide">
           <div class="content">
-            <button onclick="javascript:closePopup()">&times;</button>
+            <button onclick="javascript:closePopup('{{ one.id }}')">&times;</button>
             <img src="../media/{{ one.image }}">
             <h3>{{ one.name }}</h3>
             {{ one.description }}
           </div>
-        </div>
+        </section>
         {% endfor %}
         <br>
         <br>
@@ -62,14 +62,13 @@
 </html>
 
 <script>
-  function showPopup() {
-    user = document.getElementsByClassName('hide').value;
-    const popup = document.querySelector('#%s', user);
+  function showPopup(user) {
+    const popup = document.getElementById(user);
     popup.classList.remove('hide');
   }
 
-  function closePopup() {
-    const popup = document.querySelector('#%s', user);
+  function closePopup(user) {
+    const popup = document.getElementById(user);
     popup.classList.add('hide');
   }
 </script>

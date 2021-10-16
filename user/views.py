@@ -55,7 +55,7 @@ def friends(request):
     temp = [i['profile'] for i in temp]
     friends = []
     for i in temp:
-        temp1 = Profile.objects.filter(id=i).values('name', 'description', 'image')[0]
+        temp1 = Profile.objects.filter(id=i).values('name', 'description', 'image', 'id')[0]
         friends.append(temp1)
 
     
