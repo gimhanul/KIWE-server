@@ -28,20 +28,18 @@
         <br>
         <br>
         {% for one in friends %}
-        <div class="friend">
-          <a href="#popup1">
+        <div class="friend" onclick="javascript:showPopup()" style="display: inline">
             <img src="../media/{{ one.image }}">
             <h3 style="bottom: 35px;">{{ one.name }}</h3>
-          </a>
-
-          <div id="popup1" class="overlay">
-            <div class="popup">
-              <a class="close" href="#">&times;</a>
-            </div>
-
+        </div>
+        <div id="{{ one.id }}" group="popup" value="{{ one.id }}" class="hide">
+          <div class="content">
+            <button onclick="javascript:closePopup()">&times;</button>
+            <img src="../media/{{ one.image }}">
+            <h3>{{ one.name }}</h3>
+            {{ one.description }}
           </div>
         </div>
-        </a>
         {% endfor %}
         <br>
         <br>
@@ -62,3 +60,16 @@
       </div>
     </body>
 </html>
+
+<script>
+  function showPopup() {
+    user = document.getElementsByClassName('hide').value;
+    const popup = document.querySelector('#%s', user);
+    popup.classList.remove('hide');
+  }
+
+  function closePopup() {
+    const popup = document.querySelector('#%s', user);
+    popup.classList.add('hide');
+  }
+</script>
