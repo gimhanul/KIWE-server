@@ -1,6 +1,6 @@
 from django.contrib.auth import authenticate, get_user_model, login, logout
 from django.http.response import HttpResponse
-from .models import User, FriendRequest, Profile
+from .models import User, FriendRequest, Profile, Notification
 from django.shortcuts import get_object_or_404, redirect, render
 from .forms import UserCreationForm, AuthenticationForm, ProfileForm
 from django.contrib.auth.decorators import login_required
@@ -137,7 +137,17 @@ def profileEdit(request):
     else:
         form = ProfileForm(instance=request.user.profile)
     context = {
+
         'form': form
     }
 
     return render(request, 'profileEdit.html', context)
+
+def notification(request):
+    #notification = Notification.objects.get()
+
+    context = {
+
+    }
+    return render(request, 'notification.html', context)
+    

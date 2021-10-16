@@ -1,5 +1,6 @@
 from django.db import models
 from django.db.models.deletion import CASCADE
+from django.db.models.expressions import F
 from django.utils import timezone
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 
@@ -68,10 +69,11 @@ class Profile(models.Model):
     user = models.OneToOneField('User', on_delete=models.CASCADE)
     name = models.CharField(max_length=20)
     description = models.CharField(max_length=150, default='')
-    image = models.ImageField(upload_to='Profile/', blank=True)
+    image = models.ImageField(upload_to='Profile/', blank=True, null=True)
     
     def __str__(self):
         return self.name
+
 
 #friends
 class FriendRequest(models.Model):
@@ -79,3 +81,21 @@ class FriendRequest(models.Model):
         User, related_name='from_user', on_delete=models.CASCADE)
     to_user = models.ForeignKey(
         User, related_name='to_user', on_delete=models.CASCADE)
+
+
+#notification
+class Notification(models.Model):
+
+    TYPE_CHOICES = (
+        ('reques', 'Request'),
+        ('accept', 'Accept'),
+    )
+
+    to_user = models.ForeignKey(
+        User, related_name='noti_to_user', on_delete=models.CASCADE)
+    from_user = models.ForeignKey(
+        User, related_name='noti_from_user', on_delete=models.CASCADE)
+    notitype = models.CharField(max_length=20, choices=TYPE_CHOICES)
+    notimessage = models.CharField(max_length=100)
+    notidatetime = models.DateTimeField(default=timezone.now)
+    read = models.BooleanField(default=False)
