@@ -11,6 +11,7 @@
             margin:0;
           }
         </style>
+        <link rel="stylesheet" href="{% static 'css/popup.css' %}">
         <link rel="stylesheet" href="{% static 'css/bar.css' %}">
     </head>
     <body>
@@ -28,8 +29,17 @@
         <br>
         {% for one in friends %}
         <div class="friend">
+          <a href="#popup1">
             <img src="../media/{{ one.image }}">
             <h3 style="bottom: 35px;">{{ one.name }}</h3>
+          </a>
+
+          <div id="popup1" class="overlay">
+            <div class="popup">
+              <a class="close" href="#">&times;</a>
+            </div>
+
+          </div>
         </div>
         </a>
         {% endfor %}

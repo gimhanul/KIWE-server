@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/bar.css' %}">
     <title>kiwe</title>
 </head>
 <body>
@@ -18,5 +19,19 @@
         </div>
     </div>
     <a href="{% url 'profileEdit' %}"><button>프로필 수정</button></a>
+    <div class="bottom_menu">
+        <div>
+          <a href="{% url 'kiwe' %}"><img src="{% static 'images/b-kiwe.png' %}"></a>
+        </div>
+        <div>
+          <a href="{% url 'friends' %}"><img src="{% static 'images/b-friend.png' %}"></a>
+        </div>
+        <div>
+          <a href="{% url 'memories' %}"><img src="{% static 'images/b-memory.png' %}"></a>
+        </div>
+        <div>
+          <a href="{% url 'setting' %}"><img src="{% static 'images/b-filled-setting.png' %}"></a>
+        </div>
+      </div>
 </body>
 </html>
