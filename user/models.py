@@ -1,5 +1,5 @@
 from django.db import models
-from django.db.models.deletion import CASCADE
+from django.db.models.deletion import CASCADE, DO_NOTHING
 from django.db.models.expressions import F
 from django.utils import timezone
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
@@ -87,7 +87,7 @@ class FriendRequest(models.Model):
 class Notification(models.Model):
 
     TYPE_CHOICES = (
-        ('reques', 'Request'),
+        ('request', 'Request'),
         ('accept', 'Accept'),
     )
 
@@ -96,6 +96,6 @@ class Notification(models.Model):
     from_user = models.ForeignKey(
         User, related_name='noti_from_user', on_delete=models.CASCADE)
     notitype = models.CharField(max_length=20, choices=TYPE_CHOICES)
-    notimessage = models.CharField(max_length=100)
     notidatetime = models.DateTimeField(default=timezone.now)
     read = models.BooleanField(default=False)
+    requestID = models.ForeignKey(FriendRequest, null=True, on_delete=DO_NOTHING)

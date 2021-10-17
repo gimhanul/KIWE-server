@@ -1,9 +1,10 @@
-from django.contrib.auth import authenticate, get_user_model, login, logout
+from django.contrib.auth import authenticate, login, logout
 from django.http.response import HttpResponse
 from .models import User, FriendRequest, Profile, Notification
 from django.shortcuts import get_object_or_404, redirect, render
 from .forms import UserCreationForm, AuthenticationForm, ProfileForm
 from django.contrib.auth.decorators import login_required
+import json
 
 def index(request):
     return render(request, 'index.html')
@@ -44,7 +45,7 @@ def userlogin(request):
     }
     return render(request, 'login.html', context)
 
-@login_required
+
 def kiwe(request):
     if request.method == 'POST':
         return redirect('../q/1')
@@ -74,38 +75,40 @@ def setting(request):
             print(".")
     return render(request, 'setting.html')
 
-@login_required
-def send_friend_request(request, user_id):
-    from_user = request.user
+
+def send_friend_request(i, user_id):
+    from_user = i
     to_user = User.objects.get(id = user_id)
     friend_request, created = FriendRequest.objects.get_or_create(
         from_user=from_user, to_user=to_user)
     if created:
-        return HttpResponse('friend request sent')
+        notiCreate(to_user, from_user, 'request', created.id)
+        return
     else:
-        return HttpResponse('friend request was already sent')
+        return
         
 
 
-@login_required
-def accept_friend_request(request, requestID):
+
+def accept_friend_request(user, requestID):
     fr = FriendRequest.objects.get(id=requestID)
-    if fr.to_user == request.user:
+    if fr.to_user == user:
         fr.to_user.friends.add(fr.from_user)
         fr.from_user.friends.add(fr.to_user)
+        notiCreate(fr.from_user, fr.to_user, 'accept', '\0')
         fr.delete()
-        return HttpResponse('friend request accepted')
+        return
     else:
-        return HttpResponse('friend request not accepted')
+        return
 
-@login_required
-def delete_friend_request(request, requestID):
+
+def delete_friend_request(user, requestID):
     fr = FriendRequest.objects.get(id=requestID)
-    if fr.to_user == request.user:
+    if fr.to_user == user:
         fr.delete()
-        return HttpResponse('friend request deleted')
+        return
     else:
-        return HttpResponse('friend request deleted')
+        return
 
 def profile(request):
     return render(request, 'profile.html')
@@ -144,10 +147,24 @@ def profileEdit(request):
     return render(request, 'profileEdit.html', context)
 
 def notification(request):
-    #notification = Notification.objects.get()
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        if data['at']=='accept':
+            accept_friend_request(request.user, data['requestID'])
+        elif data['at'] == 'no':
+            delete_friend_request(request.user, data('requestID'))
 
+    notification = Notification.objects.filter(to_user = request.user)
     context = {
-
+        'notification': notification
     }
     return render(request, 'notification.html', context)
-    
+
+def notiCreate(to_user, from_user, notitype, requestID):
+    noti = Notification.objects.create(
+        to_user = to_user,
+        from_user = from_user,
+        notitype = notitype,
+        requestID = requestID
+    )
+    noti.save()
