@@ -6,13 +6,10 @@
       <meta charset="UTF-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <style>
-          h5{
-            margin:0;
-          }
-        </style>
-        <link rel="stylesheet" href="{% static 'css/popup.css' %}">
-        <link rel="stylesheet" href="{% static 'css/bar.css' %}">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+      <link rel="stylesheet" href="{% static 'css/popup.css' %}">
+      <link rel="stylesheet" href="{% static 'css/bar.css' %}">
+      <link rel="stylesheet" href="{% static 'css/friends.css' %}">
     </head>
     <body>
       <div class="title">
@@ -28,8 +25,18 @@
         <br>
         <br>
         <br>
+        <div class="search">
+          <input type="text" id="s" placeholder="친구의 이메일을 검색해주세요.">
+          <button onclick="javascript:search()"><img src="{% static 'images/search.png' %}"></button>
+        </div>
+
+        <div id="result" style="display: none;">
+          <img id="resultImage" src="">
+          <h2 id="resultName"></h2>
+          <button>친구 맺기</button>
+        </div>
         {% for one in friends %}
-        <div class="friend" onclick="javascript:showPopup('{{ one.id }}')" style="display: inline">
+        <div class="friend" onclick="javascript:showPopup('{{ one.id }}')" style="display: inline;">
             <img src="../media/{{ one.image }}">
             <h3 style="bottom: 35px;">{{ one.name }}</h3>
         </div>
@@ -71,5 +78,29 @@
   function closePopup(user) {
     const popup = document.getElementById(user);
     popup.classList.add('hide');
+  }
+
+  function search() {
+    s = document.getElementById("s").value;
+    $.ajax({
+            url : "{% url 'friends' %}",
+            type : "POST",
+            headers : {
+                'X-CSRFTOKEN' : '{{ csrf_token }}'
+            },
+            dataType : "json",
+            data : JSON.stringify(s),
+            success : function (data) {
+                    const friend = document.getElementsByClassName("friend")
+                    for(var i=0; i<friend.length; i++) {
+                      friend[i].style.display = 'none';
+                    }
+                    var file = '../media/' + data['image']
+                    document.getElementById("resultImage").src = file;
+                    document.getElementById("resultName").innerHTML = data['name'];
+                    document.getElementById("result").style.display = 'block';
+                    
+                }
+        });
   }
 </script>

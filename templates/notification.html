@@ -38,7 +38,7 @@
         }
 
         $.ajax({
-            url : "{% url 'keyword' %}",
+            url : "{% url 'notification' %}",
             type : "POST",
             headers : {
                 'X-CSRFTOKEN' : '{{ csrf_token }}'

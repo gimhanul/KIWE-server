@@ -1,15 +1,19 @@
 from django.contrib.auth import authenticate, login, logout
-from django.http.response import HttpResponse
 from .models import User, FriendRequest, Profile, Notification
-from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import redirect, render
 from .forms import UserCreationForm, AuthenticationForm, ProfileForm
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
+from django.http import JsonResponse
 import json
+
 
 def index(request):
     return render(request, 'index.html')
 
 
+
+#join
 def join(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
@@ -24,6 +28,8 @@ def join(request):
     return render(request, 'join.html', context)
 
 
+
+#login
 def userlogin(request):
     context = {}
     user = request.user
@@ -46,12 +52,40 @@ def userlogin(request):
     return render(request, 'login.html', context)
 
 
+
+#main
 def kiwe(request):
     if request.method == 'POST':
         return redirect('../q/1')
     return render(request, 'kiwe.html')
 
+
+
+#setting
+def setting(request):
+    if request.method == 'POST':
+        setting = request.POST.get('setting')
+        if setting == 'logout':
+            logout(request)
+            return redirect('/')
+        elif setting == 'profile':
+            print(".")
+    return render(request, 'setting.html')
+
+
+
+#friends
 def friends(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        result = User.objects.filter(email=data).values('profile')[0]['profile']
+        result = Profile.objects.get(id = result)
+        result = result.__dict__
+        del result['_state']
+        print(result)
+        return JsonResponse(result, safe=False)
+
+
     temp = User.objects.get(id=request.user.id).friends.values('profile')
     temp = [i['profile'] for i in temp]
     friends = []
@@ -65,16 +99,6 @@ def friends(request):
     }
     return render(request, 'friends.html', context)
 
-def setting(request):
-    if request.method == 'POST':
-        setting = request.POST.get('setting')
-        if setting == 'logout':
-            logout(request)
-            return redirect('/')
-        elif setting == 'profile':
-            print(".")
-    return render(request, 'setting.html')
-
 
 def send_friend_request(i, user_id):
     from_user = i
@@ -87,8 +111,6 @@ def send_friend_request(i, user_id):
     else:
         return
         
-
-
 
 def accept_friend_request(user, requestID):
     fr = FriendRequest.objects.get(id=requestID)
@@ -110,6 +132,9 @@ def delete_friend_request(user, requestID):
     else:
         return
 
+
+
+#profile
 def profile(request):
     return render(request, 'profile.html')
 
@@ -146,6 +171,9 @@ def profileEdit(request):
 
     return render(request, 'profileEdit.html', context)
 
+
+
+#notification
 def notification(request):
     if request.method == 'POST':
         data = json.loads(request.body)
