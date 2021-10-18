@@ -16,7 +16,7 @@
         <br>
         <br>
         <h1>프로필 설정</h1>
-        <form name="profileCreate" action="{% url 'profileCreate' %}" method="post">
+        <form name="profileCreate" action="{% url 'profileCreate' %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
 
         <div>

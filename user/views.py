@@ -159,6 +159,7 @@ def profileEdit(request):
         form = ProfileForm(request.POST, request.FILES, instance = request.user.profile)
         if form.is_valid():
             profile = form.save(commit=False)
+            profile.image = request.FILES.get('image')
             profile.user = request.user
             profile.save()
             return redirect('profile')

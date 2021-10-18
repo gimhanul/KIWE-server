@@ -33,7 +33,7 @@
         <div id="result" style="display: none;">
           <img id="resultImage" src="">
           <h2 id="resultName"></h2>
-          <button>친구 맺기</button>
+          <button value="gof" name="push">친구 맺기</button>
         </div>
         {% for one in friends %}
         <div class="friend" onclick="javascript:showPopup('{{ one.id }}')" style="display: inline;">
@@ -46,6 +46,7 @@
             <img src="../media/{{ one.image }}">
             <h3>{{ one.name }}</h3>
             {{ one.description }}
+            <button>친구 끊기</button>
           </div>
         </section>
         {% endfor %}
