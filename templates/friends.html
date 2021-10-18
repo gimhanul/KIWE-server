@@ -14,7 +14,7 @@
     <body>
       <div class="title">
         <h1 style="padding-left: 5%; transform: translateY(90%);">친구</h1>
-        <a href="{% url 'notification' %}"><img style="right: 3px" src="{% static 'images/bell.png' %}"></a>
+        <a href="{% url 'notification' %}"><img src="{% static 'images/bell.png' %}"></a>
       </div>
       <center>
         <br>
@@ -27,13 +27,12 @@
         <br>
         <div class="search">
           <input type="text" id="s" placeholder="친구의 이메일을 검색해주세요.">
-          <button onclick="javascript:search()"><img src="{% static 'images/search.png' %}"></button>
+          <button id="send" onclick="javascript:search()"><img src="{% static 'images/search.png' %}"></button>
         </div>
-
         <div id="result" style="display: none;">
           <img id="resultImage" src="">
           <h2 id="resultName"></h2>
-          <button value="gof" name="push">친구 맺기</button>
+          <button value="" id="push" onclick="javascript:push()">친구 맺기</button>
         </div>
         {% for one in friends %}
         <div class="friend" onclick="javascript:showPopup('{{ one.id }}')" style="display: inline;">
@@ -83,6 +82,11 @@
 
   function search() {
     s = document.getElementById("s").value;
+    var data = {
+      dt : 'search',
+      s : s,
+    }
+    
     $.ajax({
             url : "{% url 'friends' %}",
             type : "POST",
@@ -90,7 +94,8 @@
                 'X-CSRFTOKEN' : '{{ csrf_token }}'
             },
             dataType : "json",
-            data : JSON.stringify(s),
+            data : JSON.stringify(data),
+            async : false,
             success : function (data) {
                     const friend = document.getElementsByClassName("friend")
                     for(var i=0; i<friend.length; i++) {
@@ -100,8 +105,27 @@
                     document.getElementById("resultImage").src = file;
                     document.getElementById("resultName").innerHTML = data['name'];
                     document.getElementById("result").style.display = 'block';
-                    
+                    document.getElementById("push").value = data['user_id'];
                 }
         });
+  }
+
+  function push() {
+    push = document.getElementById("push").value;
+    console.log(push)
+    var data = {
+      dt : 'push',
+      push : push,
+    }
+    $.ajax({
+      url : "{% url 'friends' %}",
+      type : "POST",
+      headers : {
+        'X-CSRFTOKEN' : '{{ csrf_token }}'
+      },
+      dataType : "json",
+      data : JSON.stringify(data),
+      async : false,
+    });
   }
 </script>

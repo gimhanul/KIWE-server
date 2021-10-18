@@ -68,8 +68,6 @@ def setting(request):
         if setting == 'logout':
             logout(request)
             return redirect('/')
-        elif setting == 'profile':
-            print(".")
     return render(request, 'setting.html')
 
 
@@ -78,19 +76,24 @@ def setting(request):
 def friends(request):
     if request.method == 'POST':
         data = json.loads(request.body)
-        result = User.objects.filter(email=data).values('profile')[0]['profile']
-        result = Profile.objects.get(id = result)
-        result = result.__dict__
-        del result['_state']
-        print(result)
-        return JsonResponse(result, safe=False)
+        if data['dt'] == 'search':
+            result = User.objects.filter(email=data['s']).values('profile')[0]['profile']
+            result = Profile.objects.get(id = result)
+            result = result.__dict__
+            del result['_state']
+            return JsonResponse(result, safe=False)
+
+        elif data['dt'] == 'push':
+            sendf = (int)(data['push'])
+            if sendf != request.user.id:
+                send_friend_request(request.user, sendf)
 
 
     temp = User.objects.get(id=request.user.id).friends.values('profile')
     temp = [i['profile'] for i in temp]
     friends = []
     for i in temp:
-        temp1 = Profile.objects.filter(id=i).values('name', 'description', 'image', 'id')[0]
+        temp1 = Profile.objects.filter(id=i).values('name', 'description', 'image', 'id', 'user')[0]
         friends.append(temp1)
 
     
@@ -106,7 +109,8 @@ def send_friend_request(i, user_id):
     friend_request, created = FriendRequest.objects.get_or_create(
         from_user=from_user, to_user=to_user)
     if created:
-        notiCreate(to_user, from_user, 'request', created.id)
+        created_ = FriendRequest.objects.get(from_user=from_user, to_user=to_user)
+        notiCreate(to_user, from_user, 'request', created_)
         return
     else:
         return
