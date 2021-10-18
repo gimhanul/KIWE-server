@@ -20,8 +20,8 @@
     {% if noti.notitype == 'request' %}
     <div>
         {{ noti.from_user.profile.name }} 님이 친구 요청을 보냈습니다.
-        <button onclick="javascript:send('accept', {{ noti.requestID }})">수락</button>
-        <button onclick="javascript:send('no', {{ noti.requestID }})">거절</button>
+        <button onclick="javascript:send('accept', '{{ noti.requestID.id }}')">수락</button>
+        <button onclick="javascript:send('no', '{{ noti.requestID.id }}')">거절</button>
     </div>
     {% endif %}
 
@@ -36,6 +36,8 @@
             at : at,
             requestID : requestID,
         }
+
+        console.log(data)
 
         $.ajax({
             url : "{% url 'notification' %}",

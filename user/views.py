@@ -88,7 +88,6 @@ def friends(request):
             if sendf != request.user.id:
                 send_friend_request(request.user, sendf)
 
-
     temp = User.objects.get(id=request.user.id).friends.values('profile')
     temp = [i['profile'] for i in temp]
     friends = []
@@ -182,6 +181,7 @@ def profileEdit(request):
 def notification(request):
     if request.method == 'POST':
         data = json.loads(request.body)
+        print(data)
         if data['at']=='accept':
             accept_friend_request(request.user, data['requestID'])
         elif data['at'] == 'no':
