@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'kiword.apps.KiwordConfig',
 ]
 
+
 AUTH_USER_MODEL = 'user.User'
 
 MIDDLEWARE = [

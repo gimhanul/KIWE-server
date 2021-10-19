@@ -36,7 +36,6 @@ urlpatterns = [
     path('profileCreate/', user.profileCreate, name="profileCreate"),
     path('profileEdit/', user.profileEdit, name="profileEdit"),
     path('notification/', user.notification, name="notification"),
-    
 ] 
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
