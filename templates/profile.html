@@ -6,32 +6,46 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/bar.css' %}">
+    <style>
+      #edit {
+        width: 100px;
+        height: 47px;
+        margin: 18px 26px 0 17px;
+        border-radius: 19px;
+        background-color: #fff;
+      }
+    </style>
     <title>kiwe</title>
 </head>
 <body>
+  <center>
+    <br><br><br>
+    <br><br><br>
+    <h2>내 프로필</h2>
     <div class="profile">
             <img src={% if request.user.profile.image %}"{{ request.user.profile.image.url }}"{% else %}"{% static 'images/user.png' %}"{% endif %}
-            width="90px" style="border-radius: 50%;" alt="">
-            <br>이름
-            <p>{{ request.user.profile.name }}</p>
-            한 줄 소개
-            <p>{{ request.user.profile.description }}</p>
+            width="100px" style="border-radius: 50%;" alt="">
+            <br>
+            <strong><p>{{ request.user.profile.name }}</p></strong>
+            <p style="padding: 10px; display: inline-block; width: 200px; word-break:break-all; white-space: normal; background-color: #eef6d6; border-radius: 10px; border-color: #eef6d6;">{{ request.user.profile.description }}</p>
         </div>
+    </div><br><br>
+    <center><a href="{% url 'profileEdit' %}"><button id="edit" type="submit">수정하기</button></a></center>
+  </center>
+
+  <div class="bottom_menu">
+    <div>
+        <a href="{% url 'kiwe' %}"><img src="{% static 'images/b-kiwe.png' %}"></a>
     </div>
-    <a href="{% url 'profileEdit' %}"><button>프로필 수정</button></a>
-    <div class="bottom_menu">
-        <div>
-          <a href="{% url 'kiwe' %}"><img src="{% static 'images/b-kiwe.png' %}"></a>
-        </div>
-        <div>
-          <a href="{% url 'friends' %}"><img src="{% static 'images/b-friend.png' %}"></a>
-        </div>
-        <div>
-          <a href="{% url 'memories' %}"><img src="{% static 'images/b-memory.png' %}"></a>
-        </div>
-        <div>
-          <a href="{% url 'setting' %}"><img src="{% static 'images/b-filled-setting.png' %}"></a>
-        </div>
-      </div>
+    <div>
+        <a href="{% url 'friends' %}"><img src="{% static 'images/b-friend.png' %}"></a>
+    </div>
+    <div>
+        <a href="{% url 'memories' %}"><img src="{% static 'images/b-memory.png' %}"></a>
+    </div>
+    <div>
+      <a href="{% url 'setting' %}"><img src="{% static 'images/b-filled-setting.png' %}"></a>
+    </div>
+</div>
 </body>
 </html>

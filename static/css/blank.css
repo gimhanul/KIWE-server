@@ -14,3 +14,12 @@
     border-radius: 100px;
     background-color: #d0ea85;
   }
+
+
+
+
+.profileblank {
+  width: 100px;
+  border: 0;
+  border-bottom: 3px solid #d0ea85;
+}

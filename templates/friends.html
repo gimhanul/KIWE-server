@@ -9,12 +9,32 @@
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
       <link rel="stylesheet" href="{% static 'css/popup.css' %}">
       <link rel="stylesheet" href="{% static 'css/bar.css' %}">
-      <link rel="stylesheet" href="{% static 'css/friends.css' %}">
+      <style>
+          .Rectangle-4 {
+            width: 250px;
+            height: 45px;
+            padding: 0px 60px 0px 60px;
+            margin: 0px 26px 0 17px;
+            border-radius: 100px;
+            border: 0;
+            background-color: #EEF6D6;
+          }
+          .Rectangle-3 {
+            width: 90px;
+            height: 45px;
+            border-radius: 35px;
+            border: 0;
+            font-size: 16px;
+            color: white;
+            font-weight: bold;
+            background-color: #d0ea85;
+          }
+      </style>
     </head>
     <body>
       <div class="title">
         <h1 style="padding-left: 5%; transform: translateY(90%);">친구</h1>
-        <a href="{% url 'notification' %}"><img src="{% static 'images/bell.png' %}"></a>
+        <a href="{% url 'notification' %}"><img style="position: absolute; top:60px; left:90%; right: 20%" src="{% static 'images/bell.png' %}"></a>
       </div>
       <center>
         <br>
@@ -25,30 +45,37 @@
         <br>
         <br>
         <br>
-        <div class="search">
-          <input type="text" id="s" placeholder="친구의 이메일을 검색해주세요.">
-          <button id="send" onclick="javascript:search()"><img src="{% static 'images/search.png' %}"></button>
+
+        <div class="search" style="position: relative;">
+          <input style="font-size: 18px; text-align: center; display:inline" type="text" class="Rectangle-4" id="s" placeholder="친구의 이메일을 검색해주세요.">
+          <button id="send" onclick="javascript:search()" style="position: absolute; left: 340px; background-color: #EEF6D6; border: 0; outline:0;"><img src="{% static 'images/search.png' %}"></button>
+          </div>
         </div>
+
         <div id="result" style="display: none;">
-          <img id="resultImage" src="">
+          <br><br><br><br>
+          <img id="resultImage" style="margin: 100px 0px 0px 0px;" src="">
           <h2 id="resultName"></h2>
-          <button value="" id="push" onclick="javascript:push()">친구 맺기</button>
+          <button class="Rectangle-3" value="" id="push" onclick="javascript:push()">친구 맺기</button>
         </div>
+
+        <div>
         {% for one in friends %}
         <div class="friend" onclick="javascript:showPopup('{{ one.id }}')" style="display: inline;">
-            <img src="../media/{{ one.image }}">
+            <img style="margin: 100px 0px 0px 0px; width: 80px;" src="../media/{{ one.image }}">
             <h3 style="bottom: 35px;">{{ one.name }}</h3>
         </div>
         <section id="{{ one.id }}" class="hide">
-          <div class="content">
-            <button onclick="javascript:closePopup('{{ one.id }}')">&times;</button>
-            <img src="../media/{{ one.image }}">
-            <h3>{{ one.name }}</h3>
-            {{ one.description }}
-            <button>친구 끊기</button>
+          <div style="width: 300px; height: 25%; position:relative;" class="content">
+            <button style="position: absolute; top:23px; right:20px; border: 0; background-color: white;" onclick="javascript:closePopup('{{ one.id }}')">&times;</button>
+            <img style="position: absolute; left:40px; top: 60px;" src="../media/{{ one.image }}">
+            <h3 style="position: absolute; left:43px; top: 124px;">{{ one.name }}</h3>
+            <h4 style="position: absolute; right:37px; top: 52px;">{{ one.description }}</h4>
+            <button style="position: absolute; top:120px; left:145px; border: 0; background-color: white;">친구 끊기</button>
           </div>
         </section>
         {% endfor %}
+      </div>
         <br>
         <br>
       </center>
