@@ -70,6 +70,7 @@ class Profile(models.Model):
     name = models.CharField(max_length=20)
     description = models.CharField(max_length=150, default='')
     image = models.ImageField(upload_to='Profile/', blank=True, null=True)
+    is_kiwe = models.BooleanField(default=False)
     
     def __str__(self):
         return self.name

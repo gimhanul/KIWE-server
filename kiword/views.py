@@ -66,6 +66,9 @@ def kiword(request):
             usermemory = Usermemory.objects.create(user = request.user)
             usermemory.save()
 
+            request.user.profile.is_kiwe = True
+            request.user.profile.save()
+
             return JsonResponse({'recomm':recomm}, safe=False)
 
             
@@ -77,6 +80,9 @@ def kiword(request):
             if data['dt'] == 'end':
                 usermemory.longestk = data['longestk']
                 usermemory.save()
+                
+                request.user.profile.is_kiwe = False
+                request.user.profile.save()
 
                 memorytype = Memorytype.objects.all()
 
