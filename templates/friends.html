@@ -39,6 +39,10 @@
             border-radius: 10px;
             border-color: #eef6d6;
           }
+          .contents {
+            float: left;
+            margin-left: 10%;
+          }
       </style>
     </head>
     <body>
@@ -72,9 +76,15 @@
 
         <div>
         {% for one in friends %}
-        <div class="friend" onclick="javascript:showPopup('{{ one.id }}')" style="display: inline;">
+        <div class="contents">
+          <div class="friend" onclick="javascript:showPopup('{{ one.id }}')" style="display: inline; position: relative;">
             <img style="margin: 100px 0px 0px 0px; width: 80px;" src="../media/{{ one.image }}">
             <h3 style="bottom: 35px;">{{ one.name }}</h3>
+            {% if one.is_kiwe %}
+            <img style="position: absolute; background-color: transparent; top: -10px; right: 0;" src="{% static 'images/is_kiwe.png' %}">
+            <h5 style="color: #abc65f;">키위 중이에요!</h5>
+            {% endif %}
+          </div>
         </div>
         <section id="{{ one.id }}" class="hide">
           <div style="width: 300px; height: 25%; position:relative;" class="content">
