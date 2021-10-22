@@ -88,6 +88,10 @@ def friends(request):
             if sendf != request.user.id:
                 send_friend_request(request.user, sendf)
 
+        elif data['dt'] == 'delete':
+            sendf = (int)(data['push'])
+            delete_friend(request.user, sendf)
+
     temp = User.objects.get(id=request.user.id).friends.values('profile')
     temp = [i['profile'] for i in temp]
     friends = []
@@ -134,6 +138,14 @@ def delete_friend_request(user, requestID):
         return
     else:
         return
+
+
+def delete_friend(user, thatuser):
+    thatuser = Profile.objects.get(id = thatuser).user_id
+    user.friends.remove(thatuser)
+    thatuser = User.objects.get(id = thatuser)
+    thatuser.friends.remove(user)
+    return
 
 
 

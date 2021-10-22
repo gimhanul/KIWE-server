@@ -11,10 +11,10 @@
       <link rel="stylesheet" href="{% static 'css/bar.css' %}">
       <style>
           .Rectangle-4 {
-            width: 250px;
+            width: 60%;
             height: 45px;
             padding: 0px 60px 0px 60px;
-            margin: 0px 26px 0 17px;
+            margin: 20px auto;
             border-radius: 100px;
             border: 0;
             background-color: #EEF6D6;
@@ -28,6 +28,16 @@
             color: white;
             font-weight: bold;
             background-color: #d0ea85;
+          }
+          #description {
+            padding: 10px;
+            display: inline-block;
+            width: 120px;
+            word-break:break-all;
+            white-space: normal;
+            background-color: #eef6d6;
+            border-radius: 10px;
+            border-color: #eef6d6;
           }
       </style>
     </head>
@@ -46,9 +56,10 @@
         <br>
         <br>
 
-        <div class="search" style="position: relative;">
-          <input style="font-size: 18px; text-align: center; display:inline" type="text" class="Rectangle-4" id="s" placeholder="친구의 이메일을 검색해주세요.">
-          <button id="send" onclick="javascript:search()" style="position: absolute; left: 340px; background-color: #EEF6D6; border: 0; outline:0;"><img src="{% static 'images/search.png' %}"></button>
+        <div class="search" style="position: absolute; top:19%; left:0%; right:0%">
+          <input style="font-size: 18px; text-align: center;" type="text" class="Rectangle-4" id="s" placeholder="친구의 이메일을 검색해주세요.">
+          <div style="position: absolute; top:30%; left:80%;">
+            <button id="send" onclick="javascript:search()" style="position: absolute; background-color: transparent; border: 0; outline:0;"><img src="{% static 'images/search.png' %}"></button>
           </div>
         </div>
 
@@ -56,7 +67,7 @@
           <br><br><br><br>
           <img id="resultImage" style="margin: 100px 0px 0px 0px;" src="">
           <h2 id="resultName"></h2>
-          <button class="Rectangle-3" value="" id="push" onclick="javascript:push()">친구 맺기</button>
+          <button class="Rectangle-3" value="" id="push" onclick="javascript:push('push')">친구 맺기</button>
         </div>
 
         <div>
@@ -67,11 +78,13 @@
         </div>
         <section id="{{ one.id }}" class="hide">
           <div style="width: 300px; height: 25%; position:relative;" class="content">
-            <button style="position: absolute; top:23px; right:20px; border: 0; background-color: white;" onclick="javascript:closePopup('{{ one.id }}')">&times;</button>
-            <img style="position: absolute; left:40px; top: 60px;" src="../media/{{ one.image }}">
-            <h3 style="position: absolute; left:43px; top: 124px;">{{ one.name }}</h3>
-            <h4 style="position: absolute; right:37px; top: 52px;">{{ one.description }}</h4>
-            <button style="position: absolute; top:120px; left:145px; border: 0; background-color: white;">친구 끊기</button>
+            <button style="position: absolute; top:23px; right:20px; border: 0; background-color: white;" onclick="javascript:closePopup('{{ one.id }}')"><img src="{% static 'images/x.png' %}"></button>
+            <div style="position: absolute; left:40px; top: 23%">
+              <img style="width: 100px;" src="../media/{{ one.image }}">
+              <h3 style="text-align: center; font-size: larger;">{{ one.name }}</h3>
+            </div>
+            <h4 id="description" style="position: absolute; right:37px; top: 52px; ">{{ one.description }}</h4>
+            <button id="delete" value="{{ one.id }}" onclick="javascript:push('delete')" style="position: absolute; bottom: 20%; right: 10%; border: 0; background-color: white;"><img src="{% static 'images/frienddelete.png' %}"></button>
           </div>
         </section>
         {% endfor %}
@@ -137,10 +150,17 @@
         });
   }
 
-  function push() {
-    push = document.getElementById("push").value;
+  function push(dt) {
+    if(dt=='push') {
+      push = document.getElementById("push").value;
+    }
+
+    else if (dt=='delete') {
+      push = document.getElementById("delete").value;
+    }
+    
     var data = {
-      dt : 'push',
+      dt : dt,
       push : push,
     }
     $.ajax({
