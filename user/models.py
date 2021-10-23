@@ -1,5 +1,4 @@
 from django.db import models
-from django.db.models.deletion import CASCADE, DO_NOTHING
 from django.db.models.expressions import F
 from django.utils import timezone
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
@@ -99,4 +98,4 @@ class Notification(models.Model):
     notitype = models.CharField(max_length=20, choices=TYPE_CHOICES)
     notidatetime = models.DateTimeField(default=timezone.now)
     read = models.BooleanField(default=False)
-    requestID = models.ForeignKey(FriendRequest, null=True, on_delete=DO_NOTHING)
+    requestID = models.ForeignKey(FriendRequest, null=True, on_delete=models.SET_NULL)

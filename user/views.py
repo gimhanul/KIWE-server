@@ -124,7 +124,7 @@ def accept_friend_request(user, requestID):
     if fr.to_user == user:
         fr.to_user.friends.add(fr.from_user)
         fr.from_user.friends.add(fr.to_user)
-        notiCreate(fr.from_user, fr.to_user, 'accept', '\0')
+        notiCreate(fr.from_user, fr.to_user, 'accept', -1)
         fr.delete()
         return
     else:
@@ -197,7 +197,7 @@ def notification(request):
         if data['at']=='accept':
             accept_friend_request(request.user, data['requestID'])
         elif data['at'] == 'no':
-            delete_friend_request(request.user, data('requestID'))
+            delete_friend_request(request.user, data['requestID'])
 
     notification = Notification.objects.filter(to_user = request.user)
     context = {
@@ -206,10 +206,17 @@ def notification(request):
     return render(request, 'notification.html', context)
 
 def notiCreate(to_user, from_user, notitype, requestID):
-    noti = Notification.objects.create(
-        to_user = to_user,
-        from_user = from_user,
-        notitype = notitype,
-        requestID = requestID
-    )
+    if(notitype == 'accept' or notitype == 'no'):
+        noti = Notification.objects.create(
+            to_user = to_user,
+            from_user = from_user,
+            notitype = notitype,
+        )
+    else:
+        noti = Notification.objects.create(
+            to_user = to_user,
+            from_user = from_user,
+            notitype = notitype,
+            requestID = requestID
+        )
     noti.save()
