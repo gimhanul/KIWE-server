@@ -77,11 +77,17 @@ def friends(request):
     if request.method == 'POST':
         data = json.loads(request.body)
         if data['dt'] == 'search':
-            result = User.objects.filter(email=data['s']).values('profile')[0]['profile']
-            result = Profile.objects.get(id = result)
-            result = result.__dict__
-            del result['_state']
-            return JsonResponse(result, safe=False)
+            try:
+                result = User.objects.get(email=data['s'])
+            except User.DoesNotExist:
+                result = None
+            if result:
+                result = Profile.objects.get(id = result.id)
+                result = result.__dict__
+                del result['_state']
+                return JsonResponse(result, safe=False)
+            else:
+                return JsonResponse('error', safe=False)
 
         elif data['dt'] == 'push':
             sendf = (int)(data['push'])

@@ -52,11 +52,9 @@
       </div>
       <center>
         <br><br>          
-        <br><br>
-        <br><br>
-        <br><br>
+        <br><br><br>
 
-        <div class="search" style="position: absolute; top:19%; left:0%; right:0%">
+        <div class="search" style="position: relative">
           <input style="font-size: 18px; text-align: center;" type="text" class="Rectangle-4" id="s" placeholder="친구의 이메일을 검색해주세요.">
           <div style="position: absolute; top:30%; left:80%;">
             <button id="send" onclick="javascript:search()" style="position: absolute; background-color: transparent; border: 0; outline:0;"><img src="{% static 'images/search.png' %}"></button>
@@ -64,8 +62,8 @@
         </div>
 
         <div id="result" style="display: none;">
-          <br><br><br><br>
-          <img id="resultImage" style="margin: 100px 0px 0px 0px; width: 100px" src="">
+          <br><br>
+          <img id="resultImage" style="margin: 50px 0px 0px 0px; height: 100px; width: 100px" src="">
           <h2 id="resultName"></h2>
           <button class="Rectangle-3" value="" id="push" onclick="javascript:push('push')">친구 맺기</button>
         </div>
@@ -143,6 +141,13 @@
             data : JSON.stringify(data),
             async : false,
             success : function (data) {
+              if(data == 'error') {
+                document.getElementById("resultImage").src = "{% static 'images/not.png' %}";
+                document.getElementById("resultName").innerHTML = '그런... 사람은 없읍니다.';
+                document.getElementById("push").style.display = 'none';
+                document.getElementById("result").style.display = 'block';
+              }
+              else {
                     const friend = document.getElementsByClassName("friend")
                     for(var i=0; i<friend.length; i++) {
                       friend[i].style.display = 'none';
@@ -153,6 +158,7 @@
                     document.getElementById("result").style.display = 'block';
                     document.getElementById("push").value = data['user_id'];
                 }
+              },
         });
   }
 
