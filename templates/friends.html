@@ -84,7 +84,7 @@
           <div style="width: 300px; height: 25%; position:relative;" class="content">
             <button style="position: absolute; top:23px; right:20px; border: 0; background-color: white;" onclick="javascript:closePopup('{{ one.id }}')"><img src="{% static 'images/x.png' %}"></button>
             <div style="position: absolute; left:40px; top: 23%">
-              <img style="width: 100px;" src="../media/{{ one.image }}">
+              <img style="width: 100px; background-color: transparent;" src="../media/{{ one.image }}">
               <h3 style="text-align: center; font-size: larger;">{{ one.name }}</h3>
             </div>
             <h4 id="description" style="position: absolute; right:37px; top: 52px; ">{{ one.description }}</h4>
@@ -155,6 +155,7 @@
                     var file = '../media/' + data['image']
                     document.getElementById("resultImage").src = file;
                     document.getElementById("resultName").innerHTML = data['name'];
+                    document.getElementById("push").style.display = 'inline-block';
                     document.getElementById("result").style.display = 'block';
                     document.getElementById("push").value = data['user_id'];
                 }

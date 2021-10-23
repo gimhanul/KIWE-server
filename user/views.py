@@ -82,7 +82,7 @@ def friends(request):
             except User.DoesNotExist:
                 result = None
             if result:
-                result = Profile.objects.get(id = result.id)
+                result = Profile.objects.get(id = result.profile.id)
                 result = result.__dict__
                 del result['_state']
                 return JsonResponse(result, safe=False)
@@ -199,13 +199,17 @@ def profileEdit(request):
 def notification(request):
     if request.method == 'POST':
         data = json.loads(request.body)
-        print(data)
-        if data['at']=='accept':
+
+        noti = Notification.objects.get(id = data['notiID'])
+        noti.read = True
+        noti.save()
+            
+        if data['at'] =='accept':
             accept_friend_request(request.user, data['requestID'])
         elif data['at'] == 'no':
             delete_friend_request(request.user, data['requestID'])
 
-    notification = Notification.objects.filter(to_user = request.user)
+    notification = Notification.objects.filter(to_user = request.user).order_by('-notidatetime')
     context = {
         'notification': notification
     }

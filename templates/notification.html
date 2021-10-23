@@ -49,23 +49,39 @@
 
     <ul>
         {% for noti in notification %}
+
         {% if noti.notitype == 'accept' %}
-        <li>
-            <img src='../media/{{ noti.from_user.profile.image }}'>
-            <p>{{ noti.from_user.profile.name }} 님이 친구 요청을 수락했습니다.</p>
-        </li>
+            {% if noti.read == 1 %}
+            <li>
+                <img src='../media/{{ noti.from_user.profile.image }}'>
+                <p>{{ noti.from_user.profile.name }} 님이 친구 요청을 수락했습니다.</p>
+            </li>
+            {% endif %}
+            {% if noti.read == 0 %}
+            <li id="{{ noti.id }}" style="background-color: #eef6d6" onclick="javascript:read('{{ noti.id }}')">
+                <img src='../media/{{ noti.from_user.profile.image }}'>
+                <p>{{ noti.from_user.profile.name }} 님이 친구 요청을 수락했습니다.</p>
+            </li>
+            {% endif %}
         {% endif %}
 
         {% if noti.notitype == 'request' %}
-        <li>
-            <img src='../media/{{ noti.from_user.profile.image }}'>
-            <p>{{ noti.from_user.profile.name }} 님이 친구 요청을 보냈습니다.</p>
-            {% if noti.requestID != NULL %}
-            <button class="oorx" style="bottom: 23px; right: 60px" onclick="javascript:send('accept', '{{ noti.requestID.id }}')"><img src="{% static 'images/check.png' %}"></button>
-            <button class="oorx" style="bottom: 19px; right: 20px" onclick="javascript:send('no', '{{ noti.requestID.id }}')"><img src="{% static 'images/not.png' %}"></button>
+            {% if noti.read == 1 %}
+            <li>
+                <img src='../media/{{ noti.from_user.profile.image }}'>
+                <p>{{ noti.from_user.profile.name }} 님이 친구 요청을 보냈습니다.</p>
+            </li>
             {% endif %}
-        </li>
+            {% if noti.read == 0 %}
+            <li id="{{ noti.id }}" style="background-color: #eef6d6">
+                <img src='../media/{{ noti.from_user.profile.image }}'>
+                <p>{{ noti.from_user.profile.name }} 님이 친구 요청을 보냈습니다.</p>
+                <button class="oorx" style="bottom: 23px; right: 60px" onclick="javascript:send('accept', '{{ noti.requestID.id }}', '{{ noti.id }}')"><img src="{% static 'images/check.png' %}"></button>
+                <button class="oorx" style="bottom: 19px; right: 20px" onclick="javascript:send('no', '{{ noti.requestID.id }}', '{{ noti.id }}')"><img src="{% static 'images/not.png' %}"></button>
+            </li>
+            {% endif %}
         {% endif %}
+
         {% endfor %}
     </ul>
     
@@ -88,13 +104,28 @@
 </html>
 
 <script>
-    function send(at, requestID) {
+    function send(at, requestID, notiID) {
+        document.getElementById(notiID).style.backgroundColor = 'white';
+        document.getElementById(notiID).children[2].style.display = 'none';
+        document.getElementById(notiID).children[3].style.display = 'none';
 
         var data = {
             at : at,
             requestID : requestID,
-        }
-
+            notiID : notiID,
+        };
+        go(data);
+    }
+    function read(notiID) {
+        console.log(notiID);
+        document.getElementById(notiID).style.backgroundColor = 'white';
+        var data = {
+            at : 'noneedy',
+            notiID : notiID,
+        };
+        go(data);
+    }
+    function go(data) {
         $.ajax({
             url : "{% url 'notification' %}",
             type : "POST",
@@ -103,6 +134,7 @@
             },
             dataType : "json",
             data : JSON.stringify(data),
+            async : false,
         });
     }
 </script>
