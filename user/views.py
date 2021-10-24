@@ -101,13 +101,17 @@ def friends(request):
     temp = User.objects.get(id=request.user.id).friends.values('profile')
     temp = [i['profile'] for i in temp]
     friends = []
+    is_kiwe = []
     for i in temp:
-        temp1 = Profile.objects.filter(id=i).values('name', 'description', 'image', 'id', 'user', 'is_kiwe')[0]
-        friends.append(temp1)
+        temp1 = Profile.objects.get(id=i)
+        if temp1.is_kiwe:
+            is_kiwe.append(temp1)
+        else:
+            friends.append(temp1)
 
-    
     context = {
-        'friends': friends
+        'friends': friends,
+        'is_kiwe': is_kiwe,
     }
     return render(request, 'friends.html', context)
 

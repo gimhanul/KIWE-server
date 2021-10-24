@@ -39,9 +39,15 @@
             border-radius: 10px;
             border-color: #eef6d6;
           }
-          .contents {
-            float: left;
-            margin-left: 10%;
+          ul {
+            list-style: none;
+            padding-left: 0;
+            vertical-align: 0;
+          }
+          li {
+            display: inline-block;
+            margin: 10px 10px 50px 10px;
+            padding: 3px;
           }
       </style>
     </head>
@@ -68,18 +74,17 @@
           <button class="Rectangle-3" value="" id="push" onclick="javascript:push('push')">친구 맺기</button>
         </div>
 
-        <div>
-        {% for one in friends %}
-        <div class="contents">
+        <ul>
+        {% for one in is_kiwe %}
+        <li class="contents">
           <div class="friend" onclick="javascript:showPopup('{{ one.id }}')" style="display: inline; position: relative;">
-            <img style="margin: 100px 0px 0px 0px; width: 80px;" src="../media/{{ one.image }}">
-            <h3 style="bottom: 35px;">{{ one.name }}</h3>
+            <img style="width: 80px;" src="../media/{{ one.image }}">
+            <h3 style="position: absolute; white-space: nowrap; bottom: -45px; left: 50%; transform: translate(-50%,0%);">{{ one.name }}</h3>
             {% if one.is_kiwe %}
             <img style="position: absolute; background-color: transparent; top: -10px; right: 0;" src="{% static 'images/is_kiwe.png' %}">
-            <h5 style="color: #abc65f;">키위 중이에요!</h5>
             {% endif %}
           </div>
-        </div>
+        </li>
         <section id="{{ one.id }}" class="hide">
           <div style="width: 300px; height: 25%; position:relative;" class="content">
             <button style="position: absolute; top:23px; right:20px; border: 0; background-color: white;" onclick="javascript:closePopup('{{ one.id }}')"><img src="{% static 'images/x.png' %}"></button>
@@ -92,7 +97,29 @@
           </div>
         </section>
         {% endfor %}
-      </div>
+        {% for one in friends %}
+        <li class="contents">
+          <div class="friend" onclick="javascript:showPopup('{{ one.id }}')" style="display: inline; position: relative;">
+            <img style="width: 80px;" src="../media/{{ one.image }}">
+            <h3 style="position: absolute; white-space: nowrap; bottom: -45px; left: 50%; transform: translate(-50%,0%);">{{ one.name }}</h3>
+            {% if one.is_kiwe %}
+            <img style="position: absolute; background-color: transparent; top: -10px; right: 0;" src="{% static 'images/is_kiwe.png' %}">
+            {% endif %}
+          </div>
+        </li>
+        <section id="{{ one.id }}" class="hide">
+          <div style="width: 300px; height: 25%; position:relative;" class="content">
+            <button style="position: absolute; top:23px; right:20px; border: 0; background-color: white;" onclick="javascript:closePopup('{{ one.id }}')"><img src="{% static 'images/x.png' %}"></button>
+            <div style="position: absolute; left:40px; top: 23%">
+              <img style="width: 100px; background-color: transparent;" src="../media/{{ one.image }}">
+              <h3 style="text-align: center; font-size: larger;">{{ one.name }}</h3>
+            </div>
+            <h4 id="description" style="position: absolute; right:37px; top: 52px; ">{{ one.description }}</h4>
+            <button id="delete" value="{{ one.id }}" onclick="javascript:push('delete')" style="position: absolute; bottom: 20%; right: 10%; border: 0; background-color: white;"><img src="{% static 'images/frienddelete.png' %}"></button>
+          </div>
+        </section>
+        {% endfor %}
+      </ul>
         <br>
         <br>
       </center>
@@ -141,24 +168,23 @@
             data : JSON.stringify(data),
             async : false,
             success : function (data) {
+              const friend = document.getElementsByClassName("friend")
+                    for(var i=0; i<friend.length; i++) {
+                      friend[i].style.display = 'none';
+                    }
               if(data == 'error') {
                 document.getElementById("resultImage").src = "{% static 'images/not.png' %}";
                 document.getElementById("resultName").innerHTML = '그런... 사람은 없읍니다.';
                 document.getElementById("push").style.display = 'none';
-                document.getElementById("result").style.display = 'block';
               }
               else {
-                    const friend = document.getElementsByClassName("friend")
-                    for(var i=0; i<friend.length; i++) {
-                      friend[i].style.display = 'none';
-                    }
                     var file = '../media/' + data['image']
                     document.getElementById("resultImage").src = file;
                     document.getElementById("resultName").innerHTML = data['name'];
                     document.getElementById("push").style.display = 'inline-block';
-                    document.getElementById("result").style.display = 'block';
                     document.getElementById("push").value = data['user_id'];
                 }
+                document.getElementById("result").style.display = 'block';
               },
         });
   }
