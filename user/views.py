@@ -116,17 +116,21 @@ def friends(request):
     return render(request, 'friends.html', context)
 
 
-def send_friend_request(i, user_id):
-    from_user = i
+def send_friend_request(from_user, user_id):
     to_user = User.objects.get(id = user_id)
-    friend_request, created = FriendRequest.objects.get_or_create(
-        from_user=from_user, to_user=to_user)
-    if created:
-        created_ = FriendRequest.objects.get(from_user=from_user, to_user=to_user)
-        notiCreate(to_user, from_user, 'request', created_)
+    friends = from_user.friends.values('id')
+    fl = [ a['id'] for a in friends ]
+    if user_id in fl:
         return
     else:
-        return
+        friend_request, created = FriendRequest.objects.get_or_create(
+        from_user=from_user, to_user=to_user)
+        if created:
+            created_ = FriendRequest.objects.get(from_user=from_user, to_user=to_user)
+            notiCreate(to_user, from_user, 'request', created_)
+            return
+        else:
+            return
         
 
 def accept_friend_request(user, requestID):
