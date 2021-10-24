@@ -119,21 +119,23 @@ def memories(request):
     
 
 def memory(request, usermemory_id):
-    memorytype = Memorytype.objects.all()
+    memoryuser = Usermemory.objects.get(id = usermemory_id).user_id
+    if memoryuser == request.user.id:
+        memorytype = Memorytype.objects.all()
     
-    memory = []
-    #[memorytype.highlighter, memorytype.text, memorydata.result]
-    for i in memorytype:
-        result = Memoryresult.objects.filter(memory_id = usermemory_id, mt_id = i.id).values('result')[0]['result']
-        temp = (i.highlighter, i.text, result)
-        memory.append(temp)
+        memory = []
+        #[memorytype.highlighter, memorytype.text, memorydata.result]
+        for i in memorytype:
+            result = Memoryresult.objects.filter(memory_id = usermemory_id, mt_id = i.id).values('result')[0]['result']
+            temp = (i.highlighter, i.text, result)
+            memory.append(temp)
 
 
-    memory = json.dumps(memory)
-    context = {
-        'id' : usermemory_id,
-        'memory' : memory,
-    }
+        memory = json.dumps(memory)
+        context = {
+            'id' : usermemory_id,
+            'memory' : memory,
+        }
     
     return render(request, 'memory.html', context)
 

@@ -32,11 +32,11 @@
                     width="100px" style="border-radius: 50%;" id="show">
                 </label>
             
-                <input id="file-input" name="image" type="file" accept="image/*" style="display: none;"/>
+                <input id="file-input" name="image" type="file" accept="image/*" value="{{ profil.iamge }}" style="display: none;"/>
             </div>
                 <br>
-                <p><input class="profileblank" style="text-align: center; font-weight: bold; font-size: larger;" name="name" type="text"></p>
-                <p><input class="profileblank" style="padding: 10px; display: inline-block; width: 200px; word-break:break-all; white-space: normal; background-color: #eef6d6; border-radius: 10px; border-color: #eef6d6;" name="description" type="text"></p>
+                <p><input class="profileblank" value="{{ profil.name }}" style="text-align: center; font-weight: bold; font-size: larger;" name="name" type="text"></p>
+                <p><input class="profileblank" value="{{ profil.description }}" style="padding: 10px; display: inline-block; width: 200px; word-break:break-all; white-space: normal; background-color: #eef6d6; border-radius: 10px; border-color: #eef6d6;" name="description" type="text"></p>
             </div>
         </div><br><br>
         <center><button id="go" type="submit">수정 완료</button></center>
