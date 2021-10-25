@@ -1,0 +1,157 @@
+/*page*/
+ul {
+    list-style: none;
+    padding-left: 0;
+    vertical-align: 0;
+}
+
+li {
+    display: inline-block;
+    margin: 10px 10px 50px 10px;
+    padding: 3px;
+}
+
+#bell {
+    position: absolute;
+    top:60px; 
+    left:90%;
+    right: 20%
+}
+
+
+
+/*friend*/
+.friend {
+    display: inline;
+    position: relative;
+}
+.friend > #image {
+    width: 80px;
+    height: 80px;
+}
+
+#is_kiwe {
+    position: absolute;
+    background-color: transparent;
+    top: -10px;
+    right: 0;
+}
+
+.friend > h3 {
+    position: absolute;
+    white-space: nowrap;
+    bottom: -45px;
+    left: 50%;
+    transform: translate(-50%,0%);
+}
+
+
+/*search*/
+.search {
+    position: relative
+}
+
+#s { 
+    width: 60%;
+    height: 45px;
+    padding: 0px 60px 0px 60px;
+    margin: 20px auto;
+    border-radius: 100px;
+    border: 0;
+    background-color: #EEF6D6;
+    font-size: 18px;
+    text-align: center;
+}
+
+.search > div {
+    position: absolute;
+    top:30%;
+    left:80%;
+}
+
+.search > div > button {
+    position: absolute;
+    background-color: transparent;
+    border: 0;
+    outline:0;
+}
+
+
+
+/*search result*/
+#result {
+    display: none;
+}
+
+#resultImage {
+    margin: 50px 0px 0px 0px;
+    height: 100px;
+    width: 100px"
+}
+
+.letsfriend {
+    width: 90px;
+    height: 45px;
+    border-radius: 35px;
+    border: 0;
+    font-size: 16px;
+    color: white;
+    font-weight: bold;
+    background-color: #d0ea85;
+}
+
+
+
+/*popup content*/
+.content {
+    width: 300px;
+    height: 25%;
+    position:relative;
+}
+
+.content > #x {
+    position: absolute;
+    top:23px;
+    right:20px;
+    border: 0;
+    background-color: white;
+}
+
+.content > div {
+    position: absolute;
+    left:40px;
+    top: 23%
+}
+
+.content > div > img {
+    width: 100px;
+    background-color: transparent;
+}
+
+.content > div> h3 {
+    text-align: center; 
+    font-size: larger;
+}
+
+#delete {
+    position: absolute;
+    bottom: 20%;
+    right: 10%;
+    border: 0;
+    background-color: white;
+}
+
+
+#description {
+    position: absolute;
+    right:37px;
+    top: 52px;
+    padding: 10px;
+    display: inline-block;
+    width: 120px;
+    word-break:break-all;
+    white-space: normal;
+    background-color: #eef6d6;
+    border-radius: 10px;
+    border-color: #eef6d6;
+}

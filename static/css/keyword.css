@@ -1,0 +1,15 @@
+#stop {
+    position: fixed;
+    background-color: white;
+    outline: 0;
+    border:0;
+    color: gray;
+    bottom: 30px;
+    left: 45%;
+}
+
+#click {
+    background-color: white;
+    outline:0;
+    border: 0;
+}

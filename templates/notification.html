@@ -7,41 +7,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/bar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/notification.css' %}">
+    <script src="{% static 'js/notification.js' %}"></script>
     <title>kiwe</title>
-    <style>
-        li {
-            position: relative;
-            width: 100%;
-            height: 94px;
-            padding-left: 15px;
-            box-shadow: inset 0px -2px 1px rgba(0, 0, 0, 0.05);
-        }
-        ul {
-            list-style: none;
-            padding-left: 0;
-        }
-        .oorx {
-            position: absolute;
-            background-color: transparent;
-            border: none;
-        }
-        li > img {
-            margin-top: 23px;
-            width: 50px;
-            height: 50px;
-        }
-        li > p {
-            position: absolute;
-            left: 90px;
-            bottom: 19px;
-            font-size: medium;
-        }
-
-    </style>
 </head>
 <body>
-    <div class="title ">
-        <h1 style="padding-left: 5%; transform: translateY(90%);">알람</h1>
+    <div class="title">
+        <h1>알람</h1>
     </div>
     <br><br>          
     <br><br>
@@ -58,7 +30,7 @@
             </li>
             {% endif %}
             {% if noti.read == 0 %}
-            <li id="{{ noti.id }}" style="background-color: #eef6d6" onclick="javascript:read('{{ noti.id }}')">
+            <li id="{{ noti.id }}" class="noread" onclick="javascript:read('{{ noti.id }}')">
                 <img src='../media/{{ noti.from_user.profile.image }}'>
                 <p>{{ noti.from_user.profile.name }} 님이 친구 요청을 수락했습니다.</p>
             </li>
@@ -73,16 +45,17 @@
             </li>
             {% endif %}
             {% if noti.read == 0 %}
-            <li id="{{ noti.id }}" style="background-color: #eef6d6">
+            <li id="{{ noti.id }}" class="noread">
                 <img src='../media/{{ noti.from_user.profile.image }}'>
                 <p>{{ noti.from_user.profile.name }} 님이 친구 요청을 보냈습니다.</p>
-                <button class="oorx" style="bottom: 23px; right: 60px" onclick="javascript:send('accept', '{{ noti.requestID.id }}', '{{ noti.id }}')"><img src="{% static 'images/check.png' %}"></button>
-                <button class="oorx" style="bottom: 19px; right: 20px" onclick="javascript:send('no', '{{ noti.requestID.id }}', '{{ noti.id }}')"><img src="{% static 'images/not.png' %}"></button>
+                <button class="oorx" id="o" onclick="javascript:send('accept', '{{ noti.requestID.id }}', '{{ noti.id }}')"><img src="{% static 'images/check.png' %}"></button>
+                <button class="oorx" id="x" onclick="javascript:send('no', '{{ noti.requestID.id }}', '{{ noti.id }}')"><img src="{% static 'images/not.png' %}"></button>
             </li>
             {% endif %}
         {% endif %}
 
         {% endfor %}
+            <li></li>
     </ul>
     
 
@@ -104,27 +77,6 @@
 </html>
 
 <script>
-    function send(at, requestID, notiID) {
-        document.getElementById(notiID).style.backgroundColor = 'white';
-        document.getElementById(notiID).children[2].style.display = 'none';
-        document.getElementById(notiID).children[3].style.display = 'none';
-
-        var data = {
-            at : at,
-            requestID : requestID,
-            notiID : notiID,
-        };
-        go(data);
-    }
-    function read(notiID) {
-        console.log(notiID);
-        document.getElementById(notiID).style.backgroundColor = 'white';
-        var data = {
-            at : 'noneedy',
-            notiID : notiID,
-        };
-        go(data);
-    }
     function go(data) {
         $.ajax({
             url : "{% url 'notification' %}",

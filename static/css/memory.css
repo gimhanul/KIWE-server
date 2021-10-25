@@ -1,0 +1,48 @@
+#leftbutton {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background-color: transparent; 
+    outline: 0; 
+    border: 0;
+    z-index: 40;
+    width: 25vw;
+    height: 100vh;
+}
+#rightbutton{
+    position: absolute;
+    top:0px;
+    right: 0px;
+    background-color: transparent; 
+    outline:0; 
+    border: 0;
+    z-index: 40;
+    width: 25vw;
+    height: 100vh;
+}
+.contents {
+    z-index: 3;
+}
+#highlighter {
+    position:absolute;
+    display: inline-block;
+    background-color: #EEF6D6;
+    left: 44px;
+    top: 301;
+}
+#texxt {
+    position: absolute;
+    left: 44px;
+}
+.contents > img {
+    position: absolute;
+    left: 52px;
+    top: 512px;
+    width: 100px;
+    height: 100px;
+}
+#result {
+    position: absolute;
+    left: 172px;
+    top: 512px;
+}

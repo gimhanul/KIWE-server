@@ -7,115 +7,71 @@
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+      <script src="{% static 'js/popup.js' %}"></script>
       <link rel="stylesheet" href="{% static 'css/popup.css' %}">
       <link rel="stylesheet" href="{% static 'css/bar.css' %}">
-      <style>
-          .Rectangle-4 {
-            width: 60%;
-            height: 45px;
-            padding: 0px 60px 0px 60px;
-            margin: 20px auto;
-            border-radius: 100px;
-            border: 0;
-            background-color: #EEF6D6;
-          }
-          .Rectangle-3 {
-            width: 90px;
-            height: 45px;
-            border-radius: 35px;
-            border: 0;
-            font-size: 16px;
-            color: white;
-            font-weight: bold;
-            background-color: #d0ea85;
-          }
-          #description {
-            padding: 10px;
-            display: inline-block;
-            width: 120px;
-            word-break:break-all;
-            white-space: normal;
-            background-color: #eef6d6;
-            border-radius: 10px;
-            border-color: #eef6d6;
-          }
-          ul {
-            list-style: none;
-            padding-left: 0;
-            vertical-align: 0;
-          }
-          li {
-            display: inline-block;
-            margin: 10px 10px 50px 10px;
-            padding: 3px;
-          }
-      </style>
+      <link rel="stylesheet" href="{% static 'css/friends.css'%}">
     </head>
     <body>
       <div class="title">
-        <h1 style="padding-left: 5%; transform: translateY(90%);">친구</h1>
-        <a href="{% url 'notification' %}"><img style="position: absolute; top:60px; left:90%; right: 20%" src="{% static 'images/bell.png' %}"></a>
+        <h1>친구</h1>
+        <a href="{% url 'notification' %}"><img id="bell" src="{% static 'images/bell.png' %}"></a>
       </div>
       <center>
         <br><br>          
         <br><br><br>
 
-        <div class="search" style="position: relative">
-          <input style="font-size: 18px; text-align: center;" type="text" class="Rectangle-4" id="s" placeholder="친구의 이메일을 검색해주세요.">
-          <div style="position: absolute; top:30%; left:80%;">
-            <button id="send" onclick="javascript:search()" style="position: absolute; background-color: transparent; border: 0; outline:0;"><img src="{% static 'images/search.png' %}"></button>
+        <div class="search">
+          <input type="text" id="s" placeholder="친구의 이메일을 검색해주세요.">
+          <div>
+            <button id="send" onclick="javascript:search()"><img src="{% static 'images/search.png' %}"></button>
           </div>
         </div>
 
-        <div id="result" style="display: none;">
+        <div id="result">
           <br><br>
-          <img id="resultImage" style="margin: 50px 0px 0px 0px; height: 100px; width: 100px" src="">
+          <img id="resultImage" src="">
           <h2 id="resultName"></h2>
-          <button class="Rectangle-3" value="" id="push" onclick="javascript:push('push')">친구 맺기</button>
+          <button class="letsfriend" value="" id="push" onclick="javascript:push('push')">친구 맺기</button>
         </div>
 
         <ul>
         {% for one in is_kiwe %}
         <li class="contents">
-          <div class="friend" onclick="javascript:showPopup('{{ one.id }}')" style="display: inline; position: relative;">
-            <img style="width: 80px;" src="../media/{{ one.image }}">
-            <h3 style="position: absolute; white-space: nowrap; bottom: -45px; left: 50%; transform: translate(-50%,0%);">{{ one.name }}</h3>
-            {% if one.is_kiwe %}
-            <img style="position: absolute; background-color: transparent; top: -10px; right: 0;" src="{% static 'images/is_kiwe.png' %}">
-            {% endif %}
+          <div class="friend" onclick="javascript:showPopup('{{ one.id }}')">
+            <img id="image" src="../media/{{ one.image }}">
+            <h3>{{ one.name }}</h3>
+            <img id="is_kiwe" src="{% static 'images/is_kiwe.png' %}">
           </div>
         </li>
         <section id="{{ one.id }}" class="hide">
-          <div style="width: 300px; height: 25%; position:relative;" class="content">
-            <button style="position: absolute; top:23px; right:20px; border: 0; background-color: white;" onclick="javascript:closePopup('{{ one.id }}')"><img src="{% static 'images/x.png' %}"></button>
-            <div style="position: absolute; left:40px; top: 23%">
-              <img style="width: 100px; background-color: transparent;" src="../media/{{ one.image }}">
-              <h3 style="text-align: center; font-size: larger;">{{ one.name }}</h3>
+          <div class="content">
+            <button id="x" onclick="javascript:closePopup('{{ one.id }}')"><img src="{% static 'images/x.png' %}"></button>
+            <div>
+              <img src="../media/{{ one.image }}">
+              <h3>{{ one.name }}</h3>
             </div>
-            <h4 id="description" style="position: absolute; right:37px; top: 52px; ">{{ one.description }}</h4>
-            <button id="delete" value="{{ one.id }}" onclick="javascript:push('delete')" style="position: absolute; bottom: 20%; right: 10%; border: 0; background-color: white;"><img src="{% static 'images/frienddelete.png' %}"></button>
+            <h4 id="description">{{ one.description }}</h4>
+            <button id="delete" value="{{ one.id }}" onclick="javascript:push('delete')"><img src="{% static 'images/frienddelete.png' %}"></button>
           </div>
         </section>
         {% endfor %}
         {% for one in friends %}
         <li class="contents">
-          <div class="friend" onclick="javascript:showPopup('{{ one.id }}')" style="display: inline; position: relative;">
-            <img style="width: 80px;" src="../media/{{ one.image }}">
-            <h3 style="position: absolute; white-space: nowrap; bottom: -45px; left: 50%; transform: translate(-50%,0%);">{{ one.name }}</h3>
-            {% if one.is_kiwe %}
-            <img style="position: absolute; background-color: transparent; top: -10px; right: 0;" src="{% static 'images/is_kiwe.png' %}">
-            {% endif %}
+          <div class="friend" onclick="javascript:showPopup('{{ one.id }}')">
+            <img id="image" src="../media/{{ one.image }}">
+            <h3>{{ one.name }}</h3>
           </div>
         </li>
         <section id="{{ one.id }}" class="hide">
-          <div style="width: 300px; height: 25%; position:relative;" class="content">
-            <button style="position: absolute; top:23px; right:20px; border: 0; background-color: white;" onclick="javascript:closePopup('{{ one.id }}')"><img src="{% static 'images/x.png' %}"></button>
-            <div style="position: absolute; left:40px; top: 23%">
-              <img style="width: 100px; background-color: transparent;" src="../media/{{ one.image }}">
-              <h3 style="text-align: center; font-size: larger;">{{ one.name }}</h3>
+          <div class="content">
+            <button id="x" onclick="javascript:closePopup('{{ one.id }}')"><img src="{% static 'images/x.png' %}"></button>
+            <div>
+              <img src="../media/{{ one.image }}">
+              <h3>{{ one.name }}</h3>
             </div>
-            <h4 id="description" style="position: absolute; right:37px; top: 52px; ">{{ one.description }}</h4>
-            <button id="delete" value="{{ one.id }}" onclick="javascript:push('delete')" style="position: absolute; bottom: 20%; right: 10%; border: 0; background-color: white;"><img src="{% static 'images/frienddelete.png' %}"></button>
+            <h4 id="description">{{ one.description }}</h4>
+            <button id="delete" value="{{ one.id }}" onclick="javascript:push('delete')"><img src="{% static 'images/frienddelete.png' %}"></button>
           </div>
         </section>
         {% endfor %}
@@ -140,77 +96,69 @@
     </body>
 </html>
 
+
+
 <script>
-  function showPopup(user) {
-    const popup = document.getElementById(user);
-    popup.classList.remove('hide');
-  }
-
-  function closePopup(user) {
-    const popup = document.getElementById(user);
-    popup.classList.add('hide');
-  }
-
-  function search() {
+function search() {
     s = document.getElementById("s").value;
     var data = {
-      dt : 'search',
-      s : s,
+        dt: 'search',
+        s: s,
     }
-    
+
     $.ajax({
-            url : "{% url 'friends' %}",
-            type : "POST",
-            headers : {
-                'X-CSRFTOKEN' : '{{ csrf_token }}'
-            },
-            dataType : "json",
-            data : JSON.stringify(data),
-            async : false,
-            success : function (data) {
-              const friend = document.getElementsByClassName("friend")
-                    for(var i=0; i<friend.length; i++) {
-                      friend[i].style.display = 'none';
-                    }
-              if(data == 'error') {
+        url: "{% url 'friends' %}",
+        type: "POST",
+        headers: {
+            'X-CSRFTOKEN': "{{ csrf_token }}",
+        },
+        dataType: "json",
+        data: JSON.stringify(data),
+        async: false,
+        success: function (data) {
+            const friend = document.getElementsByClassName("friend")
+            for (var i = 0; i < friend.length; i++) {
+                friend[i].style.display = 'none';
+            }
+            if (data == 'error') {
                 document.getElementById("resultImage").src = "{% static 'images/not.png' %}";
-                document.getElementById("resultName").innerHTML = '그런... 사람은 없읍니다.';
+                document.getElementById("resultName").innerHTML = '그런 사람은... 없습니다.';
                 document.getElementById("push").style.display = 'none';
-              }
-              else {
-                    var file = '../media/' + data['image']
-                    document.getElementById("resultImage").src = file;
-                    document.getElementById("resultName").innerHTML = data['name'];
-                    document.getElementById("push").style.display = 'inline-block';
-                    document.getElementById("push").value = data['user_id'];
-                }
-                document.getElementById("result").style.display = 'block';
-              },
-        });
-  }
+            }
+            else {
+                var file = '../media/' + data['image']
+                document.getElementById("resultImage").src = file;
+                document.getElementById("resultName").innerHTML = data['name'];
+                document.getElementById("push").style.display = 'inline-block';
+                document.getElementById("push").value = data['user_id'];
+            }
+            document.getElementById("result").style.display = 'block';
+        },
+    });
+}
 
-  function push(dt) {
-    if(dt=='push') {
-      push = document.getElementById("push").value;
+function push(dt) {
+    if (dt == 'push') {
+        push = document.getElementById("push").value;
     }
 
-    else if (dt=='delete') {
-      push = document.getElementById("delete").value;
+    else if (dt == 'delete') {
+        push = document.getElementById("delete").value;
     }
-    
+
     var data = {
-      dt : dt,
-      push : push,
+        dt: dt,
+        push: push,
     }
     $.ajax({
-      url : "{% url 'friends' %}",
-      type : "POST",
-      headers : {
-        'X-CSRFTOKEN' : '{{ csrf_token }}'
-      },
-      dataType : "json",
-      data : JSON.stringify(data),
-      async : false,
+        url: "{% url 'friends' %}",
+        type: "POST",
+        headers: {
+            'X-CSRFTOKEN': "{{ csrf_token }}",
+        },
+        dataType: "json",
+        data: JSON.stringify(data),
+        async: false,
     });
-  }
+}
 </script>

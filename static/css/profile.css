@@ -1,0 +1,37 @@
+#go {
+  width: 100px;
+  height: 47px;
+  margin: 18px 26px 0 17px;
+  border-radius: 19px;
+  background-color: #fff;
+}
+#name {
+  text-align: center;
+  font-weight: bold; 
+  font-size: larger;
+}
+#description {
+  padding: 10px;
+  display: inline-block;
+  width: 200px;
+  word-break:break-all;
+  white-space: normal;
+  background-color: #eef6d6;
+  border-radius: 10px;
+  border-color: #eef6d6;
+}
+#file-input {
+  display: none;
+}
+#show {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+#edit {
+  width: 100px;
+  height: 47px;
+  margin: 18px 26px 0 17px;
+  border-radius: 19px;
+  background-color: #fff;
+}

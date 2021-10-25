@@ -1,0 +1,11 @@
+.memory > h1 {
+    bottom: 37px;
+}
+
+.memory > #time {
+    bottom: 35px;
+}
+
+.memory > #name {
+    bottom: 15px;
+}

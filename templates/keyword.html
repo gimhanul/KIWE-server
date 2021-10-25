@@ -4,6 +4,7 @@
     {% load static %}
     <title>kiwe</title>
     <link rel="stylesheet" href="{% static 'css/bar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/keyword.css' %}">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,10 +28,10 @@
     </div>
     <br><br>
     <center>
-        <button type="button" style="background-color: white; outline:0; border: 0;" onclick="javascript:re('time')"><img src="{% static 'images/new.jpg' %}"></button>  
+        <button type="button" id="click" onclick="javascript:re('time')"><img src="{% static 'images/new.jpg' %}"></button>  
     </center>
 
-    <a href="{% url 'kiwe' %}"><button type="button" style="position: fixed; background-color: white; outline: 0; border:0; color: gray; bottom: 30px; left: 45%;" onclick="javascript:re('end')">그만하기</button></a>
+    <a href="{% url 'kiwe' %}"><button type="button" id="stop" onclick="javascript:re('end')">그만하기</button></a>
     </form>
 </body>
 </html>

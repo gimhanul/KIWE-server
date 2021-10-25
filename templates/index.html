@@ -4,12 +4,7 @@
         {% load static %}
         <title>kiwe</title>
         <link rel="stylesheet" href="{% static 'css/button.css' %}">
-        <style>
-            center{
-                width:200px;
-                margin: 0 auto;
-            }
-        </style>
+        <link rel="stylesheet" href="{% static 'css/index.css' %}">
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,9 +22,9 @@
             <br>
             <br>
         <div class = "center" id="btn">
-            <center><a href="{% url 'login' %}"><button style="font-size:1.2em;">로그인</button></a></center>
+            <center><a href="{% url 'login' %}"><button>로그인</button></a></center>
             <br>
-            <center><a href="{% url 'join' %}"><button style="font-size:1.2em;">회원가입</button></a></center>
+            <center><a href="{% url 'join' %}"><button>회원가입</button></a></center>
             </center>
         </div>
         <br>
