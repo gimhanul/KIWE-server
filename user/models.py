@@ -68,7 +68,7 @@ class Profile(models.Model):
     user = models.OneToOneField('User', on_delete=models.CASCADE)
     name = models.CharField(max_length=20)
     description = models.CharField(max_length=150, default='')
-    image = models.ImageField(upload_to='Profile/', blank=True, default='Profile/default.png')
+    image = models.ImageField(upload_to='Profile/', blank=True, null=True)
     is_kiwe = models.BooleanField(default=False)
     
     def __str__(self):
