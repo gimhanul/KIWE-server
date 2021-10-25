@@ -3,6 +3,7 @@ ul {
     list-style: none;
     padding-left: 0;
     vertical-align: 0;
+    padding-bottom: 9%;
 }
 
 li {
@@ -13,9 +14,8 @@ li {
 
 #bell {
     position: absolute;
-    top:60px; 
-    left:90%;
-    right: 20%
+    right: 5%;
+    transform: translateY(-50%);
 }
 
 
@@ -48,25 +48,26 @@ li {
 
 /*search*/
 .search {
-    position: relative
+    padding-top: 130px;
+    top: 0;
+    position: relative;
 }
 
 #s { 
-    width: 60%;
+    width: 90%;
     height: 45px;
-    padding: 0px 60px 0px 60px;
     margin: 20px auto;
     border-radius: 100px;
     border: 0;
     background-color: #EEF6D6;
-    font-size: 18px;
+    font-size: 1rem;
     text-align: center;
 }
 
 .search > div {
     position: absolute;
-    top:30%;
-    left:80%;
+    top: 155px;
+    right: 18%;
 }
 
 .search > div > button {

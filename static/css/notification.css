@@ -10,8 +10,11 @@ li {
     box-shadow: inset 0px -2px 1px rgba(0, 0, 0, 0.05);
 }
 ul {
+    padding-top: 115px;
+    top: 0;
     list-style: none;
     padding-left: 0;
+    padding-bottom: 18%;
 }
 .oorx {
     position: absolute;
@@ -25,10 +28,14 @@ li > img {
     height: 50px;
 }
 li > p {
+    width: 50%;
+    word-break:keep-all;
+    white-space: normal;
     position: absolute;
     left: 90px;
-    bottom: 19px;
-    font-size: medium;
+    top: 50%;
+    transform: translate(0%, -90%);
+    font-size: 10vm;
 }
 .noread {
     background-color: #eef6d6;
