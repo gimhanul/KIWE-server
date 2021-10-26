@@ -23,25 +23,25 @@
 .contents {
     z-index: 3;
 }
-#highlighter {
+.highlighter {
     position:absolute;
     display: inline-block;
     background-color: #EEF6D6;
     left: 44px;
     top: 301;
 }
-#texxt {
+.texxt {
     position: absolute;
     left: 44px;
 }
-.contents > img {
+.kiwe {
     position: absolute;
     left: 52px;
     top: 512px;
     width: 100px;
     height: 100px;
 }
-#result {
+.result {
     position: absolute;
     left: 172px;
     top: 512px;

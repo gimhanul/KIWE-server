@@ -93,17 +93,17 @@ def kiword(request):
                     elif i.id == 3:
                         temp.result = data['longestk']
                     elif i.id == 4:
-                        temp.result = data['longestt']
+                        temp.result = f"{data['longestt']}분"
                     elif i.id == 5:
-                        temp.result = data['shortestt']
+                        temp.result = f"{data['shortestt']}분"
                     elif i.id == 6:
                         temp.result = data['random']
                     elif i.id == 7:
-                        temp.result = data['i']
+                        temp.result = f"{data['i']}개"
                     elif i.id == 8:
-                        temp.result = data['alllength']
+                        temp.result = f"{data['alllength']}글자"
                     elif i.id == 9:
-                        temp.result = data['allthetime']
+                        temp.result = f"{data['allthetime']}분"
                     temp.save()
 
     return render(request, 'keyword.html')
@@ -127,7 +127,7 @@ def memory(request, usermemory_id):
         #[memorytype.highlighter, memorytype.text, memorydata.result]
         for i in memorytype:
             result = Memoryresult.objects.filter(memory_id = usermemory_id, mt_id = i.id).values('result')[0]['result']
-            temp = (i.highlighter, i.text, result)
+            temp = (i.highlighter, i.text, result, i.order)
             memory.append(temp)
 
 

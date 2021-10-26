@@ -63,6 +63,7 @@ class Each(models.Model):
 class Memorytype(models.Model):
     highlighter = models.CharField(max_length=100)
     text = models.CharField(max_length=100)
+    order = models.BooleanField(default=False)
 
     def __str__ (self):
         return self.highlighter
