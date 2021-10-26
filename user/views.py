@@ -185,19 +185,22 @@ def profileCreate(request):
 
 def profileEdit(request):
     if request.method == 'POST':
-        form = ProfileForm(request.POST)
+        form = ProfileForm(request.POST, request.FILES, instance = request.user.profile)
         if form.is_valid():
             profile = form.save(commit=False)
-            profile.image = request.FILES.get('image')
+            image = request.FILES.get('image')
+            if request.user.profile.image != image and image != None:
+                profile.image = image
             profile.user = request.user
             profile.save()
             return redirect('profile')
     else:
-        form = ProfileForm()
+        form = ProfileForm(instance=request.user.profile)
     context = {
-        'profil' : request.user.profile,
+        'profile' : request.user.profile,
         'form': form,
     }
+
     return render(request, 'profileEdit.html', context)
 
 

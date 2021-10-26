@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="{% static 'css/blank.css' %}">
     <link rel="stylesheet" href="{% static 'css/bar.css' %}">
     <link rel="stylesheet" href="{% static 'css/profile.css' %}">
-    <script src="{% static 'js/profile.js'  %}"></script>
 </head>
 <body>
     <form name="profileEdit" action="{% url 'profileEdit' %}" method="post" enctype="multipart/form-data">
@@ -24,11 +23,11 @@
                     <img id="show" src={% if request.user.profile.image %}"{{ request.user.profile.image.url }}"{% else %}"{% static 'images/user.png' %}"{% endif %}>
                 </label>
             
-                <input id="file-input" name="image" type="file" accept="image/*" value="{{ profil.iamge }}">
+                <input id="file-input" name="image" type="file" accept="image/*">
             </div>
                 <br>
-                <p><input class="profileblank" value="{{ profil.name }}" id="name" name="name" type="text"></p>
-                <p><input class="profileblank" value="{{ profil.description }}" id="description" name="description" type="text"></p>
+                <p><input class="profileblank" value="{{ profile.name }}" id="name" name="name" type="text"></p>
+                <p><input class="profileblank" value="{{ profile.description}}" id="description" name="description" type="text"></p>
             </div>
         </div><br><br>
         <center><button id="go" type="submit">수정 완료</button></center>
@@ -51,3 +50,16 @@
     </div>
 </body>
 </html>
+
+<script>
+    const reader = new FileReader();
+
+    reader.onload = (readerEvent) => {
+        document.querySelector("#show").setAttribute("src", readerEvent.target.result);
+    };
+
+    document.querySelector("#file-input").addEventListener("change", (changeEvent) => {
+        const imgFile = changeEvent.target.files[0];
+        reader.readAsDataURL(imgFile);
+    })
+</script> 
