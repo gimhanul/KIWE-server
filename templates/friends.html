@@ -36,7 +36,7 @@
         {% for one in is_kiwe %}
         <li class="contents">
           <div class="friend" onclick="javascript:showPopup('{{ one.id }}')">
-            <img id="image" src="{% if request.user.profile.image %}"{{ request.user.profile.image.url }}"{% else %}"{% static 'images/user.png' %}"{% endif %}">
+            <img id="image" src="{% if one.image %}"{{ one.image.url }}"{% else %}"{% static 'images/user.png' %}"{% endif %}">
             <h3>{{ one.name }}</h3>
             <img id="is_kiwe" src="{% static 'images/is_kiwe.png' %}">
           </div>
@@ -45,7 +45,7 @@
           <div class="content">
             <button id="x" onclick="javascript:closePopup('{{ one.id }}')"><img src="{% static 'images/x.png' %}"></button>
             <div>
-              <img src="{% if request.user.profile.image %}"{{ request.user.profile.image.url }}"{% else %}"{% static 'images/user.png' %}"{% endif %}">
+              <img src="{% if one.image %}"{{ one.image.url }}"{% else %}"{% static 'images/user.png' %}"{% endif %}">
               <h3>{{ one.name }}</h3>
             </div>
             <h4 id="description">{{ one.description }}</h4>
@@ -56,7 +56,7 @@
         {% for one in friends %}
         <li class="contents">
           <div class="friend" onclick="javascript:showPopup('{{ one.id }}')">
-            <img id="image" src="{% if request.user.profile.image %}"{{ request.user.profile.image.url }}"{% else %}"{% static 'images/user.png' %}"{% endif %}">
+            <img id="image" src="{% if one.image %}"{{ one.image.url }}"{% else %}"{% static 'images/user.png' %}"{% endif %}">
             <h3>{{ one.name }}</h3>
           </div>
         </li>
@@ -64,7 +64,7 @@
           <div class="content">
             <button id="x" onclick="javascript:closePopup('{{ one.id }}')"><img src="{% static 'images/x.png' %}"></button>
             <div>
-              <img src="{% if request.user.profile.image %}"{{ request.user.profile.image.url }}"{% else %}"{% static 'images/user.png' %}"{% endif %}">
+              <img src="{% if one.image %}"{{ one.image.url }}"{% else %}"{% static 'images/user.png' %}"{% endif %}">
               <h3>{{ one.name }}</h3>
             </div>
             <h4 id="description">{{ one.description }}</h4>
