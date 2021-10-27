@@ -1,3 +1,6 @@
+body {
+    margin: 0;
+}
 #leftbutton {
     position: absolute;
     top: 0px;
@@ -33,16 +36,14 @@
 .texxt {
     position: absolute;
     left: 44px;
-}
-.kiwe {
-    position: absolute;
-    left: 52px;
-    top: 512px;
-    width: 100px;
-    height: 100px;
+    word-break: keep-all;
 }
 .result {
     position: absolute;
-    left: 172px;
-    top: 512px;
+    word-break: keep-all;
+    white-space: normal;
+    top: 60%;
+    right: 10%;
+    vertical-align: middle;
+    border-bottom: 3px solid #d0ea85;
 }

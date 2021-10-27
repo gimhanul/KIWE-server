@@ -18,7 +18,7 @@
   white-space: normal;
   background-color: #eef6d6;
   border-radius: 10px;
-  border-color: #eef6d6;
+  border: 0;
 }
 #file-input {
   display: none;
