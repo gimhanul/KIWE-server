@@ -5,6 +5,7 @@
     <title>kiwe</title>
     <link rel="stylesheet" href="{% static 'css/bar.css' %}">
     <link rel="stylesheet" href="{% static 'css/setting.css' %}">
+    <script src="{% static 'js/setting.js' %}"></script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,43 +15,47 @@
         <h1>설정</h1>
       </div>
       
+      <form name="setting" action="{% url 'setting' %}" method="post">
+      {{ csrf_token }}
       <div id="contents">
-        <form name="setting" action="{% url 'setting' %}" method="post">
-        {% csrf_token %}
           <div id='settinglist'>
             <ul>
-                <li><button class="m-list">계정</button>
-                    <ul class="sub">
-                        <li class='sub-list'><button value="profile" name="setting"><a href="{% url 'profile' %}">프로필</a></button></li>
-                        <li class='sub-list'><button value="logout" name="setting">로그아웃</button></li>
-                        <li class='sub-list'><button value="" name="setting">회원 탈퇴</button></li>
+                <li><button type="button" class="m-list" id="account" onclick="javascript:show('account')">계정</button type="button">
+                    <ul class="sub" id="sub-account">
+                        <li class='sub-list'><button type="button" value="profile" name="setting"><a href="{% url 'profile' %}">프로필</a></button type="button"></li>
+                        <li class='sub-list'><button type="button" value="logout" name="setting">로그아웃</button type="button"></li>
+                        <li class='sub-list'><button type="button" value="" name="setting">회원 탈퇴</button type="button"></li>
                     </ul>
                 </li>
                     
-                <li><button class="m-list">친구</button>
-                    <ul class="sub">
-                        <li class='sub-list'><button value="" name="setting">차단한 친구</button></li>
-                        <li class='sub-list'><button value="" name="setting">숨긴 친구</button></li>
+                <li><button type="button" class="m-list" id="friend" onclick="javascript:show('friend')">친구</button type="button">
+                    <ul class="sub" id="sub-friend">
+                        <li class='sub-list'><button type="button" value="" name="setting">차단한 친구</button type="button"></li>
+                        <li class='sub-list'><button type="button" value="" name="setting">숨긴 친구</button type="button"></li>
                     </ul>
                 </li>
                     
-                <li><button class="m-list">알림</button>
-                    <ul class="sub">
-                        <li class='sub-list'><button value="" name="setting">알림 받기</button></li>
-                        <li class='sub-list'><button value="" name="setting">통화 중 알림</button></li>
-                        <li class='sub-list'><button value="" name="setting">사용 중 알림</button></li>
+                <li><button type="button" class="m-list" id="alim" onclick="javascript:show('alim')">알림</button type="button">
+                    <ul class="sub" id="sub-alim">
+                        <li class='sub-list'><button type="button" value="" name="setting">알림 받기</button type="button"></li>
+                        <li class='sub-list'><button type="button" value="" name="setting">통화 중 알림</button type="button"></li>
+                        <li class='sub-list'><button type="button" value="" name="setting">사용 중 알림</button type="button"></li>
                     </ul>
                 </li>
                     
-                <li><button class="m-list">도움말</button></li>
+                <li><button type="button" class="m-list" id="help" onclick="javascript:show('help')">도움말</button type="button">
+                  <ul class="sub" id="sub-help">
+                    <li class='sub-list'><button type="button" value="" name="setting">튜토리얼</button type="button"></li>
+                  </ul>
+                </li>
         
-                <li><button class="m-list">개발자</button>
-                    <ul class="sub">
-                        <li class='sub-list'><button value="" name="setting">키위팀</button></li>
-                        <li class='sub-list'><button name="setting"><a href="https://github.com/gimhanul">김한울</a></button></li>
-                        <li class='sub-list'><button name="setting"><a href="https://instagram.com/o0o14o">진애란</a></button></li>
-                        <li class='sub-list'><button name="setting"><a href="https://instagram.com/sejin_987">김세진</a></button></li>
-                        <li class='sub-list'><button name="setting"><a href="https://instagram.com/yyu._.e">유나은</a></button></li>
+                <li><button type="button" class="m-list" id="dev" onclick="javascript:show('dev')">개발자</button type="button">
+                    <ul class="sub" id="sub-dev">
+                        <li class='sub-list'><button type="button" value="" name="setting">키위팀</button type="button"></li>
+                        <li class='sub-list'><button type="button" name="setting"><a href="https://github.com/gimhanul">김한울</a></button type="button"></li>
+                        <li class='sub-list'><button type="button" name="setting"><a href="https://instagram.com/o0o14o">진애란</a></button type="button"></li>
+                        <li class='sub-list'><button type="button" name="setting"><a href="https://instagram.com/sejin_987">김세진</a></button type="button"></li>
+                        <li class='sub-list'><button type="button" name="setting"><a href="https://instagram.com/yyu._.e">유나은</a></button type="button"></li>
                     </ul>
                 </li>
             </ul>
@@ -60,16 +65,16 @@
 
         <div class="bottom_menu">
           <div>
-              <a href="{% url 'kiwe' %}"><img src="{% static 'images/b-kiwe.png' %}"></button>
+              <a href="{% url 'kiwe' %}"><img src="{% static 'images/b-kiwe.png' %}"></button type="button">
           </div>
           <div>
-              <a href="{% url 'friends' %}"><img src="{% static 'images/b-friend.png' %}"></button>
+              <a href="{% url 'friends' %}"><img src="{% static 'images/b-friend.png' %}"></button type="button">
           </div>
           <div>
-              <a href="{% url 'memories' %}"><img src="{% static 'images/b-memory.png' %}"></button>
+              <a href="{% url 'memories' %}"><img src="{% static 'images/b-memory.png' %}"></button type="button">
           </div>
           <div>
-            <a href="{% url 'setting' %}"><img src="{% static 'images/b-filled-setting.png' %}"></button>
+            <a href="{% url 'setting' %}"><img src="{% static 'images/b-filled-setting.png' %}"></button type="button">
           </div>
         </div>
 </html>

@@ -13,19 +13,20 @@ button {
     background-color: white;
     outline:0;
     border: 0;
+    font-size: large;
+    font-style: italic;
 }
 
 .m-list {
-    color: black;
-    font-size: 1.5em;
     font-weight: lighter;
-    font-style: Medium;
     font-size: 30px;
-    line-height: 35px;
-    line-height: 100%;
-    box-align: Left;
-    color: black;
+    line-height: 39px;
     vertical-align: top;
+}
+
+.sub {
+    list-style: none;
+    display: none;
 }
 
 .m-list > .sub {
