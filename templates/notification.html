@@ -22,13 +22,13 @@
         {% if noti.notitype == 'accept' %}
             {% if noti.read == 1 %}
             <li>
-                <img src='../media/{{ noti.from_user.profile.image }}'>
+                <img src={% if noti.from_user.profile.image %}"{{ noti.from_user.profile.image.url }}"{% else %}"{% static 'images/user.png' %}"{% endif %}>
                 <p>{{ noti.from_user.profile.name }} 님이 친구 요청을 수락했습니다.</p>
             </li>
             {% endif %}
             {% if noti.read == 0 %}
             <li id="{{ noti.id }}" class="noread" onclick="javascript:read('{{ noti.id }}')">
-                <img src='../media/{{ noti.from_user.profile.image }}'>
+                <img src={% if noti.from_user.profile.image %}"{{ noti.from_user.profile.image.url }}"{% else %}"{% static 'images/user.png' %}"{% endif %}>
                 <p>{{ noti.from_user.profile.name }} 님이 친구 요청을 수락했습니다.</p>
             </li>
             {% endif %}
@@ -37,13 +37,13 @@
         {% if noti.notitype == 'request' %}
             {% if noti.read == 1 %}
             <li>
-                <img src='../media/{{ noti.from_user.profile.image }}'>
+                <img src={% if noti.from_user.profile.image %}"{{ noti.from_user.profile.image.url }}"{% else %}"{% static 'images/user.png' %}"{% endif %}>
                 <p>{{ noti.from_user.profile.name }} 님이 친구 요청을 보냈습니다.</p>
             </li>
             {% endif %}
             {% if noti.read == 0 %}
             <li id="{{ noti.id }}" class="noread">
-                <img src='../media/{{ noti.from_user.profile.image }}'>
+                <img src={% if noti.from_user.profile.image %}"{{ noti.from_user.profile.image.url }}"{% else %}"{% static 'images/user.png' %}"{% endif %}>
                 <p>{{ noti.from_user.profile.name }} 님이 친구 요청을 보냈습니다.</p>
                 <button class="oorx" id="o" onclick="javascript:send('accept', '{{ noti.requestID.id }}', '{{ noti.id }}')"><img src="{% static 'images/check.png' %}"></button>
                 <button class="oorx" id="x" onclick="javascript:send('no', '{{ noti.requestID.id }}', '{{ noti.id }}')"><img src="{% static 'images/not.png' %}"></button>

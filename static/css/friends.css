@@ -28,6 +28,7 @@ li {
 .friend > #image {
     width: 80px;
     height: 80px;
+    border-radius: 50%;
 }
 
 #is_kiwe {
@@ -87,7 +88,9 @@ li {
 #resultImage {
     margin: 50px 0px 0px 0px;
     height: 100px;
-    width: 100px"
+    width: 100px;
+    border-radius: 50%;
+
 }
 
 .letsfriend {
