@@ -68,6 +68,11 @@ def setting(request):
         if setting == 'logout':
             logout(request)
             return redirect('/')
+        if setting == 'withdraw':
+            user = User.objects.get(id=request.user.id)
+            user.delete()
+            return redirect('/')
+        
     return render(request, 'setting.html')
 
 
@@ -97,7 +102,7 @@ def friends(request):
         elif data['dt'] == 'delete':
             sendf = (int)(data['push'])
             delete_friend(request.user, sendf)
-
+    
     temp = User.objects.get(id=request.user.id).friends.values('profile')
     temp = [i['profile'] for i in temp]
     friends = []
