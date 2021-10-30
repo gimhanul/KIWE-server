@@ -109,7 +109,7 @@ li {
 /*popup content*/
 .content {
     width: 300px;
-    height: 25%;
+    height: 197px;
     position:relative;
 }
 
@@ -121,41 +121,50 @@ li {
     background-color: white;
 }
 
-.content > div {
+#left {
     position: absolute;
     left:40px;
     top: 23%
 }
 
-.content > div > img {
+#left > img {
     width: 100px;
     background-color: transparent;
+    border-radius: 50%;
 }
 
-.content > div> h3 {
+#left> h3 {
     text-align: center; 
     font-size: larger;
 }
 
-#delete {
+#right {
     position: absolute;
-    bottom: 20%;
-    right: 10%;
+    left: 165px;
+    top: 25%;
+}
+
+#delete {
     border: 0;
     background-color: white;
+    color: black;
+    WIDTH: 140px;
+    HEIGHT: 27pt;
+    border: 2.5px solid rgb(156, 156, 156);
+    border-radius: 10px;
 }
 
 
 #description {
-    position: absolute;
-    right:37px;
-    top: 52px;
+    height: 19px;
     padding: 10px;
-    display: inline-block;
     width: 120px;
-    word-break:break-all;
+    text-align: center;
+    word-break: keep-all;
     white-space: normal;
     background-color: #eef6d6;
     border-radius: 10px;
     border-color: #eef6d6;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

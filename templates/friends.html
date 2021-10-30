@@ -44,12 +44,13 @@
         <section id="{{ one.id }}" class="hide">
           <div class="content">
             <button id="x" onclick="javascript:closePopup('{{ one.id }}')"><img src="{% static 'images/x.png' %}"></button>
-            <div>
+            <div id="left">
               <img src={% if one.image %}"{{ one.image.url }}"{% else %}"{% static 'images/user.png' %}"{% endif %}>
               <h3>{{ one.name }}</h3>
             </div>
-            <h4 id="description">{{ one.description }}</h4>
-            <button id="delete" value="{{ one.id }}" onclick="javascript:push('delete')"><img src="{% static 'images/frienddelete.png' %}"></button>
+            <div id="right">
+              <h4 id="description">{{ one.description }}</h4>
+              <button id="delete" value="{{ one.id }}" onclick="javascript:push('delete')">친구 삭제</button>
           </div>
         </section>
         {% endfor %}
@@ -63,12 +64,13 @@
         <section id="{{ one.id }}" class="hide">
           <div class="content">
             <button id="x" onclick="javascript:closePopup('{{ one.id }}')"><img src="{% static 'images/x.png' %}"></button>
-            <div>
+            <div id="left">
               <img src={% if one.image %}"{{ one.image.url }}"{% else %}"{% static 'images/user.png' %}"{% endif %}>
               <h3>{{ one.name }}</h3>
             </div>
-            <h4 id="description">{{ one.description }}</h4>
-            <button id="delete" value="{{ one.id }}" onclick="javascript:push('delete')"><img src="{% static 'images/frienddelete.png' %}"></button>
+            <div id="right">
+              <h4 id="description">{{ one.description }}</h4>
+              <button id="delete" value="{{ one.id }}" onclick="javascript:push('delete')">친구 삭제</button>
           </div>
         </section>
         {% endfor %}
