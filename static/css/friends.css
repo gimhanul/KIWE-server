@@ -121,30 +121,30 @@ li {
     background-color: white;
 }
 
-#left {
+.left {
     position: absolute;
     left:40px;
     top: 23%
 }
 
-#left > img {
+.left > img {
     width: 100px;
     background-color: transparent;
     border-radius: 50%;
 }
 
-#left> h3 {
+.left> h3 {
     text-align: center; 
     font-size: larger;
 }
 
-#right {
+.right {
     position: absolute;
     left: 165px;
     top: 25%;
 }
 
-#delete {
+.delete {
     border: 0;
     background-color: white;
     color: black;
@@ -155,7 +155,7 @@ li {
 }
 
 
-#description {
+.description {
     height: 19px;
     padding: 10px;
     width: 120px;
@@ -169,7 +169,7 @@ li {
     text-overflow: ellipsis;
 }
 
-#more-description {
+.more-description {
     height: 134px;
     padding: 10px;
     width: 120px;

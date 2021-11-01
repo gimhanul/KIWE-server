@@ -30,7 +30,7 @@
           <br><br>
           <img id="resultImage" src="">
           <h2 id="resultName"></h2>
-          <button class="letsfriend" value="" id="push" onclick="javascript:push('push')">친구 맺기</button>
+          <button class="letsfriend" value="" id="push" onclick="javascript:push('push', '')">친구 맺기</button>
         </div>
 
         <ul>
@@ -45,13 +45,13 @@
         <section id="{{ one.id }}" class="hide">
           <div class="content">
             <button id="x" onclick="javascript:closePopup('{{ one.id }}')"><img src="{% static 'images/x.png' %}"></button>
-            <div id="left">
+            <div class="left">
               <img src={% if one.image %}"{{ one.image.url }}"{% else %}"{% static 'images/user.png' %}"{% endif %}>
               <h3>{{ one.name }}</h3>
             </div>
-            <div id="right">
-              <h4 id="description" onclick="javascript:show()">{{ one.description }}</h4>
-              <button id="delete" value="{{ one.id }}" onclick="javascript:push('delete')">친구 삭제</button>
+            <div class="right">
+              <h4 class="description" onclick="javascript:show('{{ one.id }}')">{{ one.description }}</h4>
+              <button class="delete" onclick="javascript:push('delete', '{{ one.id }}')">친구 삭제</button>
           </div>
         </section>
         {% endfor %}
@@ -65,13 +65,13 @@
         <section id="{{ one.id }}" class="hide">
           <div class="content">
             <button id="x" onclick="javascript:closePopup('{{ one.id }}')"><img src="{% static 'images/x.png' %}"></button>
-            <div id="left">
+            <div class="left">
               <img src={% if one.image %}"{{ one.image.url }}"{% else %}"{% static 'images/user.png' %}"{% endif %}>
               <h3>{{ one.name }}</h3>
             </div>
-            <div id="right">
-              <h4 id="description" onclick="javascript:show()">{{ one.description }}</h4>
-              <button id="delete" value="{{ one.id }}" onclick="javascript:push('delete')">친구 삭제</button>
+            <div class="right">
+              <h4 class="description" onclick="javascript:show('{{ one.id }}')">{{ one.description }}</h4>
+              <button class="delete" onclick="javascript:push('delete', '{{ one.id }}')">친구 삭제</button>
           </div>
         </section>
         {% endfor %}
@@ -137,13 +137,13 @@ function search() {
     });
 }
 
-function push(dt) {
+function push(dt, id) {
     if (dt == 'push') {
         push = document.getElementById("push").value;
     }
 
     else if (dt == 'delete') {
-        push = document.getElementById("delete").value;
+        push = id;
     }
 
     var data = {
