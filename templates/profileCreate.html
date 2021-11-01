@@ -8,7 +8,6 @@
     <title>kiwe</title>
     <link rel="stylesheet" href="{% static 'css/blank.css' %}">
     <link rel="stylesheet" href="{% static 'css/profile.css' %}">
-    <script src="{% static 'js/profile.js'  %}"></script>
 </head>
 <body>
     <form name="profileCreate" action="{% url 'profileCreate' %}" method="POST" enctype="multipart/form-data">
@@ -33,3 +32,16 @@
             <center><button id="go" type="submit">완료</button></center>
 </body>
 </html>
+
+<script>
+    const reader = new FileReader();
+
+    reader.onload = (readerEvent) => {
+        document.querySelector("#show").setAttribute("src", readerEvent.target.result);
+    };
+
+    document.querySelector("#file-input").addEventListener("change", (changeEvent) => {
+        const imgFile = changeEvent.target.files[0];
+        reader.readAsDataURL(imgFile);
+    })
+</script> 
