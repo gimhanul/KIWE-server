@@ -168,3 +168,15 @@ li {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+#more-description {
+    height: 134px;
+    padding: 10px;
+    width: 120px;
+    text-align: center;
+    word-break: break-all;
+    white-space: normal;
+    background-color: #eef6d6;
+    border-radius: 10px;
+    border-color: #eef6d6;
+}
