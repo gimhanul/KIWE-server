@@ -18,6 +18,17 @@ li {
     transform: translateY(-50%);
 }
 
+#newnoti {
+    position: absolute;
+    right: 5%;
+    top: 76px;
+    transform: translateX(-327%);
+    width : 10px;
+    height : 10px;
+    border-radius: 50%;
+    background-color: #d0ea85;
+}
+
 
 
 /*friend*/
@@ -161,7 +172,7 @@ li {
     width: 120px;
     text-align: center;
     word-break: keep-all;
-    white-space: normal;
+    white-space: nowrap;
     background-color: #eef6d6;
     border-radius: 10px;
     border-color: #eef6d6;

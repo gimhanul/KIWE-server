@@ -16,6 +16,9 @@
     <body>
       <div class="title">
         <h1>친구</h1>
+        {% if newnoti %}
+        <div id="newnoti"></div>
+        {% endif %}
         <a href="{% url 'notification' %}"><img id="bell" src="{% static 'images/bell.png' %}"></a>
       </div>
       <center>
@@ -122,7 +125,7 @@ function search() {
             }
             if (data == 'error') {
                 document.getElementById("resultImage").src = "{% static 'images/not.png' %}";
-                document.getElementById("resultName").innerHTML = '그런 사람은... 없습니다.';
+                document.getElementById("resultName").innerHTML = '검색 결과가 없습니다.';
                 document.getElementById("push").style.display = 'none';
             }
             else {
@@ -161,17 +164,7 @@ function push(dt, id) {
         async: false,
     });
 
-    if (dt == 'push') {
-      document.getElementById("result").style.display = 'none';
-      const friend = document.getElementsByClassName("friend")
-      for (var i = 0; i < friend.length; i++) {
-          friend[i].style.display = 'inline';
-      }
-    }
-    else if (dt == 'delete') {
-      closePopup(push);
-      window.location.reload()
-    }
+    window.location.reload();
 
 }
 </script>

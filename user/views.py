@@ -114,9 +114,15 @@ def friends(request):
         else:
             friends.append(temp1)
 
+    if Notification.objects.filter(to_user = request.user, read = False).exists():
+        newnoti = True
+    else:
+        newnoti = False
+
     context = {
         'friends': friends,
         'is_kiwe': is_kiwe,
+        'newnoti': newnoti,
     }
     return render(request, 'friends.html', context)
 
