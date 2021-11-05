@@ -129,7 +129,7 @@ function search() {
                 document.getElementById("push").style.display = 'none';
             }
             else {
-                var file = '../media/' + data['image']
+                var file = {% if one.image %}"{{ one.image.url }}"{% else %}"{% static 'images/user.png' %}"{% endif %}
                 document.getElementById("resultImage").src = file;
                 document.getElementById("resultName").innerHTML = data['name'];
                 document.getElementById("push").style.display = 'inline-block';
