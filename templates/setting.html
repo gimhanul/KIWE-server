@@ -27,7 +27,8 @@
                         <li class='sub-list'><button value="withdraw" name="setting">회원 탈퇴</button></li>
                     </ul>
                 </li>
-                    
+
+                <!--
                 <li><button class="m-list" id="friend" type="button" onclick="javascript:show('friend')">친구</button>
                     <ul class="sub" id="sub-friend">
                         <li class='sub-list'><button value="" name="setting">차단한 친구</button></li>
@@ -42,6 +43,7 @@
                         <li class='sub-list'><button value="" name="setting">사용 중 알림</button></li>
                     </ul>
                 </li>
+              -->
                     
                 <li><button class="m-list" id="app" type="button" onclick="javascript:show('app')">앱 다운</button>
                   <ul class="sub" id="sub-app">
@@ -54,6 +56,8 @@
                     <li class='sub-list'><button value="" name="setting"><a href="https://github.com/slymax/webview">@slymax/webview</a></button></li>
                   </ul>
                 </li>
+
+                <li><button class="m-list" type="button"><a href="{% url 'privacy' %}" style="text-decoration: none; color: black;"> 개인정보처리방침</a></button></li>
 
                 <li><button class="m-list" id="dev" type="button" onclick="javascript:show('dev')">개발자</button>
                     <ul class="sub" id="sub-dev">

@@ -75,6 +75,9 @@ def setting(request):
         
     return render(request, 'setting.html')
 
+def privacy(request):
+    return render(request, 'privacy.html')
+
 
 
 #friends
