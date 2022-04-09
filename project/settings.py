@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+import pymysql  
+
+
+pymysql.install_as_MySQLdb()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -83,10 +87,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'kiwe', # Database 이름
-        'USER': 'hanul', # 데이터베이스에서 사용할 계정
-        'PASSWORD': 'hanul', # 계정의 비밀번호
+        'USER': 'kiwe', # 데이터베이스에서 사용할 계정
+        'PASSWORD': 'kiwe', # 계정의 비밀번호
         'HOST': 'localhost', # 데이테베이스 주소
-        'PORT': '3306', # 데이터베이스 포트, mysql 디폴트값은 3306
+        'PORT': '3309', # 데이터베이스 포트, mysql 디폴트값은 3306
         'OPTIONS': {
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
         }
